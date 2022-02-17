@@ -26,11 +26,11 @@
             <div class="sidebar" data-color="blue">
                 <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
                 <div class="logo">
-                    <a href="#" class="simple-text logo-mini" title="Sistema integrado de gestión">
-                        <img src="assets/img/logo-md.png">
+                    <a href="#" class="simple-text logo-mini" title="Portal">
+                        <img src="{{asset('assets/img/logo-md.png')}}">
                     </a>
                     <!--Nombre de la empresa-->
-                    <a href="#" class="simple-text logo-normal" title="Sistema integrado de gestión">Fiabilis</a>
+                    <a href="#" class="simple-text logo-normal" title="Portal">Fiabilis</a>
                     <div class="navbar-minimize">
                         <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
                             <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
@@ -153,7 +153,7 @@
 
                 <div class="logo">
                     <a href="#" class="simple-text logo-mini" title="Sistema integrado de gestión">
-                        <img src="assets/img/logo-md.png">
+                        <img src="{{asset('assets/img/logo-md.png')}}">
                     </a>
                     <!--Nombre de la empresa-->
                     <a href="#" class="simple-text logo-normal" title="Sistema integrado de gestión">Fiabilis</a>
@@ -192,11 +192,11 @@
                             <ul class="navbar-nav">
 
                                 <li class="nav-item">
-                                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
+                                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Login') }}</a>
                                 </li>
                                 <li class="nav-item">
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Register') }}</a>
                                     @endif
                                 </li>
 
