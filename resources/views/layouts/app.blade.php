@@ -46,12 +46,7 @@
                                 <p class="sidebar-normal">Antecedentes</p>
                             </a>
                         </li> -->
-                        <li class="">
-                            <a href="#">
-                                <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
-                                <p class="sidebar-normal">Pestaña</p>
-                            </a>
-                        </li>
+
                         <li class="active">
                             <a data-toggle="collapse" href="#sidebar-admin" aria-expanded="false" class="collapsed">
                                 <span class="sidebar-mini-icon"><i class="now-ui-icons ui-2_settings-90"></i></span>
@@ -75,6 +70,14 @@
                                 </ul>
                             </div>
                         </li>
+                        
+                        <li class="">
+                            <a href="#">
+                                <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                                <p class="sidebar-normal">Pestaña</p>
+                            </a>
+                        </li>
+
                     </ul>
                     <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
                         <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
