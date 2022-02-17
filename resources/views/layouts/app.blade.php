@@ -1,83 +1,191 @@
-<!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset('assets/img/brand/favicon.png')}}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Portal Cliente</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+        name="viewport">
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet">
+    <link href="{{asset('assets/vendor/font-awesome/css/all.min.css')}}" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('assets/css/now-ui-dashboard.min.css?v=1.1.0')}}" rel="stylesheet">
 </head>
-<body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+
+
+<body class="sidebar-mini">
+    <div class="wrapper">
+
+        <div class="sidebar" data-color="blue">
+            <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
+            <div class="logo">
+                <a href="#" class="simple-text logo-mini" title="Sistema integrado de gestión">
+                    <img src="assets/img/logo-md.png">
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
+                <!--Nombre de la empresa-->
+                <a href="#" class="simple-text logo-normal" title="Sistema integrado de gestión">Fiabilis</a>
+                <div class="navbar-minimize">
+                    <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
+                        <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
+                        <i class="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini"></i>
+                    </button>
                 </div>
             </div>
-        </nav>
+            <div class="sidebar-wrapper ps-container ps-theme-default">
+                <ul class="nav">
+                    <!-- <li class="">
+                        <a href="#">
+                            <span class="sidebar-mini-icon"><i class="now-ui-icons business_briefcase-24"></i></span>
+                            <p class="sidebar-normal">Antecedentes</p>
+                        </a>
+                    </li> -->
+                    <li class="">
+                        <a href="#">
+                            <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                            <p class="sidebar-normal">Pestaña</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a data-toggle="collapse" href="#sidebar-admin" aria-expanded="false" class="collapsed">
+                            <span class="sidebar-mini-icon"><i class="now-ui-icons ui-2_settings-90"></i></span>
+                            <p class="sidebar-normal">Administración <b class="caret"></b></p>
+                        </a>
+                        <div class="clearfix"></div>
+                        <div class="collapse" id="sidebar-admin">
+                            <ul class="nav">
+                                <li class="">
+                                    <a href="#">
+                                        <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
+                                        <p class="sidebar-normal">Crear usuario</p>
+                                    </a>
+                                </li>
+                                <li class="active">
+                                    <a href="#">
+                                        <span class="sidebar-mini-icon">U</span>
+                                        <p class="sidebar-normal">Usuarios</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                    <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                </div>
+                <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;">
+                    <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+                </div>
+            </div>
+        </div>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand">Portal Cliente</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+
+                        <ul class="navbar-nav">
+
+
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navUserDropdown"
+                                    data-toggle="dropdown">
+                                    <!-- <img height="16" src="#"> -->
+                                    <span class="mx-1">Peter</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navUserDropdown">
+                                    <a class="dropdown-item" href="">
+                                        <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+
+            <div class="panel-header panel-header-sm"></div>
+
+            <!-- Start Content -->
+            <div class="content">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h2>Bienvenido</h2>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <table class="table-striped nowrap dataTable no-footer" style="min-width:100%">
+                                            <thead>
+                                                <th>Nombre</th>
+                                                <th>E-mail</th>
+                                                <th>Rol</th>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Administrador Principal</td>
+                                                    <td>admin@admin.cl</td>
+                                                    <td>Administrador</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Pedro</td>
+                                                    <td>pedro@admin.cl</td>
+                                                    <td>Consultor</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Juan</td>
+                                                    <td>juan@admin.cl</td>
+                                                    <td>Cliente</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> <!-- End card -->
+                    </div>
+                </div>
+            </div> <!-- End Content -->
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="copyright">
+                        © 2022, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
     </div>
+    <!--   Core JS Files   -->
+    <script src="{{asset('assets/js/core/jquery.min.js?v=1645015120')}}"></script>
+    <script src="{{asset('assets/js/core/popper.min.js?v=1645015120')}}"></script>
+    <script src="{{asset('assets/js/core/bootstrap.min.js?v=1645015120')}}"></script>
+    <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js?v=1645015120')}}"></script>
+    <script src="{{asset('assets/js/now-ui-dashboard.min.js?v=1645015120')}}" type="text/javascript"></script>
 </body>
+
 </html>
