@@ -6,13 +6,13 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Empresa::factory(10)->create();
+        \App\Models\User::factory(10)->create();
+        \App\Models\RazonSocial::factory(10)->create();
+        \App\Models\Factura::factory(10)->create();
+        \App\Models\Gestion::factory(10)->create();
+        \App\Models\Reporte::factory(10)->create();
     }
 }
