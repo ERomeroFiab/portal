@@ -29,7 +29,7 @@ class CreateGestionsTable extends Migration
             $table->timestamp('fecha_inicio')->nullable();
             $table->timestamp('fecha_cierre')->nullable();
             $table->timestamp('fecha_deposito')->nullable();
-            $table->timestamp('honorarios_fiabilis')->nullable();
+            $table->integer('honorarios_fiabilis')->nullable();
             $table->string('tipo')->nullable()->comment('Recuperación, etc');
             $table->string('motivo')->nullable()->comment('SIS Cuprum, etc');
             $table->string('status')->nullable();

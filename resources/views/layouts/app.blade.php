@@ -15,6 +15,7 @@
     <!-- CSS Files -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/now-ui-dashboard.min.css?v=1.1.0')}}" rel="stylesheet">
+    @yield('customcss')
 </head>
 
 
@@ -56,13 +57,13 @@
                             <div class="collapse" id="sidebar-admin">
                                 <ul class="nav">
                                     <li class="">
-                                        <a href="#">
+                                        <a href="{{ route('usuarios.create') }}">
                                             <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
                                             <p class="sidebar-normal">Crear usuario</p>
                                         </a>
                                     </li>
                                     <li class="active">
-                                        <a href="#">
+                                        <a href="{{ route('usuarios.index') }}">
                                             <span class="sidebar-mini-icon">U</span>
                                             <p class="sidebar-normal">Usuarios</p>
                                         </a>
@@ -235,6 +236,9 @@
     <script src="{{asset('assets/js/core/bootstrap.min.js?v=1645015120')}}"></script>
     <script src="{{asset('assets/js/plugins/perfect-scrollbar.jquery.min.js?v=1645015120')}}"></script>
     <script src="{{asset('assets/js/now-ui-dashboard.min.js?v=1645015120')}}" type="text/javascript"></script>
+
+    {{-- Custom Scripts --}}
+    @yield('customjs')
 </body>
 
 </html>
