@@ -56,34 +56,42 @@
                             <div class="clearfix"></div>
                             <div class="collapse" id="sidebar-admin">
                                 <ul class="nav">
-                                    <li class="{{ request()->is('usuarios/create') ? 'active' : '' }}">
-                                        <a href="{{ route('usuarios.create') }}">
-                                            <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
-                                            <p class="sidebar-normal">Crear usuario</p>
-                                        </a>
-                                    </li>
-                                    <li class="{{ request()->is('usuarios/index') ? 'active' : '' }}">
-                                        <a href="{{ route('usuarios.index') }}">
-                                            <span class="sidebar-mini-icon">U</span>
-                                            <p class="sidebar-normal">Usuarios</p>
-                                        </a>
-                                    </li>
                                     <li class="{{ request()->is('empresas/index') ? 'active' : '' }}">
                                         <a href="{{ route('empresas.index') }}">
                                             <span class="sidebar-mini-icon">E</span>
                                             <p class="sidebar-normal">Empresas</p>
                                         </a>
                                     </li>
+                                    <li class="{{ request()->is('empresas/create') ? 'active' : '' }}">
+                                        <a href="{{ route('empresas.create') }}">
+                                            <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
+                                            <p class="sidebar-normal">Crear empresa</p>
+                                        </a>
+                                    </li>
+                                    <hr>
+                                    <li class="{{ request()->is('usuarios/index') ? 'active' : '' }}">
+                                        <a href="{{ route('usuarios.index') }}">
+                                            <span class="sidebar-mini-icon">U</span>
+                                            <p class="sidebar-normal">Usuarios</p>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->is('usuarios/create') ? 'active' : '' }}">
+                                        <a href="{{ route('usuarios.create') }}">
+                                            <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
+                                            <p class="sidebar-normal">Crear usuario</p>
+                                        </a>
+                                    </li>
+
                                 </ul>
                             </div>
                         </li>
                         
-                        <li class="">
+                        {{-- <li class="">
                             <a href="#">
                                 <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
                                 <p class="sidebar-normal">Pestaña</p>
                             </a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                     <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
