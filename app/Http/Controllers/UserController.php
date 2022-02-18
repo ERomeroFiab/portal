@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    public function index()
+    public function admin_index()
     {
         $users = User::all();
         
@@ -19,14 +19,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function create()
+    public function admin_create()
     {
         $empresas = Empresa::all();
         return view('administrador.usuarios.create', [
             "empresas" => $empresas,
         ]);
     }
-    public function show($id)
+    public function admin_show($id)
     {
         $user = User::where('id', $id)->with('empresa')->first();
         
@@ -35,7 +35,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function admin_store(Request $request)
     {
         Validator::make($request->all(), [
             'name' => 'required|string',
@@ -52,7 +52,7 @@ class UserController extends Controller
         return redirect()->route('admin.usuarios.show', ['id' => $user->id])->with('success', "El usuario {$user->name} fue agregado exitosamente");
     }
 
-    public function edit($id)
+    public function admin_edit($id)
     {
         $user = User::find($id);
         return view('administrador.usuarios.edit', [
@@ -60,7 +60,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function update($id, Request $request)
+    public function admin_update($id, Request $request)
     {
         $user = User::find($id);
         dd( $request->all() );

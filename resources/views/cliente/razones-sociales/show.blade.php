@@ -22,27 +22,6 @@
                                 <input disabled type="text" class="form-control" id="rut" value="{{ $razon_social->rut }}">
                             </div>
 
-                            <div class="form-group">
-                                <label for="contrato">Contrato</label>
-                                <input disabled type="text" class="form-control" id="contrato" value="{{ $razon_social->contrato }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="no_entity">Número de entity</label>
-                                <input disabled type="text" class="form-control" id="no_entity" value="{{ $razon_social->no_entity }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date_signature">date_signature</label>
-                                <input disabled type="text" class="form-control" id="date_signature" value="{{ $razon_social->date_signature }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suivi_par">suivi_par</label>
-                                <input disabled type="text" class="form-control" id="suivi_par" value="{{ $razon_social->suivi_par }}">
-                            </div>
-
-
                         </form>
                     </div>
                     <div class="col-12 mt-3">
@@ -56,12 +35,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>N°</th>
-                                                    <th>Inició</th>
+                                                    <th>Glosa</th>
+                                                    <th>Tipo</th>
+                                                    <th>Motivo</th>
+                                                    <th>Inicio</th>
+                                                    <th>Monto Gestionado</th>
                                                     <th>Finalizó</th>
                                                     <th>Fecha Depósito</th>
                                                     <th>Honorarios Fiabilis</th>
-                                                    <th>Tipo</th>
-                                                    <th>Motivo</th>
+
                                                     <th>Status</th>
                                                     <th>Reportes</th>
                                                     <th>&nbsp;</th>
@@ -71,16 +53,18 @@
                                                 @foreach ($razon_social->gestiones as $gestion)
                                                 <tr>
                                                     <td>{{ $loop->iteration }} </td>
+                                                    <td>{{ $gestion->glosa }} </td>
+                                                    <td>{{ $gestion->tipo }} </td>
+                                                    <td>{{ $gestion->motivo }} </td>
                                                     <td>{{ $gestion->fecha_inicio->format('d-m-Y') }} </td>
+                                                    <td>{{ $gestion->monto_gestionado }} </td>
                                                     <td>{{ $gestion->fecha_cierre->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->fecha_deposito->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->honorarios_fiabilis }} </td>
-                                                    <td>{{ $gestion->tipo }} </td>
-                                                    <td>{{ $gestion->motivo }} </td>
                                                     <td>{{ $gestion->status }} </td>
                                                     <td class="text-center">{{ count($gestion->reportes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('admin.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

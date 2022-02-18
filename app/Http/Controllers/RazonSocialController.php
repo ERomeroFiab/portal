@@ -6,14 +6,11 @@ use App\Models\RazonSocial;
 use App\Http\Requests\StoreRazonSocialRequest;
 use App\Http\Requests\UpdateRazonSocialRequest;
 
+use App\Models\Empresa;
+
 class RazonSocialController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function admin_index()
     {
         $razon_social = RazonSocial::all();
         
@@ -22,34 +19,17 @@ class RazonSocialController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function admin_create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreRazonSocialRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRazonSocialRequest $request)
+    public function admin_store(StoreRazonSocialRequest $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\RazonSocial  $razonSocial
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function admin_show($id)
     {
         $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
         
@@ -58,37 +38,25 @@ class RazonSocialController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\RazonSocial  $razonSocial
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(RazonSocial $razonSocial)
+    // CLIENTE
+    public function cliente_index()
     {
-        //
+        $user_id = auth()->user()->id;
+        $empresa = Empresa::whereHas('representante', function ($q) use ($user_id){
+            $q->where('id', $user_id);
+        })->first();
+        
+        return view('cliente.razones-sociales.index', [
+            "empresa" => $empresa,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateRazonSocialRequest  $request
-     * @param  \App\Models\RazonSocial  $razonSocial
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRazonSocialRequest $request, RazonSocial $razonSocial)
+    public function cliente_show($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\RazonSocial  $razonSocial
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(RazonSocial $razonSocial)
-    {
-        //
+        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        
+        return view('cliente.razones-sociales.show', [
+            "razon_social" => $razon_social,
+        ]);
     }
 }

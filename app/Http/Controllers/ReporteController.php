@@ -13,7 +13,7 @@ class ReporteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function admin_index()
     {
         $reportes = Reporte::all();
         
@@ -27,7 +27,7 @@ class ReporteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function admin_create()
     {
         //
     }
@@ -38,7 +38,7 @@ class ReporteController extends Controller
      * @param  \App\Http\Requests\StoreReporteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreReporteRequest $request)
+    public function admin_store(StoreReporteRequest $request)
     {
         //
     }
@@ -49,7 +49,7 @@ class ReporteController extends Controller
      * @param  \App\Models\Reporte  $reporte
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function admin_show($id)
     {
         $reporte = Reporte::where('id', $id)->first();
         

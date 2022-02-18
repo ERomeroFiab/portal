@@ -8,12 +8,7 @@ use App\Http\Requests\UpdateGestionRequest;
 
 class GestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function admin_index()
     {
         $gestiones = Gestion::all();
         
@@ -22,34 +17,7 @@ class GestionController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreGestionRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreGestionRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Gestion  $gestion
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function admin_show($id)
     {
         $gestion = Gestion::where('id', $id)->with('reportes')->first();
         
@@ -57,38 +25,27 @@ class GestionController extends Controller
             "gestion" => $gestion,
         ]);
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Gestion  $gestion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Gestion $gestion)
+    // CLIENTE
+    public function cliente_index()
     {
-        //
+        $cliente = auth()->user();
+        $empresa_id = $cliente->empresa_id;
+        $gestiones = Gestion::whereHas('razon_social', function($q) use ($empresa_id){
+            $q->where('empresa_id', $empresa_id);
+        })->get();
+        
+        return view('cliente.gestiones.index', [
+            "gestiones" => $gestiones,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateGestionRequest  $request
-     * @param  \App\Models\Gestion  $gestion
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateGestionRequest $request, Gestion $gestion)
+    public function cliente_show($id)
     {
-        //
+        $gestion = Gestion::where('id', $id)->with('reportes')->first();
+        
+        return view('cliente.gestiones.show', [
+            "gestion" => $gestion,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Gestion  $gestion
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Gestion $gestion)
-    {
-        //
-    }
 }

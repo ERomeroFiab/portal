@@ -10,7 +10,7 @@ class UserFactory extends Factory
 {
     public function definition()
     {
-        $rol = $this->faker->randomElement(['Gestor', 'Cliente']);
+        $rol = $this->faker->randomElement(['Consultor', 'Cliente']);
         $empresa_id = $rol === "Cliente" ? Empresa::pluck('id')[$this->faker->numberBetween(1,Empresa::count()-1)] : null;
         return [
             'empresa_id' => $empresa_id,

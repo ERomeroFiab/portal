@@ -52,7 +52,7 @@
                                                     <td>{{ count($razon_social->gestiones_finalizadas) }} </td>
                                                     <td>{{ count($razon_social->gestiones_pendientes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('admin.razonesSociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('cliente.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

@@ -23,13 +23,18 @@
     <div class="wrapper">
 
         @auth
-
+            {{-- SIDEBAR --}}
             @if ( auth()->user()->rol === "Administrador" )
                 @include('administrador.partials.sidebar')
+            @elseif( auth()->user()->rol === "Consultor" )
+                @include('consultor.partials.sidebar')
+            @elseif( auth()->user()->rol === "Cliente" )
+                @include('cliente.partials.sidebar')
             @else
                 @include('partials.sidebar')
             @endif
 
+            {{-- MAINPANEL --}}
             <div class="main-panel">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
@@ -59,7 +64,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="navUserDropdown"
                                         data-toggle="dropdown">
                                         <!-- <img height="16" src="#"> -->
-                                        <span class="mx-1">{{ auth()->user()->name }} </span>
+                                        <span class="mx-1">{{ auth()->user()->name }} ({{ auth()->user()->rol }}) </span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navUserDropdown">
                                         <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -86,16 +91,17 @@
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="copyright">
-                            © 2022, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
+                            © {{ date('Y') }}, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
                         </div>
                     </div>
                 </footer>
             </div>
 
         @else
-
+            {{-- SIDEBAR --}}
             @include('partials.sidebar')
 
+            {{-- MAINPANEL --}}
             <div class="main-panel">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
@@ -145,7 +151,7 @@
                 <footer class="footer">
                     <div class="container-fluid">
                         <div class="copyright">
-                            © 2022, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
+                            © {{ date('Y') }}, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
                         </div>
                     </div>
                 </footer>

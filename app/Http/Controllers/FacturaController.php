@@ -13,9 +13,13 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function cliente_index()
     {
-        //
+        $facturas = Factura::all();
+        
+        return view('cliente.facturas.index', [
+            "facturas" => $facturas,
+        ]);
     }
 
     /**
@@ -23,7 +27,7 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function cliente_create()
     {
         //
     }
@@ -34,7 +38,7 @@ class FacturaController extends Controller
      * @param  \App\Http\Requests\StoreFacturaRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreFacturaRequest $request)
+    public function cliente_store(StoreFacturaRequest $request)
     {
         //
     }
@@ -45,9 +49,13 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $factura)
+    public function cliente_show($id)
     {
-        //
+        $factura = Factura::where('id', $id)->first();
+        
+        return view('cliente.facturas.show', [
+            "factura" => $factura,
+        ]);
     }
 
     /**
@@ -56,7 +64,7 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function edit(Factura $factura)
+    public function cliente_edit(Factura $factura)
     {
         //
     }
@@ -68,7 +76,7 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateFacturaRequest $request, Factura $factura)
+    public function cliente_update(UpdateFacturaRequest $request, Factura $factura)
     {
         //
     }
@@ -79,7 +87,7 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Factura $factura)
+    public function cliente_destroy(Factura $factura)
     {
         //
     }

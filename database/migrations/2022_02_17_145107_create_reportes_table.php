@@ -11,6 +11,9 @@ class CreateReportesTable extends Migration
         Schema::create('reportes', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->unsignedBigInteger('gestor_id')->nullable();
+            $table->foreign('gestor_id')->references('id')->on('users')->onDelete('set null');
+
             $table->unsignedBigInteger('gestion_id')->nullable();
             $table->foreign('gestion_id')->references('id')->on('gestions')->onDelete('set null');
 

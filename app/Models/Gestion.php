@@ -23,10 +23,6 @@ class Gestion extends Model
     {
         return $this->belongsTo('App\Models\Factura', 'factura_id'); 
     }
-    public function gestor()
-    {
-        return $this->belongsTo('App\Models\User', 'gestor_id'); 
-    }
     public function reportes()
     {
         return $this->hasMany('App\Models\Reporte', 'gestion_id'); 
