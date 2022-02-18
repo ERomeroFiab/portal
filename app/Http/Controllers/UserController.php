@@ -14,7 +14,7 @@ class UserController extends Controller
     {
         $users = User::all();
         
-        return view('usuarios.index', [
+        return view('administrador.usuarios.index', [
             "users" => $users,
         ]);
     }
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function create()
     {
         $empresas = Empresa::all();
-        return view('usuarios.create', [
+        return view('administrador.usuarios.create', [
             "empresas" => $empresas,
         ]);
     }
@@ -30,7 +30,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->with('empresa')->first();
         
-        return view('usuarios.show', [
+        return view('administrador.usuarios.show', [
             "user" => $user,
         ]);
     }
@@ -49,13 +49,13 @@ class UserController extends Controller
         $user->password = bcrypt('12345678');
         $user->save();
 
-        return redirect()->route('usuarios.index')->with('success', "El usuario {$user->name} fue agregado exitosamente");
+        return redirect()->route('admin.usuarios.show', ['id' => $user->id])->with('success', "El usuario {$user->name} fue agregado exitosamente");
     }
 
     public function edit($id)
     {
         $user = User::find($id);
-        return view('usuarios.edit', [
+        return view('administrador.usuarios.edit', [
             "user" => $user,
         ]);
     }

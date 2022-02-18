@@ -17,7 +17,7 @@ class ReporteController extends Controller
     {
         $reportes = Reporte::all();
         
-        return view('reportes.index', [
+        return view('administrador.reportes.index', [
             "reportes" => $reportes,
         ]);
     }
@@ -53,7 +53,7 @@ class ReporteController extends Controller
     {
         $reporte = Reporte::where('id', $id)->first();
         
-        return view('reportes.show', [
+        return view('administrador.reportes.show', [
             "reporte" => $reporte,
         ]);
     }

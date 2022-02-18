@@ -67,7 +67,7 @@
                                                     <td>{{ $gestion->status }} </td>
                                                     <td class="text-center">{{ count($gestion->reportes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('admin.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

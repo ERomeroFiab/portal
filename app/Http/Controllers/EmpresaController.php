@@ -17,7 +17,7 @@ class EmpresaController extends Controller
     {
         $empresas = Empresa::all();
         
-        return view('empresas.index', [
+        return view('administrador.empresas.index', [
             "empresas" => $empresas,
         ]);
     }
@@ -29,7 +29,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('empresas.create');
+        return view('administrador.empresas.create');
     }
 
     /**
@@ -53,7 +53,7 @@ class EmpresaController extends Controller
     {
         $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
         
-        return view('empresas.show', [
+        return view('administrador.empresas.show', [
             "empresa" => $empresa,
         ]);
     }

@@ -26,7 +26,7 @@
                                     <td>{{ $user->email }} </td>
                                     <td>{{ $user->rol }} </td>
                                     <td> 
-                                       <a href="{{ route('usuarios.show', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                       <a href="{{ route('admin.usuarios.show', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
                                     </td>
                                  </tr>
                               @endforeach

@@ -29,7 +29,7 @@
                                     <td>{{ $empresa->tipo }} </td>
                                     <td>
                                         @if ($empresa->representante)
-                                        <a target="_blank" href="{{ route('usuarios.show', ['id' => $empresa->representante->id]) }}">
+                                        <a target="_blank" href="{{ route('admin.usuarios.show', ['id' => $empresa->representante->id]) }}">
                                             {{$empresa->representante->name}}
                                         </a>
                                         @else
@@ -40,7 +40,7 @@
                                         {{ count( $empresa->razones_sociales ) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                        <a href="{{ route('admin.empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
                                     </td>
                                 </tr>
                                 @endforeach

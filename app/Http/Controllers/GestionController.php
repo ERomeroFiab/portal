@@ -17,7 +17,7 @@ class GestionController extends Controller
     {
         $gestiones = Gestion::all();
         
-        return view('gestiones.index', [
+        return view('administrador.gestiones.index', [
             "gestiones" => $gestiones,
         ]);
     }
@@ -53,7 +53,7 @@ class GestionController extends Controller
     {
         $gestion = Gestion::where('id', $id)->with('reportes')->first();
         
-        return view('gestiones.show', [
+        return view('administrador.gestiones.show', [
             "gestion" => $gestion,
         ]);
     }

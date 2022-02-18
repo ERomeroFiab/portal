@@ -17,7 +17,7 @@ class RazonSocialController extends Controller
     {
         $razon_social = RazonSocial::all();
         
-        return view('razones-sociales.index', [
+        return view('administrador.razones-sociales.index', [
             "razon_social" => $razon_social,
         ]);
     }
@@ -53,7 +53,7 @@ class RazonSocialController extends Controller
     {
         $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
         
-        return view('razones-sociales.show', [
+        return view('administrador.razones-sociales.show', [
             "razon_social" => $razon_social,
         ]);
     }

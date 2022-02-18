@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <form action="{{ route('usuarios.store') }}" method="POST">
+                            <form action="{{ route('admin.usuarios.store') }}" method="POST">
                                 @csrf
 
                                 <div class="form-group">
