@@ -26,6 +26,14 @@ class UserController extends Controller
             "empresas" => $empresas,
         ]);
     }
+    public function show($id)
+    {
+        $user = User::where('id', $id)->with('empresa')->first();
+        
+        return view('usuarios.show', [
+            "user" => $user,
+        ]);
+    }
 
     public function store(Request $request)
     {

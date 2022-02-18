@@ -48,7 +48,7 @@
                             </a>
                         </li> -->
 
-                        <li class="active">
+                        <li class="{{ request()->is('usuarios/*') ? 'active' : '' }}">
                             <a data-toggle="collapse" href="#sidebar-admin" aria-expanded="false" class="collapsed">
                                 <span class="sidebar-mini-icon"><i class="now-ui-icons ui-2_settings-90"></i></span>
                                 <p class="sidebar-normal">Administración <b class="caret"></b></p>
@@ -56,16 +56,22 @@
                             <div class="clearfix"></div>
                             <div class="collapse" id="sidebar-admin">
                                 <ul class="nav">
-                                    <li class="">
+                                    <li class="{{ request()->is('usuarios/create') ? 'active' : '' }}">
                                         <a href="{{ route('usuarios.create') }}">
                                             <span class="sidebar-mini-icon"><i class="fas fa-plus"></i></span>
                                             <p class="sidebar-normal">Crear usuario</p>
                                         </a>
                                     </li>
-                                    <li class="active">
+                                    <li class="{{ request()->is('usuarios/index') ? 'active' : '' }}">
                                         <a href="{{ route('usuarios.index') }}">
                                             <span class="sidebar-mini-icon">U</span>
                                             <p class="sidebar-normal">Usuarios</p>
+                                        </a>
+                                    </li>
+                                    <li class="{{ request()->is('empresas/index') ? 'active' : '' }}">
+                                        <a href="{{ route('empresas.index') }}">
+                                            <span class="sidebar-mini-icon">E</span>
+                                            <p class="sidebar-normal">Empresas</p>
                                         </a>
                                     </li>
                                 </ul>

@@ -10,11 +10,13 @@ class UserFactory extends Factory
 {
     public function definition()
     {
+        $rol = $this->faker->randomElement(['Gestor', 'Cliente']);
+        $empresa_id = $rol === "Cliente" ? Empresa::pluck('id')[$this->faker->numberBetween(1,Empresa::count()-1)] : null;
         return [
-            'empresa_id' => Empresa::pluck('id')[$this->faker->numberBetween(1,Empresa::count()-1)],
+            'empresa_id' => $empresa_id,
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
-            'rol' => $this->faker->randomElement(['Gestor', 'Cliente']),
+            'rol' => $rol,
             'password' => bcrypt("12345678"), // password
             'status' => null,
             'email_verified_at' => now(),
