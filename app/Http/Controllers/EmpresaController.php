@@ -29,7 +29,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('empresas.create');
     }
 
     /**
@@ -49,9 +49,13 @@ class EmpresaController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function show(Empresa $empresa)
+    public function show($id)
     {
-        //
+        $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
+        
+        return view('empresas.show', [
+            "empresa" => $empresa,
+        ]);
     }
 
     /**

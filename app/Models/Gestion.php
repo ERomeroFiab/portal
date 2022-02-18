@@ -9,6 +9,12 @@ class Gestion extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'fecha_inicio'  => 'datetime',
+        'fecha_cierre'  => 'datetime',
+        'fecha_deposito'  => 'datetime',
+    ];
+
     public function razon_social()
     {
         return $this->belongsTo('App\Models\RazonSocial', 'razon_social_id'); 

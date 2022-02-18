@@ -15,7 +15,11 @@ class RazonSocialController extends Controller
      */
     public function index()
     {
-        //
+        $razon_social = RazonSocial::all();
+        
+        return view('razones-sociales.index', [
+            "razon_social" => $razon_social,
+        ]);
     }
 
     /**
@@ -45,9 +49,13 @@ class RazonSocialController extends Controller
      * @param  \App\Models\RazonSocial  $razonSocial
      * @return \Illuminate\Http\Response
      */
-    public function show(RazonSocial $razonSocial)
+    public function show($id)
     {
-        //
+        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        
+        return view('razones-sociales.show', [
+            "razon_social" => $razon_social,
+        ]);
     }
 
     /**

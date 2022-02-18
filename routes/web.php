@@ -38,4 +38,25 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/usuarios/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->name('usuarios.edit');
     Route::post('/usuarios/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->name('usuarios.update');
 
+    Route::get('/razones-sociales/index', [App\Http\Controllers\RazonSocialController::class, 'index'])->name('razonesSociales.index');
+    Route::get('/razones-sociales/create', [App\Http\Controllers\RazonSocialController::class, 'create'])->name('razonesSociales.create');
+    Route::post('/razones-sociales/store', [App\Http\Controllers\RazonSocialController::class, 'store'])->name('razonesSociales.store');
+    Route::get('/razones-sociales/show/{id}', [App\Http\Controllers\RazonSocialController::class, 'show'])->name('razonesSociales.show');
+    Route::get('/razones-sociales/edit/{id}', [App\Http\Controllers\RazonSocialController::class, 'edit'])->name('razonesSociales.edit');
+    Route::post('/razones-sociales/update/{id}', [App\Http\Controllers\RazonSocialController::class, 'update'])->name('razonesSociales.update');
+
+    Route::get('/gestiones/index', [App\Http\Controllers\GestionController::class, 'index'])->name('gestiones.index');
+    Route::get('/gestiones/create', [App\Http\Controllers\GestionController::class, 'create'])->name('gestiones.create');
+    Route::post('/gestiones/store', [App\Http\Controllers\GestionController::class, 'store'])->name('gestiones.store');
+    Route::get('/gestiones/show/{id}', [App\Http\Controllers\GestionController::class, 'show'])->name('gestiones.show');
+    Route::get('/gestiones/edit/{id}', [App\Http\Controllers\GestionController::class, 'edit'])->name('gestiones.edit');
+    Route::post('/gestiones/update/{id}', [App\Http\Controllers\GestionController::class, 'update'])->name('gestiones.update');
+
+    Route::get('/reportes/index', [App\Http\Controllers\ReporteController::class, 'index'])->name('reportes.index');
+    Route::get('/reportes/create', [App\Http\Controllers\ReporteController::class, 'create'])->name('reportes.create');
+    Route::post('/reportes/store', [App\Http\Controllers\ReporteController::class, 'store'])->name('reportes.store');
+    Route::get('/reportes/show/{id}', [App\Http\Controllers\ReporteController::class, 'show'])->name('reportes.show');
+    Route::get('/reportes/edit/{id}', [App\Http\Controllers\ReporteController::class, 'edit'])->name('reportes.edit');
+    Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'update'])->name('reportes.update');
+
 });

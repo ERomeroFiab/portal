@@ -15,7 +15,11 @@ class ReporteController extends Controller
      */
     public function index()
     {
-        //
+        $reportes = Reporte::all();
+        
+        return view('reportes.index', [
+            "reportes" => $reportes,
+        ]);
     }
 
     /**
@@ -45,9 +49,13 @@ class ReporteController extends Controller
      * @param  \App\Models\Reporte  $reporte
      * @return \Illuminate\Http\Response
      */
-    public function show(Reporte $reporte)
+    public function show($id)
     {
-        //
+        $reporte = Reporte::where('id', $id)->first();
+        
+        return view('reportes.show', [
+            "reporte" => $reporte,
+        ]);
     }
 
     /**

@@ -15,7 +15,11 @@ class GestionController extends Controller
      */
     public function index()
     {
-        //
+        $gestiones = Gestion::all();
+        
+        return view('gestiones.index', [
+            "gestiones" => $gestiones,
+        ]);
     }
 
     /**
@@ -45,9 +49,13 @@ class GestionController extends Controller
      * @param  \App\Models\Gestion  $gestion
      * @return \Illuminate\Http\Response
      */
-    public function show(Gestion $gestion)
+    public function show($id)
     {
-        //
+        $gestion = Gestion::where('id', $id)->with('reportes')->first();
+        
+        return view('gestiones.show', [
+            "gestion" => $gestion,
+        ]);
     }
 
     /**

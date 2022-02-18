@@ -19,7 +19,7 @@ class GestionFactory extends Factory
             'Ahorro SIS', 'Exceso SIS', 'Bono Mujer Trabajadora (BMT)'
         ];
         $status = [
-            'En Proceso', 'Finalizada'
+            'Pendiente', 'Finalizada'
         ];
         return [
             "gestor_id"           => User::pluck('id')[$this->faker->numberBetween(1,User::count()-1)],
