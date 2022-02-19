@@ -11,7 +11,7 @@ class CreateFacturasTable extends Migration
         Schema::create('facturas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('monto');
-            $table->timestamp('fecha_de_pago')->nullable();
+            $table->dateTime('fecha_de_pago')->nullable();
             $table->string('status')->default('Pendiente')->comment('Pendiente, En Proceso, Pagada');
             $table->timestamps();
         });

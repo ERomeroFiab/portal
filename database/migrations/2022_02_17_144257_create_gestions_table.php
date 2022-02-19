@@ -22,9 +22,9 @@ class CreateGestionsTable extends Migration
             $table->integer('monto_aprobado')->nullable();
             $table->integer('fee')->nullable();
             $table->integer('monto_factura')->nullable();
-            $table->timestamp('fecha_inicio')->nullable();
-            $table->timestamp('fecha_cierre')->nullable();
-            $table->timestamp('fecha_deposito')->nullable();
+            $table->dateTime('fecha_inicio')->nullable();
+            $table->dateTime('fecha_cierre')->nullable();
+            $table->dateTime('fecha_deposito')->nullable();
             $table->integer('honorarios_fiabilis')->nullable();
             $table->string('tipo')->nullable()->comment('Oportunidades, Recuperación, Regularizaciones');
             $table->string('motivo')->nullable()->comment('SIS Cuprum, Exceso Colmena, Ahorro SIS, etc');

@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('rol')->comment('Gestor ó Cliente.');
             $table->string('password');
             $table->string('status')->nullable();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->dateTime('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
