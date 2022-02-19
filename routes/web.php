@@ -40,12 +40,12 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/usuarios/edit/{id}', [App\Http\Controllers\UserController::class, 'admin_edit'])->name('admin.usuarios.edit');
         Route::post('/usuarios/update/{id}', [App\Http\Controllers\UserController::class, 'admin_update'])->name('admin.usuarios.update');
 
-        Route::get('/razones-sociales/index', [App\Http\Controllers\RazonSocialController::class, 'admin_index'])->name('admin.razonesSociales.index');
-        Route::get('/razones-sociales/create', [App\Http\Controllers\RazonSocialController::class, 'admin_create'])->name('admin.razonesSociales.create');
-        Route::post('/razones-sociales/store', [App\Http\Controllers\RazonSocialController::class, 'admin_store'])->name('admin.razonesSociales.store');
-        Route::get('/razones-sociales/show/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_show'])->name('admin.razonesSociales.show');
-        Route::get('/razones-sociales/edit/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_edit'])->name('admin.razonesSociales.edit');
-        Route::post('/razones-sociales/update/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_update'])->name('admin.razonesSociales.update');
+        Route::get('/razones-sociales/index', [App\Http\Controllers\RazonSocialController::class, 'admin_index'])->name('admin.razones-sociales.index');
+        Route::get('/razones-sociales/create', [App\Http\Controllers\RazonSocialController::class, 'admin_create'])->name('admin.razones-sociales.create');
+        Route::post('/razones-sociales/store', [App\Http\Controllers\RazonSocialController::class, 'admin_store'])->name('admin.razones-sociales.store');
+        Route::get('/razones-sociales/show/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_show'])->name('admin.razones-sociales.show');
+        Route::get('/razones-sociales/edit/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_edit'])->name('admin.razones-sociales.edit');
+        Route::post('/razones-sociales/update/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_update'])->name('admin.razones-sociales.update');
 
         Route::get('/gestiones/index', [App\Http\Controllers\GestionController::class, 'admin_index'])->name('admin.gestiones.index');
         Route::get('/gestiones/create', [App\Http\Controllers\GestionController::class, 'admin_create'])->name('admin.gestiones.create');
@@ -143,6 +143,13 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/reportes/show/{id}', [App\Http\Controllers\ReporteController::class, 'consultor_show'])->name('consultor.reportes.show');
         Route::get('/reportes/edit/{id}', [App\Http\Controllers\ReporteController::class, 'consultor_edit'])->name('consultor.reportes.edit');
         Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'consultor_update'])->name('consultor.reportes.update');
+
+        Route::get('/facturas/index', [App\Http\Controllers\FacturaController::class, 'consultor_index'])->name('consultor.facturas.index');
+        Route::get('/facturas/create', [App\Http\Controllers\FacturaController::class, 'consultor_create'])->name('consultor.facturas.create');
+        Route::post('/facturas/store', [App\Http\Controllers\FacturaController::class, 'consultor_store'])->name('consultor.facturas.store');
+        Route::get('/facturas/show/{id}', [App\Http\Controllers\FacturaController::class, 'consultor_show'])->name('consultor.facturas.show');
+        Route::get('/facturas/edit/{id}', [App\Http\Controllers\FacturaController::class, 'consultor_edit'])->name('consultor.facturas.edit');
+        Route::post('/facturas/update/{id}', [App\Http\Controllers\FacturaController::class, 'consultor_update'])->name('consultor.facturas.update');
     });
     
 

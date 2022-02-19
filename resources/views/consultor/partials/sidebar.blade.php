@@ -1,11 +1,11 @@
 <div class="sidebar" data-color="blue">
-
+    <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
     <div class="logo">
-        <a href="#" class="simple-text logo-mini" title="Sistema integrado de gestión">
+        <a href="#" class="simple-text logo-mini" title="Portal">
             <img src="{{asset('assets/img/logo-md.png')}}">
         </a>
         <!--Nombre de la empresa-->
-        <a href="#" class="simple-text logo-normal" title="Sistema integrado de gestión">Fiabilis</a>
+        <a href="#" class="simple-text logo-normal" title="Portal">Fiabilis</a>
         <div class="navbar-minimize">
             <button id="minimizeSidebar" class="btn btn-simple btn-icon btn-neutral btn-round">
                 <i class="now-ui-icons text_align-center visible-on-sidebar-regular"></i>
@@ -13,5 +13,34 @@
             </button>
         </div>
     </div>
+    <div class="sidebar-wrapper ps-container ps-theme-default">
+        <ul class="nav">
+            
+            <li class="{{ request()->is('consultor/empresas/index') ? 'active' : '' }}">
+                <a href="{{ route('consultor.empresas.index') }}">
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-layer-group"></i></span>
+                    <p class="sidebar-normal">Empresas</p>
+                </a>
+            </li>
+            <li class="{{ request()->is('consultor/gestiones/index') ? 'active' : '' }}">
+                <a href="{{ route('consultor.gestiones.index') }}">
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-briefcase"></i></span>
+                    <p class="sidebar-normal">Gestiones</p>
+                </a>
+            </li>
+            <li class="{{ request()->is('consultor/facturas/index') ? 'active' : '' }}">
+                <a href="{{ route('consultor.facturas.index') }}">
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                    <p class="sidebar-normal">Facturas</p>
+                </a>
+            </li>
 
+        </ul>
+        <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+            <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+        </div>
+        <div class="ps-scrollbar-y-rail" style="top: 0px; right: 0px;">
+            <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 0px;"></div>
+        </div>
+    </div>
 </div>

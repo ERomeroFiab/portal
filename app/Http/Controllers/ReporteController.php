@@ -8,11 +8,6 @@ use App\Http\Requests\UpdateReporteRequest;
 
 class ReporteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function admin_index()
     {
         $reportes = Reporte::all();
@@ -22,33 +17,6 @@ class ReporteController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function admin_create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreReporteRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function admin_store(StoreReporteRequest $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
     public function admin_show($id)
     {
         $reporte = Reporte::where('id', $id)->first();
@@ -58,37 +26,15 @@ class ReporteController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Reporte $reporte)
+    // CONSULTOR
+    public function consultor_show($id)
     {
-        //
+        $reporte = Reporte::where('id', $id)->first();
+        
+        return view('consultor.reportes.show', [
+            "reporte" => $reporte,
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateReporteRequest  $request
-     * @param  \App\Models\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateReporteRequest $request, Reporte $reporte)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Reporte  $reporte
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Reporte $reporte)
-    {
-        //
-    }
 }

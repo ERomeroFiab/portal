@@ -26,7 +26,7 @@
                         </form>
                     </div>
                     <div class="col-12 mt-3">
-                        <h3> {{ count($empresa->razones_sociales) < 2 ? count($empresa->razones_sociales)." Razón social" : count($empresa->razones_sociales)." Razones sociales" }}</h3>
+                        <h3> {{ count($empresa->razones_sociales) < 2 ? count($empresa->razones_sociales)." Razón Social" : count($empresa->razones_sociales)." Razones Sociales" }}</h3>
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -52,7 +52,7 @@
                                                     <td>{{ count($razon_social->gestiones_finalizadas) }} </td>
                                                     <td>{{ count($razon_social->gestiones_pendientes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('admin.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="{{ route('consultor.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

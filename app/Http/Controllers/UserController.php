@@ -65,4 +65,13 @@ class UserController extends Controller
         $user = User::find($id);
         dd( $request->all() );
     }
+    // CONSULTOR
+    public function consultor_show($id)
+    {
+        $user = User::where('id', $id)->with('empresa')->first();
+        
+        return view('consultor.usuarios.show', [
+            "user" => $user,
+        ]);
+    }
 }

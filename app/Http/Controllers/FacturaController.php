@@ -35,5 +35,14 @@ class FacturaController extends Controller
         ]);
     }
 
+    // CONSULTOR
+    public function consultor_index()
+    {
+        $facturas = Factura::all();
+        
+        return view('consultor.facturas.index', [
+            "facturas" => $facturas,
+        ]);
+    }
 
 }

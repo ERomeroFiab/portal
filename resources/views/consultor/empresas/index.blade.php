@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h2>Empresas</h2>
+                <h2>{{ count($empresas) < 2 ? count($empresas)." Empresa" : count($empresas)." Empresas" }}</h2>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -30,7 +30,7 @@
                                     <td>{{ $empresa->tipo }} </td>
                                     <td>
                                         @if ($empresa->representante)
-                                            <a target="_blank" href="{{ route('admin.usuarios.show', ['id' => $empresa->representante->id]) }}">
+                                            <a target="_blank" href="{{ route('consultor.usuarios.show', ['id' => $empresa->representante->id]) }}">
                                                 {{$empresa->representante->name}}
                                             </a>
                                         @else
@@ -48,7 +48,7 @@
                                         {{ count( $empresa->razones_sociales ) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver</a>
+                                        <a href="{{ route('consultor.empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                     </td>
                                 </tr>
                                 @endforeach

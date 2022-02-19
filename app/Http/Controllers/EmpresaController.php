@@ -22,11 +22,6 @@ class EmpresaController extends Controller
         return view('administrador.empresas.create');
     }
 
-    public function admin_store(StoreEmpresaRequest $request)
-    {
-        //
-    }
-
     public function admin_show($id)
     {
         $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
@@ -36,20 +31,6 @@ class EmpresaController extends Controller
         ]);
     }
 
-    public function admin_edit(Empresa $empresa)
-    {
-        //
-    }
-
-    public function admin_update(UpdateEmpresaRequest $request, Empresa $empresa)
-    {
-        //
-    }
-
-    public function admin_destroy(Empresa $empresa)
-    {
-        //
-    }
     // CLIENTE
     public function cliente_index()
     {
@@ -65,11 +46,6 @@ class EmpresaController extends Controller
         return view('administrador.empresas.create');
     }
 
-    public function cliente_store(StoreEmpresaRequest $request)
-    {
-        //
-    }
-
     public function cliente_show($id)
     {
         $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
@@ -78,19 +54,23 @@ class EmpresaController extends Controller
             "empresa" => $empresa,
         ]);
     }
-
-    public function cliente_edit(Empresa $empresa)
+    // CONSULTOR
+    public function consultor_index()
     {
-        //
+        $empresas = Empresa::all();
+        
+        return view('consultor.empresas.index', [
+            "empresas" => $empresas,
+        ]);
     }
 
-    public function cliente_update(UpdateEmpresaRequest $request, Empresa $empresa)
+    public function consultor_show($id)
     {
-        //
+        $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
+        
+        return view('consultor.empresas.show', [
+            "empresa" => $empresa,
+        ]);
     }
 
-    public function cliente_destroy(Empresa $empresa)
-    {
-        //
-    }
 }

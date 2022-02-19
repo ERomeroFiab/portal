@@ -19,16 +19,6 @@ class RazonSocialController extends Controller
         ]);
     }
 
-    public function admin_create()
-    {
-        //
-    }
-
-    public function admin_store(StoreRazonSocialRequest $request)
-    {
-        //
-    }
-
     public function admin_show($id)
     {
         $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
@@ -57,6 +47,16 @@ class RazonSocialController extends Controller
         $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
         
         return view('cliente.razones-sociales.show', [
+            "razon_social" => $razon_social,
+        ]);
+    }
+
+    // CONSULTOR
+    public function consultor_show($id)
+    {
+        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        
+        return view('consultor.razones-sociales.show', [
             "razon_social" => $razon_social,
         ]);
     }
