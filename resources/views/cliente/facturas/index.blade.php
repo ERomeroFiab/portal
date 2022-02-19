@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h2>Facturas Pendientes</h2>
+                <h2>{{ $cantidad_de_facturas < 2 ? $cantidad_de_facturas. " Factura pendiente" : $cantidad_de_facturas. " Facturas pendientes" }}</h2>
             </div>
             <div class="card-body">
                 <div class="row">

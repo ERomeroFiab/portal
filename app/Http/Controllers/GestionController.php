@@ -36,6 +36,7 @@ class GestionController extends Controller
         
         return view('cliente.gestiones.index', [
             "gestiones" => $gestiones,
+            "cantidad_de_gestiones" => $gestiones->count(),
         ]);
     }
 

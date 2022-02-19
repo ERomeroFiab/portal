@@ -23,11 +23,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="rut">Rut</label>
-                                <input disabled type="text" class="form-control" id="rut" value="{{ $razon_social->rut }}">
-                            </div>
-
-                            <div class="form-group">
                                 <label for="contrato">Contrato</label>
                                 <input disabled type="text" class="form-control" id="contrato" value="{{ $razon_social->contrato }}">
                             </div>
@@ -50,7 +45,7 @@
                         </form>
                     </div>
                     <div class="col-12 mt-3">
-                        <h3>Gestiones</h3>
+                        <h3> {{ count($razon_social->gestiones) < 2 ? count($razon_social->gestiones)." Gestión" : count($razon_social->gestiones)." Gestiones" }}</h3>
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">

@@ -134,6 +134,12 @@ class GestionFactory extends Factory
             'Asesoría Laboral: Gestión Subsidio Empleo Jóven.',
             'Asesoría Laboral: Recuperación Excesos AFP Capital.',
         ];
+        $bancos = [
+            "Falabella",
+            "Banco Estado",
+            "Santander",
+            "BCI",
+        ];
         $razon_social_id = RazonSocial::pluck('id')[$this->faker->numberBetween(1,RazonSocial::where('empresa_id', 1)->count()-1)];
         $factura = Factura::whereHas('gestiones', function($q) use ($razon_social_id){
             $q->where('status', 'Pendiente')->where('razon_social_id', $razon_social_id);
@@ -142,10 +148,12 @@ class GestionFactory extends Factory
             "razon_social_id"     => $razon_social_id,
             "factura_id"          => $factura ? $factura->id : Factura::pluck('id')[$this->faker->numberBetween(1,Factura::doesntHave('gestiones')->count()-1)],
             "glosa"               => $this->faker->randomElement( $glosa ),
+            "banco"               => $this->faker->randomElement( $bancos ),
+            "monto_depositado"    => $this->faker->numberBetween(10000,30000), 
             "monto_gestionado"    => $this->faker->numberBetween(10000,30000), 
             "monto_aprobado"      => $this->faker->numberBetween(10000,30000), 
             "fee"                 => $this->faker->numberBetween(10,50), 
-            "monto_factura"       => $this->faker->numberBetween(10000,30000), 
+            "monto_por_facturar"  => $this->faker->numberBetween(10000,30000), 
             "fecha_inicio"        => $this->faker->dateTimeBetween($startDate='-20 years', $endDate='-10 years', $timezone=null),
             "fecha_cierre"        => $this->faker->dateTimeBetween($startDate='-10 years', $endDate='-1 years', $timezone=null),
             "fecha_deposito"      => $this->faker->dateTimeBetween($startDate='-20 years', $endDate='-10 years', $timezone=null),

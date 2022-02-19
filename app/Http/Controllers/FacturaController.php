@@ -21,6 +21,7 @@ class FacturaController extends Controller
         
         return view('cliente.facturas.index', [
             "facturas" => $facturas,
+            "cantidad_de_facturas" => $facturas->count(),
         ]);
     }
 

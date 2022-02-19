@@ -26,7 +26,7 @@
                         </form>
                     </div>
                     <div class="col-12 mt-3">
-                        <h3>Reportes</h3>
+                        <h3>{{ count($gestion->reportes) < 2 ? count($gestion->reportes)." Reporte" : count($gestion->reportes)." Reportes" }}</h3>
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">

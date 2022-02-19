@@ -48,6 +48,7 @@ class RazonSocialController extends Controller
         
         return view('cliente.razones-sociales.index', [
             "empresa" => $empresa,
+            "cantidad_de_razones_sociales" => $empresa->razones_sociales->count(),
         ]);
     }
 

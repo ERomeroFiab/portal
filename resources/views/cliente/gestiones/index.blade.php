@@ -7,7 +7,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12 mt-3">
-                        <h3>Gestiones</h3>
+                        <h3>{{ $cantidad_de_gestiones < 2 ? $cantidad_de_gestiones." Gestión" : $cantidad_de_gestiones. " Gestiones"}}</h3>
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">

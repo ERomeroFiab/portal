@@ -18,10 +18,12 @@ class CreateGestionsTable extends Migration
             $table->foreign('factura_id')->references('id')->on('facturas')->onDelete('set null');
 
             $table->string('glosa')->nullable();
+            $table->string('banco')->nullable();
+            $table->integer('monto_depositado')->nullable();
             $table->integer('monto_gestionado')->nullable();
             $table->integer('monto_aprobado')->nullable();
             $table->integer('fee')->nullable();
-            $table->integer('monto_factura')->nullable();
+            $table->integer('monto_por_facturar')->nullable();
             $table->dateTime('fecha_inicio')->nullable();
             $table->dateTime('fecha_cierre')->nullable();
             $table->dateTime('fecha_deposito')->nullable();
