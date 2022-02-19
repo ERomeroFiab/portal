@@ -4,27 +4,8 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
-            <div class="card-header">
-                <h2>Empresa <b>{{ $empresa->nombre }}</b></h2>
-            </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-12">
-                        <form>
-
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input disabled type="text" class="form-control" id="name" value="{{ $empresa->nombre }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="tipo">Tipo</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->tipo }}">
-                            </div>
-
-
-                        </form>
-                    </div>
                     <div class="col-12 mt-3">
                         <h3>Razones Sociales</h3>
                         <div class="card">

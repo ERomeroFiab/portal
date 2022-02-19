@@ -18,19 +18,19 @@
             
             <li class="{{ request()->is('cliente/razones-sociales/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.razones-sociales.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-layer-group"></i></span>
                     <p class="sidebar-normal">Razones Sociales</p>
                 </a>
             </li>
             <li class="{{ request()->is('cliente/gestiones/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.gestiones.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-briefcase"></i></span>
                     <p class="sidebar-normal">Gestiones</p>
                 </a>
             </li>
             <li class="{{ request()->is('cliente/facturas/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.facturas.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
                     <p class="sidebar-normal">Facturas</p>
                 </a>
             </li>

@@ -22,6 +22,11 @@
                                 <input disabled type="text" class="form-control" id="fecha_cierre" value="{{ $factura->fecha_cierre ? $factura->fecha_cierre : "Aún no se cierra" }}">
                             </div>
 
+                            <div class="form-group">
+                                <label for="fecha_cierre">Status</label>
+                                <input disabled type="text" class="form-control" id="fecha_cierre" value="{{ $factura->status }}">
+                            </div>
+
 
                         </form>
                     </div>
