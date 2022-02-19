@@ -47,7 +47,8 @@
                                     <span class="navbar-toggler-bar bar3"></span>
                                 </button>
                             </div>
-                            <a class="navbar-brand">Portal Cliente</a>
+                            <a class="navbar-brand"> {{ auth()->user()->rol === "Cliente" ? "Empresa ".auth()->user()->empresa->nombre : "Portal Cliente" }} </a>
+                            {{-- <a class="navbar-brand">Portal Cliente</a> --}}
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">

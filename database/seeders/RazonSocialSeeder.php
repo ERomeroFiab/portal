@@ -23,12 +23,12 @@ class RazonSocialSeeder extends Seeder
                 $empresa->save();
             }
             $razon_social = new RazonSocial();
-            $razon_social->empresa_id      = $empresa->id;
             $razon_social->nombre          = $NOMBRE_DE_RAZON;
             $razon_social->rut             = $VALUE['rut'];
+            $razon_social->empresa_id      = $empresa->id;
             $razon_social->contrato        = $VALUE['contrato'];
             $razon_social->no_entity       = $VALUE['no_entity'];
-            // $razon_social->date_signature  = Carbon::createFromFormat('d-m-Y' ,$VALUE['date_signature'])->format('Y-m-d H:i:s');
+            $razon_social->date_signature  = Carbon::createFromFormat('d-m-Y' ,$VALUE['date_signature']);
             $razon_social->suivi_par       = $VALUE['suivi_par'];
             $razon_social->save();
         }

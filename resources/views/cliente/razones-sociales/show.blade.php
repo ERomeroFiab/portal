@@ -22,6 +22,31 @@
                                 <input disabled type="text" class="form-control" id="rut" value="{{ $razon_social->rut }}">
                             </div>
 
+                            <div class="form-group">
+                                <label for="rut">Rut</label>
+                                <input disabled type="text" class="form-control" id="rut" value="{{ $razon_social->rut }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contrato">Contrato</label>
+                                <input disabled type="text" class="form-control" id="contrato" value="{{ $razon_social->contrato }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="no_entity">no_entity</label>
+                                <input disabled type="text" class="form-control" id="no_entity" value="{{ $razon_social->no_entity }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="date_signature">date_signature</label>
+                                <input disabled type="text" class="form-control" id="date_signature" value="{{ $razon_social->date_signature }}">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="suivi_par">suivi_par</label>
+                                <input disabled type="text" class="form-control" id="suivi_par" value="{{ $razon_social->suivi_par }}">
+                            </div>
+
                         </form>
                     </div>
                     <div class="col-12 mt-3">
@@ -64,7 +89,7 @@
                                                     <td>{{ $gestion->status }} </td>
                                                     <td class="text-center">{{ count($gestion->reportes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

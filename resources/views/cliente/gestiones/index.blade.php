@@ -36,7 +36,9 @@
                                                 @foreach ($gestiones as $gestion)
                                                 <tr>
                                                     <td>{{ $loop->iteration }} </td>
-                                                    <td>{{ $gestion->razon_social->nombre }} </td>
+                                                    <td title="Empresa: {{ $gestion->razon_social->empresa->nombre }}">
+                                                        {{ $gestion->razon_social->nombre }} 
+                                                    </td>
                                                     <td>{{ $gestion->fecha_inicio->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->fecha_cierre->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->fecha_deposito->format('d-m-Y') }} </td>
@@ -46,7 +48,7 @@
                                                     <td>{{ $gestion->status }} </td>
                                                     <td class="text-center">{{ count($gestion->reportes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

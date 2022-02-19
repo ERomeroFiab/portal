@@ -134,9 +134,13 @@ class GestionFactory extends Factory
             'Asesoría Laboral: Gestión Subsidio Empleo Jóven.',
             'Asesoría Laboral: Recuperación Excesos AFP Capital.',
         ];
+        $razon_social_id = RazonSocial::pluck('id')[$this->faker->numberBetween(1,RazonSocial::where('empresa_id', 1)->count()-1)];
+        $factura = Factura::whereHas('gestiones', function($q) use ($razon_social_id){
+            $q->where('status', 'Pendiente')->where('razon_social_id', $razon_social_id);
+        })->first();
         return [
-            "razon_social_id"     => RazonSocial::pluck('id')[$this->faker->numberBetween(1,RazonSocial::count()-1)],
-            "factura_id"          => Factura::pluck('id')[$this->faker->numberBetween(1,Factura::count()-1)],
+            "razon_social_id"     => $razon_social_id,
+            "factura_id"          => $factura ? $factura->id : Factura::pluck('id')[$this->faker->numberBetween(1,Factura::doesntHave('gestiones')->count()-1)],
             "glosa"               => $this->faker->randomElement( $glosa ),
             "monto_gestionado"    => $this->faker->numberBetween(10000,30000), 
             "monto_aprobado"      => $this->faker->numberBetween(10000,30000), 

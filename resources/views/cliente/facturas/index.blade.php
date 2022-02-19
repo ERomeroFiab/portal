@@ -18,6 +18,7 @@
                                     <th>fecha Limite</th>
                                     <th>Gestiones</th>
                                     <th>Razón Social</th>
+                                    <th>Status</th>
                                     <th>&nbsp;</th>
                                 </tr>
                             </thead>
@@ -30,11 +31,12 @@
                                     <td>
                                         {{ count( $factura->gestiones ) }}
                                     </td>
-                                    <td>
+                                    <td title="Empresa: {{ count( $factura->gestiones ) > 0 ? $factura->gestiones[0]->razon_social->empresa->nombre : "-" }}">
                                         {{ count( $factura->gestiones ) > 0 ? $factura->gestiones[0]->razon_social->nombre : "-" }}
                                     </td>
+                                    <td>{{ $factura->status }} </td>
                                     <td>
-                                        <a href="{{ route('cliente.facturas.show', ['id' => $factura->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                        <a href="{{ route('cliente.facturas.show', ['id' => $factura->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                     </td>
                                 </tr>
                                 @endforeach

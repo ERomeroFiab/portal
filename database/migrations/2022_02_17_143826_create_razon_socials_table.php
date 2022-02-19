@@ -18,7 +18,7 @@ class CreateRazonSocialsTable extends Migration
             $table->string('rut');
             $table->string('contrato')->nullable();
             $table->string('no_entity')->nullable();
-            $table->timestamp('date_signature')->nullable();
+            $table->dateTime('date_signature')->nullable();
             $table->string('suivi_par')->nullable();
             $table->string('direccion')->nullable();
             $table->string('status')->nullable();

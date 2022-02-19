@@ -50,7 +50,7 @@
                                                     <td>{{ $reporte->descripcion }} </td>
                                                     <td>{{ $reporte->created_at->format('d-m-Y H:i:s') }} </td>
                                                     <td>
-                                                        <a href="{{ route('admin.reportes.show', ['id' => $reporte->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('admin.reportes.show', ['id' => $reporte->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

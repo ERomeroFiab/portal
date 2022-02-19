@@ -47,12 +47,14 @@
                                                 @foreach ($empresa->razones_sociales as $razon_social)
                                                 <tr>
                                                     <td>{{ $loop->iteration }} </td>
-                                                    <td>{{ $razon_social->nombre }} </td>
+                                                    <td title="Empresa: {{ $razon_social->empresa->nombre }}">
+                                                        {{ $razon_social->nombre }} 
+                                                    </td>
                                                     <td>{{ $razon_social->rut }} </td>
                                                     <td>{{ count($razon_social->gestiones_finalizadas) }} </td>
                                                     <td>{{ count($razon_social->gestiones_pendientes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('cliente.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                                        <a href="{{ route('cliente.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach

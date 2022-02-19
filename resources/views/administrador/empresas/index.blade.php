@@ -40,7 +40,7 @@
                                         {{ count( $empresa->razones_sociales ) }}
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver Detalle</a>
+                                        <a href="{{ route('admin.empresas.show', ['id' => $empresa->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                     </td>
                                 </tr>
                                 @endforeach

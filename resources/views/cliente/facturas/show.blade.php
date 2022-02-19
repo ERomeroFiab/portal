@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h2>Razón Social <b>{{ $razon_social->nombre }}</b></h2>
+                <h2>Factura: <b>{{ $factura->id }}</b></h2>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -13,33 +13,13 @@
                         <form>
 
                             <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input disabled type="text" class="form-control" id="name" value="{{ $razon_social->nombre }}">
+                                <label for="fecha_inicio">Fecha de Inicio</label>
+                                <input disabled type="text" class="form-control" id="fecha_inicio" value="{{ $factura->created_at->format('d-m-Y') }}">
                             </div>
 
                             <div class="form-group">
-                                <label for="rut">Rut</label>
-                                <input disabled type="text" class="form-control" id="rut" value="{{ $razon_social->rut }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="contrato">Contrato</label>
-                                <input disabled type="text" class="form-control" id="contrato" value="{{ $razon_social->contrato }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="no_entity">Número de entity</label>
-                                <input disabled type="text" class="form-control" id="no_entity" value="{{ $razon_social->no_entity }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="date_signature">date_signature</label>
-                                <input disabled type="text" class="form-control" id="date_signature" value="{{ $razon_social->date_signature }}">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="suivi_par">suivi_par</label>
-                                <input disabled type="text" class="form-control" id="suivi_par" value="{{ $razon_social->suivi_par }}">
+                                <label for="fecha_cierre">Fecha de Cierre</label>
+                                <input disabled type="text" class="form-control" id="fecha_cierre" value="{{ $factura->fecha_cierre ? $factura->fecha_cierre : "Aún no se cierra" }}">
                             </div>
 
 
@@ -56,31 +36,41 @@
                                             <thead>
                                                 <tr>
                                                     <th>N°</th>
-                                                    <th>Inició</th>
-                                                    <th>Finalizó</th>
-                                                    <th>Fecha Depósito</th>
-                                                    <th>Honorarios Fiabilis</th>
+                                                    <th>Razón Social</th>
+                                                    <th>Glosa</th>
+                                                    <th>Monto Gestionado</th>
+                                                    <th>Monto Aprobado</th>
+                                                    <th>Fee</th>
+                                                    <th>Monto Facturado</th>
+                                                    <th>Fecha de Inicio</th>
+                                                    <th>Fecha de Cierre</th>
+                                                    <th>Fecha de Depósito</th>
+                                                    <th>Honorario Fiabilis</th>
                                                     <th>Tipo</th>
                                                     <th>Motivo</th>
-                                                    <th>Status</th>
-                                                    <th>Reportes</th>
                                                     <th>&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($razon_social->gestiones as $gestion)
+                                                @foreach ($factura->gestiones as $gestion)
                                                 <tr>
                                                     <td>{{ $loop->iteration }} </td>
+                                                    <td title="Empresa: {{ $gestion->razon_social->empresa->nombre }}">
+                                                        {{ $gestion->razon_social->nombre }} ({{ $gestion->razon_social->rut }}) 
+                                                    </td>
+                                                    <td>{{ $gestion->glosa }} </td>
+                                                    <td>{{ $gestion->monto_gestionado }} </td>
+                                                    <td>{{ $gestion->monto_aprobado }} </td>
+                                                    <td>{{ $gestion->fee }}% </td>
+                                                    <td>{{ $gestion->monto_factura }} </td>
                                                     <td>{{ $gestion->fecha_inicio->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->fecha_cierre->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->fecha_deposito->format('d-m-Y') }} </td>
                                                     <td>{{ $gestion->honorarios_fiabilis }} </td>
                                                     <td>{{ $gestion->tipo }} </td>
                                                     <td>{{ $gestion->motivo }} </td>
-                                                    <td>{{ $gestion->status }} </td>
-                                                    <td class="text-center">{{ count($gestion->reportes) }} </td>
                                                     <td>
-                                                        <a href="{{ route('admin.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver</a>
+                                                        <a href="{{ route('cliente.gestiones.show', ['id' => $gestion->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                                     </td>
                                                 </tr>
                                                 @endforeach
