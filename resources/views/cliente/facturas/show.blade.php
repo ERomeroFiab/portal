@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <h2>Factura: <b>{{ $factura->id }}</b></h2>
+                <h2>Servicio por facturar: <b>{{ $factura->id }}</b></h2>
             </div>
             <div class="card-body">
                 <div class="row">

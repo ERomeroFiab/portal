@@ -31,7 +31,7 @@
             <li class="{{ request()->is('cliente/facturas/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.facturas.index') }}">
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
-                    <p class="sidebar-normal">Facturas</p>
+                    <p class="sidebar-normal">Servicios por facturar</p>
                 </a>
             </li>
 
