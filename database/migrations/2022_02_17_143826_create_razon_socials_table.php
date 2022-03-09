@@ -12,16 +12,18 @@ class CreateRazonSocialsTable extends Migration
             $table->bigIncrements('id');
 
             $table->unsignedBigInteger('empresa_id')->nullable();
-            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('set null');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('set null')->onUpdate('cascade');
 
             $table->string('nombre');
             $table->string('rut');
-            $table->string('contrato')->nullable();
-            $table->string('no_entity')->nullable();
-            $table->dateTime('date_signature')->nullable();
-            $table->string('suivi_par')->nullable();
+            $table->string('tipo')->nullable();
+            $table->integer('codigo_postal')->nullable();
             $table->string('direccion')->nullable();
+            $table->bigInteger('numero_de_cuenta_bancaria')->nullable();
+            $table->string('banco')->nullable();
+            $table->string('tipo_de_cuenta')->nullable();
             $table->string('status')->nullable();
+            
             $table->timestamps();
         });
     }

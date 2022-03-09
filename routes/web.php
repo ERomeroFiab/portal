@@ -60,6 +60,10 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/reportes/show/{id}', [App\Http\Controllers\ReporteController::class, 'admin_show'])->name('admin.reportes.show');
         Route::get('/reportes/edit/{id}', [App\Http\Controllers\ReporteController::class, 'admin_edit'])->name('admin.reportes.edit');
         Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'admin_update'])->name('admin.reportes.update');
+
+        // Api's hacia silvertool database
+        Route::get('/silvertool/actualizar_database', [App\Http\Controllers\SilverToolController::class, 'actualizar_database'])->name('silver.actualizar_database');
+
     });
 
     // CLIENTE

@@ -30,4 +30,7 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'PATH_TO_SILVERTOOL_DATABASE_MANAGER' => env('PATH_TO_SILVERTOOL_DATABASE_MANAGER'),
+    'TOKEN_FOR_REQUESTS_TO_SILVER'        => env('TOKEN_FOR_REQUESTS_TO_SILVER'),
+
 ];

@@ -5,7 +5,14 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Nuevo Usuario</h2>
+                    <h2>
+                        Nuevo Usuario
+                        <a href="{{ route('silver.actualizar_database') }}">
+                            <button onclick="$(this).prop('disabled', true).text('Actualizando...');" type="button" class="btn btn-sm btn-info float-right">
+                                Actualizar la Base de datos desde Silvertool
+                            </button>
+                        </a>
+                    </h2>
                 </div>
                 <div class="card-body">
                     <div class="row">
