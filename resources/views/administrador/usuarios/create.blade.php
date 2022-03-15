@@ -55,7 +55,7 @@
                                 
                                 <div id="empresaInput" class="form-group d-none">
                                     <label for="empresa">Empresa</label>
-                                    <select name="empresa" class="form-control" id="empresa">
+                                    <select name="empresa_id" class="form-control" id="empresa">
                                         <option value="" selected disabled>-- Seleccione --</option>
                                         @foreach ($empresas as $empresa)
                                             <option value="{{$empresa->id}}">{{$empresa->nombre}} ({{ $empresa->tipo }})</option>

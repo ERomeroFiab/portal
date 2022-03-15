@@ -42,11 +42,11 @@ class UserController extends Controller
         ])->validate();
 
         $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->rol = $request->rol;
+        $user->name       = $request->name;
+        $user->email      = $request->email;
+        $user->rol        = $request->rol;
         $user->empresa_id = $request->empresa_id;
-        $user->password = bcrypt('12345678');
+        $user->password   = bcrypt('12345678');
         $user->save();
 
         return redirect()->route('admin.usuarios.show', ['id' => $user->id])->with('success', "El usuario {$user->name} fue agregado exitosamente");
