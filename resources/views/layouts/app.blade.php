@@ -131,11 +131,11 @@
                                 <li class="nav-item">
                                     <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Login') }}</a>
                                 </li>
-                                <li class="nav-item">
+                                {{-- <li class="nav-item">
                                     @if (Route::has('register'))
                                         <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">{{ __('Register') }}</a>
                                     @endif
-                                </li>
+                                </li> --}}
 
                             </ul>
                         </div>

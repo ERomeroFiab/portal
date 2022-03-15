@@ -52,13 +52,13 @@
                                             class="form-text text-muted text-danger">{{ $errors->first('rol') }}</small>
                                     @endif
                                 </div>
-
+                                
                                 <div id="empresaInput" class="form-group d-none">
                                     <label for="empresa">Empresa</label>
                                     <select name="empresa" class="form-control" id="empresa">
                                         <option value="" selected disabled>-- Seleccione --</option>
                                         @foreach ($empresas as $empresa)
-                                            <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
+                                            <option value="{{$empresa->id}}">{{$empresa->nombre}} ({{ $empresa->tipo }})</option>
                                         @endforeach
                                     </select>
                                     @if ($errors->has('empresa'))
