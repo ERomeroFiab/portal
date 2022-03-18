@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('includes.messages_in_session')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -20,18 +23,6 @@
                                     @if ($errors->has('name'))
                                         <small id="name_error"
                                             class="form-text text-muted text-danger">{{ $errors->first('name') }}</small>
-                                    @endif
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="tipo">Tipo</label>
-                                    <select name="tipo" class="form-control" id="tipo">
-                                        <option value="" selected disabled>-- Seleccione --</option>
-                                        <option value="Prospecto">Prospecto</option>
-                                        <option value="Cliente">Cliente</option>
-                                    </select>
-                                    @if ($errors->has('tipo'))
-                                        <small class="form-text text-muted text-danger">{{ $errors->first('tipo') }}</small>
                                     @endif
                                 </div>
 

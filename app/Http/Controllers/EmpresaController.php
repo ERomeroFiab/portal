@@ -6,6 +6,9 @@ use App\Models\Empresa;
 use App\Http\Requests\StoreEmpresaRequest;
 use App\Http\Requests\UpdateEmpresaRequest;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 class EmpresaController extends Controller
 {
     public function admin_index()
@@ -20,6 +23,19 @@ class EmpresaController extends Controller
     public function admin_create()
     {
         return view('administrador.empresas.create');
+    }
+
+    public function admin_store( Request $request )
+    {
+        Validator::make($request->all(), [
+            'name' => 'required|string',
+        ])->validate();
+
+        $new_empresa = new Empresa();
+        $new_empresa->nombre = $request->get('name');
+        $new_empresa->save();
+
+        return redirect()->back()->with('success', "La empresa {$new_empresa->nombre} se registró correctamente.");
     }
 
     public function admin_show($id)

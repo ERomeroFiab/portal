@@ -18,4 +18,12 @@ class Empresa extends Model
     {
         return $this->hasOne('App\Models\User', 'empresa_id'); 
     }
+
+    public function get_razones_sociales_quantity_in_text()
+    {
+        if ( $this->razones_sociales->count() <= 1 ) {
+            return $this->razones_sociales->count()." Razón Social";
+        }
+        return $this->razones_sociales->count()." Razones Sociales";
+    }
 }

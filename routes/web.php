@@ -61,9 +61,6 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/reportes/edit/{id}', [App\Http\Controllers\ReporteController::class, 'admin_edit'])->name('admin.reportes.edit');
         Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'admin_update'])->name('admin.reportes.update');
 
-        // Api's hacia silvertool database
-        Route::get('/silvertool/actualizar_database', [App\Http\Controllers\SilverToolController::class, 'actualizar_database'])->name('silver.actualizar_database');
-
     });
 
     // CLIENTE
@@ -156,6 +153,13 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('/facturas/update/{id}', [App\Http\Controllers\FacturaController::class, 'consultor_update'])->name('consultor.facturas.update');
     });
     
+    // Ajax
+    Route::get('/ajax/empresas', [App\Http\Controllers\AjaxController::class, 'get_tabla_empresas'])->name('ajax.get_tabla_empresas');
+
+    // Api's hacia silvertool database
+    Route::get('/silvertool/actualizar_group_names', [App\Http\Controllers\SilverToolController::class, 'actualizar_group_names'])->name('silver.actualizar_group_names');
+    Route::get('/silvertool/get_razones_sociales_from_silvertool_by_group_name', [App\Http\Controllers\SilverToolController::class, 'get_razones_sociales_from_silvertool_by_group_name'])->name('silver.get_razones_sociales_from_silvertool_by_group_name');
+    Route::get('/silvertool/get_razon_social_by_rut', [App\Http\Controllers\SilverToolController::class, 'get_razon_social_by_rut'])->name('silver.get_razon_social_by_rut');
 
 
 });

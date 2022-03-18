@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @include('includes.messages_in_session')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
