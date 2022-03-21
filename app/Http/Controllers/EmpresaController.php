@@ -25,6 +25,29 @@ class EmpresaController extends Controller
         return view('administrador.empresas.create');
     }
 
+    public function admin_edit( $id )
+    {
+        $empresa = Empresa::find( $id );
+        return view('administrador.empresas.edit', [
+            'empresa' => $empresa,
+        ]);
+    }
+
+    public function admin_update( $id, Request $request )
+    {
+        Validator::make($request->all(), [
+            'nombre' => 'required|string',
+        ])->validate();
+
+
+        $empresa = Empresa::find( $id );
+        $empresa->nombre = $request->get('nombre');
+        $empresa->update();
+
+
+        return redirect()->back()->with('success', "La empresa {$empresa->nombre} se actualizó correctamente.");
+    }
+
     public function admin_store( Request $request )
     {
         Validator::make($request->all(), [

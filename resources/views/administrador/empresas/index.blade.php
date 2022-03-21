@@ -41,7 +41,7 @@
             </div> <!-- End card -->
         </div>
     </div>
-    
+
 @endsection
 
 @section('customjs')
@@ -75,7 +75,10 @@
                     { 
                         data: 'action', 
                         render: function (data, type, row){
-                            console.log(data);
+                            return `
+                                <a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>
+                                <a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>
+                            `;
                         },
                         orderable: false, 
                         searchable: false
