@@ -72,7 +72,14 @@
                     { data: "cliente"},
                     { data: "email"},
                     { data: "razones_sociales_count"},
-                    { data: 'action', orderable: false, searchable: false}
+                    { 
+                        data: 'action', 
+                        render: function (data, type, row){
+                            console.log(data);
+                        },
+                        orderable: false, 
+                        searchable: false
+                    }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,

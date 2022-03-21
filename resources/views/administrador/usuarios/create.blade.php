@@ -53,7 +53,7 @@
                                 <select name="rol" class="form-control">
                                     <option value="" selected disabled>-- Seleccione --</option>
                                     <option value="Cliente">Cliente</option>
-                                    <option value="Gestor">Gestor</option>
+                                    {{-- <option value="Gestor">Gestor</option> --}}
                                 </select>
                                 @if ($errors->has('rol'))
                                     <small id="rol_error"

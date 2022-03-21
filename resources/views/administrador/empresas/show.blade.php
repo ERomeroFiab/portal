@@ -22,13 +22,13 @@
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="tipo">Representante</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->name }}">
+                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante ? $empresa->representante->name : null }}">
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="form-group">
                                 <label for="tipo">Email</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->email }}">
+                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante ? $empresa->representante->email : null }}">
                             </div>
                         </div>
 

@@ -47,6 +47,11 @@ class EmpresaController extends Controller
         ]);
     }
 
+    public function admin_destroy()
+    {
+        dd( 'funcion admin_destroy() en EmpresaController' );
+    }
+
     // CLIENTE
     public function cliente_index()
     {

@@ -47,7 +47,12 @@ class AjaxController extends Controller
                                 return $data;
                             })
                             ->addColumn('action', function ($dato) {
-                                return '<a href="'.route('admin.empresas.show', ['id' => $dato->id]).'" class="btn btn-sm btn-info">Ver</a>';
+                                $data['id'] = $dato->id;
+                                $data['path_to_show']    = route('admin.empresas.show', ['id' => $dato->id]);
+                                $data['path_to_edit']    = route('admin.empresas.edit', ['id' => $dato->id]);
+                                $data['path_to_destroy'] = route('admin.empresas.destroy', ['id' => $dato->id]);
+
+                                return $data;
                             })
                             ->toJson();
     }

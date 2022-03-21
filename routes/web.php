@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/empresas/show/{id}', [App\Http\Controllers\EmpresaController::class, 'admin_show'])->name('admin.empresas.show');
         Route::get('/empresas/edit/{id}', [App\Http\Controllers\EmpresaController::class, 'admin_edit'])->name('admin.empresas.edit');
         Route::post('/empresas/update/{id}', [App\Http\Controllers\EmpresaController::class, 'admin_update'])->name('admin.empresas.update');
+        Route::delete('/empresas/destroy/{id}', [App\Http\Controllers\EmpresaController::class, 'admin_destroy'])->name('admin.empresas.destroy');
 
         Route::get('/usuarios/index', [App\Http\Controllers\UserController::class, 'admin_index'])->name('admin.usuarios.index');
         Route::get('/usuarios/create', [App\Http\Controllers\UserController::class, 'admin_create'])->name('admin.usuarios.create');
