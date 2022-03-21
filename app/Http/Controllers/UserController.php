@@ -20,7 +20,7 @@ class UserController extends Controller
 
     public function admin_create()
     {
-        $empresas = Empresa::all();
+        $empresas = Empresa::orderBy('nombre', 'ASC')->get();
         return view('administrador.usuarios.create', [
             "empresas" => $empresas,
         ]);
