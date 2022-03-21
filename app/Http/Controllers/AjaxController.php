@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Empresa;
 use Yajra\DataTables\Facades\DataTables;
+use App\Models\User;
 
 class AjaxController extends Controller
 {
@@ -54,6 +55,30 @@ class AjaxController extends Controller
 
                                 return $data;
                             })
+                            ->toJson();
+    }
+
+    public function get_tabla_usuarios( Request $request )
+    {
+        
+        $datos = User::query();
+        
+        return DataTables::eloquent( $datos )
+                            ->filter(function ($query) use ($request) {
+                                
+                                // if ( $request->get('SEARCH_BY_VILLE') !== null ) {
+                                //     $query->where('VILLE', $request->get('SEARCH_BY_VILLE'));
+                                // }
+
+                            })
+                            // ->addColumn('action', function ($dato) {
+                            //     $data['id'] = $dato->id;
+                            //     $data['path_to_show']    = route('admin.empresas.show', ['id' => $dato->id]);
+                            //     $data['path_to_edit']    = route('admin.empresas.edit', ['id' => $dato->id]);
+                            //     $data['path_to_destroy'] = route('admin.empresas.destroy', ['id' => $dato->id]);
+
+                            //     return $data;
+                            // })
                             ->toJson();
     }
 }
