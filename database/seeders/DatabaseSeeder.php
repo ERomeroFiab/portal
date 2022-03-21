@@ -13,20 +13,20 @@ class DatabaseSeeder extends Seeder
             "name"     => "Administrador Principal",
             "email"    => "admin@admin.com",
             "rol"      => "Administrador",
-            "password" => bcrypt("12345678"),
+            "password" => bcrypt("UexrgHDfhi"),
         ]);
         // \App\Models\User::create([
         //     "name"     => "Juan",
         //     "email"    => "consultor@consultor.com",
         //     "rol"      => "Consultor",
-        //     "password" => bcrypt("12345678"),
+        //     "password" => bcrypt("UexrgHDfhi"),
         // ]);
         // \App\Models\User::create([
         //     "name"       => "Pedro",
         //     "email"      => "cliente@cliente.com",
         //     "rol"        => "Cliente",
         //     "EMPRESA_ID" => 1,
-        //     "password"   => bcrypt("12345678"),
+        //     "password"   => bcrypt("UexrgHDfhi"),
         // ]);
 
         // \App\Models\Factura::factory(80)->create();
