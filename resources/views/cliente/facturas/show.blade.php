@@ -55,7 +55,7 @@
                                                     <th>Motivo</th>
                                                     <th>Reportes</th>
 
-                                                    <th class="no_eportar">&nbsp;</th>
+                                                    <th class="no_exportar">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

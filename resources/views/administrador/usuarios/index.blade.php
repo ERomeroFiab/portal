@@ -29,7 +29,7 @@
                                  <th>Rut</th>
                                  <th>Rol</th>
                                  <th>Empresa</th>
-                                 <th class="no_eportar">&nbsp;</th>
+                                 <th class="no_exportar">&nbsp;</th>
                               </tr>
                            </thead>
                            <tbody>

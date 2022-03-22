@@ -19,7 +19,7 @@
                                     <th>Gestiones</th>
                                     <th>Razón Social</th>
                                     <th>Status</th>
-                                    <th class="no_eportar">&nbsp;</th>
+                                    <th class="no_exportar">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
