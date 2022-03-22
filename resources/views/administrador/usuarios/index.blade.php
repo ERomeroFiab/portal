@@ -4,16 +4,16 @@
 
    @include('includes.messages_in_session')
    
-    <div class="row">
-        <div class="col-lg-12">
+   <div class="row">
+      <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <h2>Usuarios</h2>
-                </div>
-                <div class="card-body">
-                   <div class="row">
-                      <div class="col-12">
-                         <table class="table-hover" style="width:100%">
+               <div class="card-header">
+                  <h2>Usuarios</h2>
+               </div>
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-12">
+                        <table class="table-hover" style="width:100%">
                            <thead>
                               <tr>
                                  <th>Nombre</th>
@@ -31,14 +31,18 @@
                                     <td> 
                                        <a href="{{ route('admin.usuarios.show', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Ver</a>
                                     </td>
+                                    <td> 
+                                       <a href="{{ route('admin.usuarios.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">Editar</a>
+                                    </td>
                                  </tr>
                               @endforeach
                            </tbody>
-                         </table>
-                      </div>
-                   </div>
-                </div>
+                        </table>
+                     </div>
+                  </div>
+               </div>
             </div> <!-- End card -->
-        </div>
-    </div>
+      </div>
+   </div>
 @endsection
+

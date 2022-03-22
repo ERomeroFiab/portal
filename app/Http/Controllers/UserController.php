@@ -53,16 +53,37 @@ class UserController extends Controller
 
     public function admin_edit($id)
     {
-        $user = User::find($id);
+        
+        if ($id == 1) {
+            
+            return redirect()->back()->with('error','El administrador no se puede editar ');
+        }
+        $user = User::find( $id );
+        $empresas = Empresa::doesnthave('representante')->get();
         return view('administrador.usuarios.edit', [
             "user" => $user,
+            "empresas" => $empresas
         ]);
     }
 
-    public function admin_update($id, Request $request)
-    {
-        $user = User::find($id);
-        dd( $request->all() );
+    public function admin_update( $id, Request $request )
+    {   
+        Validator::make($request->all(), [
+            'name' => 'required|string',
+            'empresa_id' =>'required|exists:empresas,id',
+        ])->validate();
+        
+
+        $user = User::find( $id );
+        if ($user->id === 1) {
+            return redirect()->back()->with('error','El administrador no se puede editar ');
+        }
+        $user->name = $request->get('name');
+        $user->empresa_id = $request->get('empresa_id');
+        $user->update();
+        dd($user);
+
+        return redirect()->route('admin.empresas.show', ['id' => $user->id])->with('success', "El usuario se actualizó correctamente");
     }
     // CONSULTOR
     public function consultor_show($id)
