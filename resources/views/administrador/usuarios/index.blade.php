@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
 @section('customcss')
-    <style>
-        #tabla_usuarios_filter {
+   <style>
+      #tabla_usuarios_filter {
             display: none;
-        }
-    </style>
+      }
+   </style>
 @endsection
 
 @section('content')
@@ -15,13 +15,13 @@
    <div class="row">
       <div class="col-lg-12">
             <div class="card">
-                <div class="card-header">
-                    <h2>Usuarios</h2>
-                </div>
-                <div class="card-body">
-                   <div class="row">
-                      <div class="col-12">
-                         <table id="tabla_usuarios" class="table-hover" style="width:100%">
+               <div class="card-header">
+                  <h2>Usuarios</h2>
+               </div>
+               <div class="card-body">
+                  <div class="row">
+                     <div class="col-12">
+                        <table id="tabla_usuarios" class="table-hover" style="width:100%">
                            <thead>
                               <tr>
                                  <th>Nombre</th>
@@ -40,11 +40,11 @@
                   </div>
 
                   <div class="row mt-5">
-                      <div class="col-12">
-                          <a href="{{ route('admin.usuarios.create') }}" class="btn btn-sm btn-info">
+                     <div class="col-12">
+                        <a href="{{ route('admin.usuarios.create') }}" class="btn btn-sm btn-info">
                               Crear nuevo usuario
-                          </a>
-                      </div>
+                        </a>
+                     </div>
                   </div>
                </div>
             </div> <!-- End card -->
@@ -53,149 +53,149 @@
 @endsection
 
 @section('customjs')
-    
-    <script>
-        let TABLA_USUARIOS;
-        const CSRF = "{{ csrf_token() }}";
+   
+   <script>
+      let TABLA_USUARIOS;
+      const CSRF = "{{ csrf_token() }}";
 
-        $(document).ready(function() {
+      $(document).ready(function() {
 
             TABLA_USUARIOS = $('#tabla_usuarios').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('ajax.get_tabla_usuarios') }}",
+               serverSide: true,
+               processing: true,
+               ajax: {
+                  url: "{{ route('ajax.get_tabla_usuarios') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
-                    data: function ( d ) {
+                  data: function ( d ) {
                         // d.search_by_xxxx = $('#input__xxxx').val();
-                    }
-                },
-                columns: [
-                    { data: "name"},
-                    { data: "email"},
-                    { data: "rut"},
-                    { data: "rol"},
-                    { data: "empresa"},
-                    { 
+                  }
+               },
+               columns: [
+                  { data: "name"},
+                  { data: "email"},
+                  { data: "rut"},
+                  { data: "rol"},
+                  { data: "empresa"},
+                  { 
                         data: 'action', 
                         render: function (data, type, row){
-                            let html = "";
-                            if ( data.path_to_show ) {
-                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
-                            }
-                            if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
-                            }
-                            if ( data.path_to_destroy ) {
-                                html += `
+                           let html = "";
+                           if ( data.path_to_show ) {
+                              html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
+                           }
+                           if ( data.path_to_edit ) {
+                              html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
+                           }
+                           if ( data.path_to_destroy ) {
+                              html += `
                                     <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger">Eliminar</a>
                                     <form action="${data.path_to_destroy}" method="POST" class="d-none">
-                                        <input type="hidden" name="_token" value="${CSRF}">
-                                        <input type="hidden" name="_method" value="delete">
-                                        <input type="submit" id="boton_submit_to_remove_user_${data.id}">
+                                       <input type="hidden" name="_token" value="${CSRF}">
+                                       <input type="hidden" name="_method" value="delete">
+                                       <input type="submit" id="boton_submit_to_remove_user_${data.id}">
                                     </form>
-                                `;
-                                html += ``;
-                            }
-                            return html;
+                              `;
+                              html += ``;
+                           }
+                           return html;
                         },
                         orderable: false, 
                         searchable: false
-                    }
-                ],
+                  }
+               ],
                 // order: [[ 1, 'desc' ]],
-                pageLength: 20,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
-                },
-                dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    title: "tabla empresas - " + new Date().toLocaleString(),
-                    className: "bg-info",
-                    exportOptions: {
+               pageLength: 20,
+               language: {
+                  url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
+               },
+               dom: 'Bfrtip',
+               buttons: [{
+                  extend: 'excelHtml5',
+                  title: "tabla empresas - " + new Date().toLocaleString(),
+                  className: "bg-info",
+                  exportOptions: {
                         columns: ':not(.no_exportar)'
-                    },
-                    action: newExportAction
-                }],
+                  },
+                  action: newExportAction
+               }],
             });
 
             // función para exportar el excel con todas las filas
             function newExportAction(e, dt, button, config) {
-                var self = this;
-                var oldStart = dt.settings()[0]._iDisplayStart;
-                dt.one('preXhr', function (e, s, data) {
+               var self = this;
+               var oldStart = dt.settings()[0]._iDisplayStart;
+               dt.one('preXhr', function (e, s, data) {
                     // Just this once, load all data from the server...
-                    data.start = 0;
-                    data.length = 2147483647;
-                    dt.one('preDraw', function (e, settings) {
+                  data.start = 0;
+                  data.length = 2147483647;
+                  dt.one('preDraw', function (e, settings) {
                         // Call the original action function
                         if (button[0].className.indexOf('buttons-copy') >= 0) {
-                            $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
+                           $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
                         } else if (button[0].className.indexOf('buttons-excel') >= 0) {
-                            $.fn.dataTable.ext.buttons.excelHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt, button, config);
+                           $.fn.dataTable.ext.buttons.excelHtml5.available(dt, config) ?
+                              $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt, button, config) :
+                              $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt, button, config);
                         } else if (button[0].className.indexOf('buttons-csv') >= 0) {
-                            $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
+                           $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
+                              $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
+                              $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
                         } else if (button[0].className.indexOf('buttons-pdf') >= 0) {
-                            $.fn.dataTable.ext.buttons.pdfHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button, config);
+                           $.fn.dataTable.ext.buttons.pdfHtml5.available(dt, config) ?
+                              $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button, config) :
+                              $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button, config);
                         } else if (button[0].className.indexOf('buttons-print') >= 0) {
-                            $.fn.dataTable.ext.buttons.print.action(e, dt, button, config);
+                           $.fn.dataTable.ext.buttons.print.action(e, dt, button, config);
                         }
                         dt.one('preXhr', function (e, s, data) {
                             // DataTables thinks the first item displayed is index 0, but we're not drawing that.
                             // Set the property to what it was before exporting.
-                            settings._iDisplayStart = oldStart;
-                            data.start = oldStart;
+                           settings._iDisplayStart = oldStart;
+                           data.start = oldStart;
                         });
                         // Reload the grid with the original page. Otherwise, API functions like table.cell(this) don't work properly.
                         setTimeout(dt.ajax.reload, 0);
                         // Prevent rendering of the full data to the DOM
                         return false;
-                    });
-                });
+                  });
+               });
                 // Requery the server with the new one-time export settings
-                dt.ajax.reload();
+               dt.ajax.reload();
             }
 
 
-        });
+      });
 
-        function sweetAlert_to_remove_user( boton_submit ) {
+      function sweetAlert_to_remove_user( boton_submit ) {
             Swal.fire({
-                icon: "warning",
-                title: '¿Desea ELIMINAR este usuario, con la empresa asociada y sus razones sociales?',
-                confirmButtonText: `Eliminar`,
-                confirmButtonColor: '#d9534f',
+               icon: "warning",
+               title: '¿Desea ELIMINAR este usuario, con la empresa asociada y sus razones sociales?',
+               confirmButtonText: `Eliminar`,
+               confirmButtonColor: '#d9534f',
             }).then((result) => {
                 /* Read more about isConfirmed, isDenied below */
-                if (result.isConfirmed) {
-                    document.getElementById(boton_submit).click();
-                }
+               if (result.isConfirmed) {
+                  document.getElementById(boton_submit).click();
+               }
             })
-        }
+      }
 
-        function buscar(){
+      function buscar(){
             TABLA_EMPRESAS.draw();
-        }
+      }
 
         // Pintar en verde los inputs que contienen algo
-        $( "#input__ID_IDENTIFICATION" ).change(function() { agregar_quitar_bg_success('input__ID_IDENTIFICATION'); });
+      $( "#input__ID_IDENTIFICATION" ).change(function() { agregar_quitar_bg_success('input__ID_IDENTIFICATION'); });
 
-        function agregar_quitar_bg_success(id){
+      function agregar_quitar_bg_success(id){
             if ( $(`#${id}`).val() !== "" ) {
-                $(`#${id}`).addClass('bg-success');
+               $(`#${id}`).addClass('bg-success');
             } else {
-                $(`#${id}`).removeClass('bg-success');
+               $(`#${id}`).removeClass('bg-success');
             }
-        }
+      }
 
-    </script>
+   </script>
 @endsection

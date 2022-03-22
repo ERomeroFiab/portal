@@ -29,6 +29,18 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input name="email" type="text" class="form-control" id="email" value="{{ $user->email }}">
+                                </div>
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
                                     <label for="empresa">Empresas</label>
                                     <select name="empresa_id" id="empresa" class="form-control">
                                         @foreach ($empresas as $empresa)
