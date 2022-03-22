@@ -28,7 +28,7 @@
                                         <th>Usuario</th>
                                         <th>Email</th>
                                         <th>Razones Sociales</th>
-                                        <th>&nbsp;</th>
+                                        <th class="no_eportar">&nbsp;</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -26,7 +26,7 @@
                                                     <th>Motivo</th>
                                                     <th>Status</th>
                                                     <th>Reportes</th>
-                                                    <th>&nbsp;</th>
+                                                    <th class="no_eportar">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

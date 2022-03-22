@@ -42,7 +42,7 @@
                                                         <th>Titulo</th>
                                                         <th>Descripción</th>
                                                         <th>Fecha</th>
-                                                        <th>&nbsp;</th>
+                                                        <th class="no_eportar">&nbsp;</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>

@@ -28,7 +28,7 @@
                                  <th>Email</th>
                                  <th>Rol</th>
                                  <th>Empresa</th>
-                                 <th>&nbsp;</th>
+                                 <th class="no_eportar">&nbsp;</th>
                               </tr>
                            </thead>
                            <tbody>
