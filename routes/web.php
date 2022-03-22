@@ -156,7 +156,11 @@ Route::group(['middleware' => ['auth']], function() {
     
     // Ajax
     Route::get('/ajax/empresas', [App\Http\Controllers\AjaxController::class, 'get_tabla_empresas'])->name('ajax.get_tabla_empresas');
+<<<<<<< HEAD
     Route::get('/ajax/users', [App\Http\Controllers\AjaxController::class, 'get_tabla_users'])->name('ajax.get_tabla_users');
+=======
+    Route::get('/ajax/usuarios', [App\Http\Controllers\AjaxController::class, 'get_tabla_usuarios'])->name('ajax.get_tabla_usuarios');
+>>>>>>> 8a8e4e07224d0615d8bde093bef8d35435d16d16
 
     // Api's hacia silvertool database
     Route::get('/silvertool/actualizar_group_names', [App\Http\Controllers\SilverToolController::class, 'actualizar_group_names'])->name('silver.actualizar_group_names');

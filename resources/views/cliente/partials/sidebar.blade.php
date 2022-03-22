@@ -16,7 +16,7 @@
     <div class="sidebar-wrapper ps-container ps-theme-default">
         <ul class="nav">
             
-            {{-- <li class="{{ request()->is('cliente/razones-sociales/index') ? 'active' : '' }}">
+            <li class="{{ request()->is('cliente/razones-sociales/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.razones-sociales.index') }}">
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-layer-group"></i></span>
                     <p class="sidebar-normal">Razones Sociales</p>
@@ -33,7 +33,7 @@
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
                     <p class="sidebar-normal">Servicios por facturar</p>
                 </a>
-            </li> --}}
+            </li>
 
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
