@@ -19,7 +19,7 @@ class CreateRazonSocialsTable extends Migration
             $table->string('ciudad')->nullable();
             $table->integer('codigo_postal')->nullable();
             $table->string('direccion')->nullable();
-            $table->bigInteger('numero_de_cuenta_bancaria')->nullable();
+            $table->string('numero_de_cuenta_bancaria')->nullable();
             $table->string('banco')->nullable();
             $table->string('tipo_de_cuenta')->nullable();
             $table->string('status')->nullable();

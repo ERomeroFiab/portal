@@ -70,7 +70,7 @@
                                         <div class="col-3">
                                             <div class="card text-center">
                                                 <div class="card-header">
-                                                    {{ $razon_social->nombre }}
+                                                    <b>{{ $razon_social->nombre }}</b>
                                                 </div>
                                                 <div class="card-body">
                                                     @if ( $razon_social->rut )
