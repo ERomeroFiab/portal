@@ -40,7 +40,7 @@
                                                     <th>Rut</th>
                                                     <th>Gestiones Finalizadas</th>
                                                     <th>Gestiones Pendientes</th>
-                                                    <th class="no_eportar">&nbsp;</th>
+                                                    <th class="no_exportar">&nbsp;</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

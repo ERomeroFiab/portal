@@ -19,7 +19,7 @@
                                     <th>Representante</th>
                                     <th>Email</th>
                                     <th>Razones Sociales</th>
-                                    <th class="no_eportar">&nbsp;</th>
+                                    <th class="no_exportar">&nbsp;</th>
                                 </tr>
                             </thead>
                             <tbody>
