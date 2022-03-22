@@ -17,9 +17,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                           <a href="#" class="btn btn-sm btn-info">
-                               Registrar nuevos clientes desde SilverTool
-                           </a>
+                            <button class="btn btn-sm btn-info" type="button">Botón</button>
                         </div>
                     </div>
                 </div>
