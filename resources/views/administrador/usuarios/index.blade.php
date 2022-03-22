@@ -7,15 +7,6 @@
    <div class="row">
       <div class="col-lg-12">
             <div class="card">
-<<<<<<< HEAD
-               <div class="card-header">
-                  <h2>Usuarios</h2>
-               </div>
-               <div class="card-body">
-                  <div class="row">
-                     <div class="col-12">
-                        <table class="table-hover" style="width:100%">
-=======
                 <div class="card-header">
                     <h2>Usuarios</h2>
                 </div>
@@ -23,7 +14,6 @@
                    <div class="row">
                       <div class="col-12">
                          <table id="tabla_usuarios" class="table-hover" style="width:100%">
->>>>>>> 8a8e4e07224d0615d8bde093bef8d35435d16d16
                            <thead>
                               <tr>
                                  <th>Nombre</th>
@@ -33,23 +23,7 @@
                               </tr>
                            </thead>
                            <tbody>
-<<<<<<< HEAD
-                              @foreach ($users as $user)
-                                 <tr>
-                                    <td>{{ $user->name }} </td>
-                                    <td>{{ $user->email }} </td>
-                                    <td>{{ $user->rol }} </td>
-                                    <td> 
-                                       <a href="{{ route('admin.usuarios.show', ['id' => $user->id]) }}" class="btn btn-sm btn-info">Ver</a>
-                                    </td>
-                                    <td> 
-                                       <a href="{{ route('admin.usuarios.edit', ['id' => $user->id]) }}" class="btn btn-sm btn-warning">Editar</a>
-                                    </td>
-                                 </tr>
-                              @endforeach
-=======
                               {{-- SERVER SIDE RENDERING --}}
->>>>>>> 8a8e4e07224d0615d8bde093bef8d35435d16d16
                            </tbody>
                         </table>
                      </div>
@@ -60,8 +34,6 @@
    </div>
 @endsection
 
-<<<<<<< HEAD
-=======
 @section('customjs')
     
     <script>
@@ -165,4 +137,3 @@
 
     </script>
 @endsection
->>>>>>> 8a8e4e07224d0615d8bde093bef8d35435d16d16
