@@ -17,9 +17,7 @@ class AjaxController extends Controller
             'representante',
         ];
         
-        $datos = Empresa::with( $relations )->withCount($relations);
-        
-        return DataTables::eloquent( $datos )
+        return DataTables::eloquent( Empresa::query()->withCount($relations) )
                             ->filter(function ($query) use ($request) {
                                 
                                 // if ( $request->get('SEARCH_BY_VILLE') !== null ) {

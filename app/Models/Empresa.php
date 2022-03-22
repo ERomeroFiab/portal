@@ -21,9 +21,16 @@ class Empresa extends Model
 
     public function get_razones_sociales_quantity_in_text()
     {
-        if ( $this->razones_sociales->count() <= 1 ) {
-            return $this->razones_sociales->count()." Razón Social";
+        $texto = "";
+        $cantidad = $this->razones_sociales->count();
+        
+        if ( $cantidad == 1 ) {
+            $texto = $cantidad." Razón Social";
+        } elseif ( $cantidad > 1 ) {
+            $texto = $cantidad." Razones Sociales";
+        } else {
+            $texto = "Sin Razones Sociales.";
         }
-        return $this->razones_sociales->count()." Razones Sociales";
+        return $texto;
     }
 }

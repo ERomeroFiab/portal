@@ -19,18 +19,21 @@
                             </div>
                         </div>
 
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="tipo">Representante</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante ? $empresa->representante->name : null }}">
+                        @if ( $empresa->representante )
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tipo">Representante</label>
+                                    <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->name }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="form-group">
-                                <label for="tipo">Email</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante ? $empresa->representante->email : null }}">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tipo">Email</label>
+                                    <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->email }}">
+                                </div>
                             </div>
-                        </div>
+                        @endif
+
 
                         <div class="col-12 mt-3">
                             <h6> {{ $empresa->get_razones_sociales_quantity_in_text() }}</h6>

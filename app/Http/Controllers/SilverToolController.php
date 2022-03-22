@@ -101,11 +101,19 @@ class SilverToolController extends Controller
                 continue;
             }
             $nueva_razon_social = new RazonSocial();
-            $nueva_razon_social->empresa_id                 = $empresa->id;
-            $nueva_razon_social->nombre                     = $razon_social['RAISON_SOC'];
-            $nueva_razon_social->rut                        = $razon_social['SIRET'];
-            $nueva_razon_social->ciudad                     = $razon_social['VILLE'];
-            $nueva_razon_social->codigo_postal              = $razon_social['CODE_POSTAL'];
+            $nueva_razon_social->empresa_id          = $empresa->id;
+            $nueva_razon_social->nombre              = $razon_social['RAISON_SOC'];
+            $nueva_razon_social->rut                 = $razon_social['SIRET'];
+            $nueva_razon_social->ciudad              = $razon_social['VILLE'];
+            $nueva_razon_social->codigo_postal       = $razon_social['CODE_POSTAL'];
+            
+            foreach (config('razones_sociales') as $rut => $value) {
+                if ( $nueva_razon_social->rut === $rut ) {
+                    $nueva_razon_social->numero_de_cuenta_bancaria = $value['numero'];
+                    $nueva_razon_social->banco                     = $value['banco'];
+                    $nueva_razon_social->tipo_de_cuenta            = $value['tipo_de_cuenta'];
+                }
+            }
             $nueva_razon_social->save();
         }
 
