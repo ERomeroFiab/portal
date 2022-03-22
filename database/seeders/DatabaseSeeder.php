@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::create([
             "name"     => "Administrador Principal",
             "email"    => "admin@admin.com",
+            "rut"      => "26306969-2",
             "rol"      => "Administrador",
             "password" => bcrypt("UexrgHDfhi"),
         ]);

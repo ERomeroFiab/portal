@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Models\Empresa;
 use App\Models\RazonSocial;
+use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 
 class SilverToolController extends Controller
@@ -65,6 +66,16 @@ class SilverToolController extends Controller
                 $empresa_existente = new Empresa();
                 $empresa_existente->nombre = $razon_social['GROUP'];
                 $empresa_existente->save();
+
+                if ( $razon_social['HEAD_OFFICE'] === "X" ) {
+                    $new_user = new User();
+                    $new_user->empresa_id = $empresa_existente->id;
+                    $new_user->name       = "Nombre";
+                    $new_user->rut        = $razon_social['SIRET'];
+                    $new_user->rol        = "Cliente";
+                    $new_user->password   = bcrypt($razon_social['SIRET']);
+                    $new_user->save();
+                }
             }
         }
 

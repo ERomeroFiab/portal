@@ -60,12 +60,12 @@
                 </div>
             </li>
             
-            {{-- <li class="">
-                <a href="#">
+            <li class="">
+                <a href="{{ route('admin.herramientas.index') }}">
                     <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
-                    <p class="sidebar-normal">Pestaña</p>
+                    <p class="sidebar-normal">Herramientas</p>
                 </a>
-            </li> --}}
+            </li>
 
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">

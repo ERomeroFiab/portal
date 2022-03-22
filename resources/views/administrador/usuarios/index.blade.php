@@ -26,6 +26,7 @@
                               <tr>
                                  <th>Nombre</th>
                                  <th>Email</th>
+                                 <th>Rut</th>
                                  <th>Rol</th>
                                  <th>Empresa</th>
                                  <th class="no_eportar">&nbsp;</th>
@@ -74,6 +75,7 @@
                 columns: [
                     { data: "name"},
                     { data: "email"},
+                    { data: "rut"},
                     { data: "rol"},
                     { data: "empresa"},
                     { 

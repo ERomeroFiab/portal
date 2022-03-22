@@ -15,10 +15,11 @@ class CreateUsersTable extends Migration
             $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('set null');
 
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->nullable();
+            $table->string('rut')->unique()->comment('Head Office');
             $table->string('rol')->comment('Gestor ó Cliente.');
             $table->string('password');
-            $table->string('status')->nullable();
+            $table->dateTime('first_login')->nullable();
             $table->dateTime('email_verified_at')->nullable();
             $table->rememberToken();
             $table->timestamps();

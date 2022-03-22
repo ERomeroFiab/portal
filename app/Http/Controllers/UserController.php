@@ -38,11 +38,13 @@ class UserController extends Controller
     {
         Validator::make($request->all(), [
             'name' => 'required|string',
+            'rut'  => 'required|string|unique:users',
         ])->validate();
 
         $user = new User();
         $user->name       = $request->name;
         $user->email      = $request->email;
+        $user->rut        = $request->rut;
         $user->rol        = $request->rol;
         $user->empresa_id = $request->empresa_id;
         $user->password   = bcrypt('12345678');

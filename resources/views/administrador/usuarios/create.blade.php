@@ -28,57 +28,66 @@
                             <form action="{{ route('admin.usuarios.store') }}" method="POST">
                                 @csrf
 
-                            <div class="form-group">
-                                <label for="name">Nombre</label>
-                                <input name="name" type="text" class="form-control" id="name"
-                                    aria-describedby="name_error" placeholder="Ejemplo: Juan">
-                                @if ($errors->has('name'))
-                                    <small id="name_error"
-                                        class="form-text text-muted text-danger">{{ $errors->first('name') }}</small>
-                                @endif
-                            </div>
+                                <div class="form-group">
+                                    <label for="name">Nombre</label>
+                                    <input name="name" type="text" class="form-control" id="name"
+                                        aria-describedby="name_error" placeholder="Ejemplo: Juan">
+                                    @if ($errors->has('name'))
+                                        <small id="name_error"
+                                            class="form-text text-muted text-danger">{{ $errors->first('name') }}</small>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input name="email" type="email" class="form-control" id="email"
-                                    aria-describedby="email_error" placeholder="Ejemplo: juan@gmail.com">
-                                @if ($errors->has('email'))
-                                    <small id="email_error"
-                                        class="form-text text-muted text-danger">{{ $errors->first('email') }}</small>
-                                @endif
-                            </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input name="email" type="email" class="form-control" id="email"
+                                        aria-describedby="email_error" placeholder="Ejemplo: juan@gmail.com">
+                                    @if ($errors->has('email'))
+                                        <small id="email_error"
+                                            class="form-text text-muted text-danger">{{ $errors->first('email') }}</small>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <label>Rol</label>
-                                <select name="rol" class="form-control">
-                                    <option value="" selected disabled>-- Seleccione --</option>
-                                    <option value="Cliente">Cliente</option>
-                                    {{-- <option value="Gestor">Gestor</option> --}}
-                                </select>
-                                @if ($errors->has('rol'))
-                                    <small id="rol_error"
-                                        class="form-text text-muted text-danger">{{ $errors->first('rol') }}</small>
-                                @endif
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="empresa">Empresa</label>
-                                <select name="empresa_id" class="js-example-basic-single form-control" id="empresa">
-                                    <option value="" selected disabled>-- Seleccione --</option>
-                                    @foreach ($empresas as $empresa)
-                                        <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
-                                    @endforeach
-                                </select>
-                                @if ($errors->has('empresa'))
-                                    <small id="empresa_error" class="form-text text-muted text-danger">
-                                        {{ $errors->first('empresa') }}
-                                    </small>
-                                @endif
-                            </div>
+                                <div class="form-group">
+                                    <label for="rut">Rut</label>
+                                    <input name="rut" type="text" class="form-control" id="rut"
+                                        aria-describedby="rut_error" placeholder="Ejemplo: 12345678-9">
+                                    @if ($errors->has('rut'))
+                                        <small id="rut_error" class="form-text text-muted text-danger">{{ $errors->first('rut') }}</small>
+                                    @endif
+                                </div>
 
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Guardar</button>
-                            </div>
+                                <div class="form-group">
+                                    <label>Rol</label>
+                                    <select name="rol" class="form-control">
+                                        <option value="" selected disabled>-- Seleccione --</option>
+                                        <option value="Cliente">Cliente</option>
+                                        {{-- <option value="Gestor">Gestor</option> --}}
+                                    </select>
+                                    @if ($errors->has('rol'))
+                                        <small id="rol_error"
+                                            class="form-text text-muted text-danger">{{ $errors->first('rol') }}</small>
+                                    @endif
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="empresa">Empresa</label>
+                                    <select name="empresa_id" class="js-example-basic-single form-control" id="empresa">
+                                        <option value="" selected disabled>-- Seleccione --</option>
+                                        @foreach ($empresas as $empresa)
+                                            <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
+                                        @endforeach
+                                    </select>
+                                    @if ($errors->has('empresa'))
+                                        <small id="empresa_error" class="form-text text-muted text-danger">
+                                            {{ $errors->first('empresa') }}
+                                        </small>
+                                    @endif
+                                </div>
+
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Guardar</button>
+                                </div>
 
                             </form>
                         </div>

@@ -28,6 +28,12 @@
                                 </div>
 
                                 <div class="form-group">
+                                    <label for="rut">Rut</label>
+                                    <input disabled type="text" class="form-control" id="rut"
+                                        value="{{ $user->rut }}">
+                                </div>
+
+                                <div class="form-group">
                                     <label for="rolInput">Rol</label>
                                     <input disabled type="text" class="form-control" id="rolInput"
                                         value="{{ $user->rol }}">

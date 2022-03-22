@@ -64,6 +64,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/reportes/edit/{id}', [App\Http\Controllers\ReporteController::class, 'admin_edit'])->name('admin.reportes.edit');
         Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'admin_update'])->name('admin.reportes.update');
 
+        Route::get('/herramientas/index', [App\Http\Controllers\HerramientaController::class, 'admin_index'])->name('admin.herramientas.index');
+
     });
 
     // CLIENTE
