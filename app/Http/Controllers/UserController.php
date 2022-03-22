@@ -73,7 +73,7 @@ class UserController extends Controller
             
         $user = User::find( $id );
         if ($user->id === 1) {
-            return redirect()->back()->with('error','El administrador no se puede editar ');
+            return redirect()->back()->with('error','El administrador no se puede editar');
         }
         $user->name = $request->get('name');
         $user->empresa_id = $request->get('empresa_id');
@@ -82,9 +82,24 @@ class UserController extends Controller
         return redirect()->route('admin.usuarios.index')->with('success','Actualización correctamente finalizada');
     }
 
-    public function admin_destroy(  )
+    public function admin_destroy( $id )
     {
-        dd('admin_destroy()');
+        Validator::make(['id' => $id], [
+            'id' =>'required|exists:users,id',
+        ])->validate();
+        if ($id == 1) {
+            return redirect()->back()->with('error','El administrador no se puede eliminar');
+        }
+        $user = User::find( $id );
+        if ( $user->empresa ) {
+            foreach ($user->empresa->razones_sociales as $razon_social) {
+                $razon_social->delete();
+            }
+            $user->empresa->delete();
+        }
+        $user->delete();
+        return redirect()->back()->with('success', "El usuario {$user->name} se eliminó correctamente.");
+        
     }
     // CONSULTOR
     public function consultor_show($id)

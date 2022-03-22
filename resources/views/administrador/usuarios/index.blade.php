@@ -47,6 +47,8 @@
     
     <script>
         let TABLA_USUARIOS;
+        const CSRF = "{{ csrf_token() }}";
+
         $(document).ready(function() {
 
             TABLA_USUARIOS = $('#tabla_usuarios').DataTable({
@@ -69,14 +71,25 @@
                     { 
                         data: 'action', 
                         render: function (data, type, row){
-                            $html = "";
+                            let html = "";
                             if ( data.path_to_show ) {
-                                $html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
+                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
                             }
                             if ( data.path_to_edit ) {
-                                $html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
+                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
                             }
-                            return $html;
+                            if ( data.path_to_destroy ) {
+                                html += `
+                                    <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger">Eliminar</a>
+                                    <form action="${data.path_to_destroy}" method="POST" class="d-none">
+                                        <input type="hidden" name="_token" value="${CSRF}">
+                                        <input type="hidden" name="_method" value="delete">
+                                        <input type="submit" id="boton_submit_to_remove_user_${data.id}">
+                                    </form>
+                                `;
+                                html += ``;
+                            }
+                            return html;
                         },
                         orderable: false, 
                         searchable: false
@@ -144,6 +157,20 @@
 
 
         });
+
+        function sweetAlert_to_remove_user( boton_submit ) {
+            Swal.fire({
+                icon: "warning",
+                title: '¿Desea ELIMINAR este usuario, con la empresa asociada y sus razones sociales?',
+                confirmButtonText: `Eliminar`,
+                confirmButtonColor: '#d9534f',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    document.getElementById(boton_submit).click();
+                }
+            })
+        }
 
         function buscar(){
             TABLA_EMPRESAS.draw();

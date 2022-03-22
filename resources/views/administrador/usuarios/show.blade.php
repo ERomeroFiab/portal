@@ -97,6 +97,14 @@
                                                     <a href="{{ route('admin.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">
                                                         Ver
                                                     </a>
+                                                    <button class="btn btn-sm btn-danger" onclick="sweetAlertToRemoveRazonSocial('button_submit_to_remove_rs_{{$razon_social->id}}')" type="button">
+                                                        Borrar
+                                                    </button>
+                                                    <form action="{{ route('admin.razones-sociales.destroy', ['id' => $razon_social->id]) }}" method="POST" class="d-none">
+                                                        @csrf
+                                                        @method('delete')
+                                                        <input type="submit" id="button_submit_to_remove_rs_{{$razon_social->id}}">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -111,4 +119,23 @@
             </div> <!-- End card -->
         </div>
     </div>
+@endsection
+
+@section('customjs')
+    <script>
+        function sweetAlertToRemoveRazonSocial( boton_submit ) {
+            Swal.fire({
+                icon: "warning",
+                title: '¿Desea ELIMINAR esta Razón social?',
+                confirmButtonText: `Eliminar`,
+                confirmButtonColor: '#d9534f',
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    console.log(boton_submit)
+                    document.getElementById(boton_submit).click();
+                }
+            })
+        }
+    </script>
 @endsection

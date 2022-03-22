@@ -31,9 +31,6 @@ class AjaxController extends Controller
                                 }
                                 return "-";
                             })
-                            ->addColumn('razones_sociales_count', function ($dato) {
-                                return $dato->razones_sociales->count();
-                            })
                             ->editColumn('cliente', function ($dato) {
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;

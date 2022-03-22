@@ -70,9 +70,18 @@ class EmpresaController extends Controller
         ]);
     }
 
-    public function admin_destroy()
+    public function admin_destroy( $id )
     {
-        dd( 'funcion admin_destroy() en EmpresaController' );
+        Validator::make(['id' => $id], [
+            'id' => 'required|exists:empresas,id',
+        ])->validate();
+        $empresa = Empresa::find( $id );
+        foreach ($empresa->razones_sociales as $razon_social) {
+            $razon_social->delete();
+        }
+        $empresa->delete();
+
+        return redirect()->back()->with('success', "La empresa {$empresa->nombre} se eliminó correctamente y todas sus razones sociales relacionadas.");
     }
 
     // CLIENTE

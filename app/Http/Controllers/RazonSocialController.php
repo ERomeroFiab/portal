@@ -7,6 +7,7 @@ use App\Http\Requests\StoreRazonSocialRequest;
 use App\Http\Requests\UpdateRazonSocialRequest;
 
 use App\Models\Empresa;
+use Illuminate\Support\Facades\Validator;
 
 class RazonSocialController extends Controller
 {
@@ -26,6 +27,20 @@ class RazonSocialController extends Controller
         return view('administrador.razones-sociales.show', [
             "razon_social" => $razon_social,
         ]);
+    }
+
+    
+    public function admin_destroy( $id )
+    {
+        Validator::make(['id' => $id], [
+            'id' =>'required|exists:razon_socials,id',
+        ])->validate();
+
+        $razon_social = RazonSocial::find( $id );
+        $user_id = $razon_social->empresa->representante->id;
+        $razon_social->delete();
+
+        return redirect()->route('admin.usuarios.show', ['id' => $user_id])->with('success', "Razón social {$razon_social->nombre} eliminada correctamente");
     }
 
     // CLIENTE
