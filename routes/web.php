@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/usuarios/show/{id}', [App\Http\Controllers\UserController::class, 'admin_show'])->name('admin.usuarios.show');
         Route::get('/usuarios/edit/{id}', [App\Http\Controllers\UserController::class, 'admin_edit'])->name('admin.usuarios.edit');
         Route::post('/usuarios/update/{id}', [App\Http\Controllers\UserController::class, 'admin_update'])->name('admin.usuarios.update');
+        Route::delete('/usuarios/destroy/{id}', [App\Http\Controllers\UserController::class, 'admin_destroy'])->name('admin.usuarios.destroy');
 
         Route::get('/razones-sociales/index', [App\Http\Controllers\RazonSocialController::class, 'admin_index'])->name('admin.razones-sociales.index');
         Route::get('/razones-sociales/create', [App\Http\Controllers\RazonSocialController::class, 'admin_create'])->name('admin.razones-sociales.create');
@@ -156,11 +157,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     // Ajax
     Route::get('/ajax/empresas', [App\Http\Controllers\AjaxController::class, 'get_tabla_empresas'])->name('ajax.get_tabla_empresas');
-<<<<<<< HEAD
-    Route::get('/ajax/users', [App\Http\Controllers\AjaxController::class, 'get_tabla_users'])->name('ajax.get_tabla_users');
-=======
     Route::get('/ajax/usuarios', [App\Http\Controllers\AjaxController::class, 'get_tabla_usuarios'])->name('ajax.get_tabla_usuarios');
->>>>>>> 8a8e4e07224d0615d8bde093bef8d35435d16d16
 
     // Api's hacia silvertool database
     Route::get('/silvertool/actualizar_group_names', [App\Http\Controllers\SilverToolController::class, 'actualizar_group_names'])->name('silver.actualizar_group_names');

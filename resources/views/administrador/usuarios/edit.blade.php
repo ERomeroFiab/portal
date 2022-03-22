@@ -18,14 +18,13 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" id="name" value="{{ $user->name }}">
-                                    @error('nombre')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-
+                                    <input name="name" type="text" class="form-control" id="name" value="{{ $user->name }}">
                                 </div>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 
                             </div>
                             <div class="col-6">
@@ -36,15 +35,15 @@
                                             <option value="{{$empresa->id}}">{{$empresa->nombre}}</option>
                                         @endforeach
                                         <option selected value="{{$user->empresa->id}}">{{$user->empresa->nombre}}</option>
-                                        
                                     </select>
-                                    @error('empresa_id')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
                                 </div>
+                                @error('empresa_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
+
                             <div class="col-12">
                                 <input class="btn btn-sm btn-success" type="submit" value="Editar">
                             </div>

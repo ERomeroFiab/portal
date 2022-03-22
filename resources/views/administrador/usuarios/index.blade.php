@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('customcss')
+    <style>
+        #tabla_usuarios_filter {
+            display: none;
+        }
+    </style>
+@endsection
+
 @section('content')
 
    @include('includes.messages_in_session')
@@ -19,7 +27,8 @@
                                  <th>Nombre</th>
                                  <th>Email</th>
                                  <th>Rol</th>
-                                 {{-- <th>&nbsp;</th> --}}
+                                 <th>Empresa</th>
+                                 <th>&nbsp;</th>
                               </tr>
                            </thead>
                            <tbody>
@@ -56,6 +65,22 @@
                     { data: "name"},
                     { data: "email"},
                     { data: "rol"},
+                    { data: "empresa"},
+                    { 
+                        data: 'action', 
+                        render: function (data, type, row){
+                            $html = "";
+                            if ( data.path_to_show ) {
+                                $html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
+                            }
+                            if ( data.path_to_edit ) {
+                                $html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
+                            }
+                            return $html;
+                        },
+                        orderable: false, 
+                        searchable: false
+                    }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
