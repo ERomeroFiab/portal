@@ -37,6 +37,14 @@
                         </table>
                      </div>
                   </div>
+
+                  <div class="row mt-5">
+                      <div class="col-12">
+                          <a href="{{ route('admin.usuarios.create') }}" class="btn btn-sm btn-info">
+                              Crear nuevo usuario
+                          </a>
+                      </div>
+                  </div>
                </div>
             </div> <!-- End card -->
       </div>
