@@ -55,10 +55,7 @@ class AjaxController extends Controller
 
     public function get_tabla_usuarios( Request $request )
     {
-        
-        $datos = User::query();
-        
-        return DataTables::eloquent( $datos )
+        return DataTables::eloquent( User::query() )
                             ->filter(function ($query) use ($request) {
                                 
                                 // if ( $request->get('SEARCH_BY_VILLE') !== null ) {
@@ -79,6 +76,12 @@ class AjaxController extends Controller
                             ->addColumn('empresa', function ($dato) {
                                 if ( $dato->empresa ) {
                                     return $dato->empresa->nombre;
+                                }
+                                return "-";
+                            })
+                            ->addColumn('razones_sociales_count', function ($dato) {
+                                if ( $dato->empresa ) {
+                                    return $dato->empresa->razones_sociales->count();
                                 }
                                 return "-";
                             })

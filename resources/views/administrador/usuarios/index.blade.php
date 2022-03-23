@@ -29,6 +29,7 @@
                                  <th>Rut</th>
                                  <th>Rol</th>
                                  <th>Empresa</th>
+                                 <th>Razones Sociales</th>
                                  <th class="no_exportar">&nbsp;</th>
                               </tr>
                            </thead>
@@ -78,19 +79,20 @@
                     { data: "rut"},
                     { data: "rol"},
                     { data: "empresa"},
+                    { data: "razones_sociales_count"},
                     { 
                         data: 'action', 
                         render: function (data, type, row){
                             let html = "";
                             if ( data.path_to_show ) {
-                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info">Ver</a>`;
+                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
                             }
                             if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning">Editar</a>`;
+                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
                             }
                             if ( data.path_to_destroy ) {
                                 html += `
-                                    <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger">Eliminar</a>
+                                    <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                     <form action="${data.path_to_destroy}" method="POST" class="d-none">
                                         <input type="hidden" name="_token" value="${CSRF}">
                                         <input type="hidden" name="_method" value="delete">
