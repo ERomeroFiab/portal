@@ -44,6 +44,12 @@ class CreateMissionMotiveEcosTable extends Migration
             $table->unsignedBigInteger('mission_motive_id')->nullable();
             $table->foreign('mission_motive_id')->references('id')->on('mission_motives')->onDelete('set null')->onUpdate('cascade');
 
+            $table->unsignedBigInteger('mission_id')->nullable();
+            $table->foreign('mission_id')->references('id')->on('missions')->onDelete('set null')->onUpdate('cascade');
+
+            $table->unsignedBigInteger('razon_social_id')->nullable();
+            $table->foreign('razon_social_id')->references('id')->on('razon_socials')->onDelete('set null')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

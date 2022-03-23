@@ -13,4 +13,14 @@ class MissionMotiveEco extends Model
     {
         return $this->belongsTo('App\Models\MissionMotive', 'mission_motive_id'); 
     }
+
+    public function mission()
+    {
+        return $this->belongsTo('App\Models\Mission', 'mission_id'); 
+    }
+
+    public function razon_social()
+    {
+        return $this->belongsTo('App\Models\RazonSocial', 'razon_social_id'); 
+    }
 }

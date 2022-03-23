@@ -230,6 +230,9 @@ class SilverToolController extends Controller
                             if ( $eco ) {
                                 $new_eco = new MissionMotiveEco();
                                 $new_eco->mission_motive_id         = $new_motive->id;
+                                $new_eco->mission_id                = $new_mission->id;
+                                $new_eco->razon_social_id           = $new_razon_social->id;
+                                $new_eco->mission_motive_id         = $new_motive->id;
                                 $new_eco->DATE_PREVISIONNELLE       = $eco['DATE_PREVISIONNELLE'];
                                 $new_eco->ECO_ABANDONNEE            = $eco['ECO_ABANDONNEE'];
                                 $new_eco->ECO_A_FACTURER            = $eco['ECO_A_FACTURER'];

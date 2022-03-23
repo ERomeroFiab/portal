@@ -113,23 +113,22 @@ class AjaxController extends Controller
 
             })
             ->addColumn('razon_social', function ($dato) {
-                return $dato->mission_motive->mission->razon_social->nombre;
+                return $dato->razon_social->nombre;
             })
             ->addColumn('rut', function ($dato) {
-                return $dato->mission_motive->mission->razon_social->rut;
+                return $dato->razon_social->rut;
             })
             ->addColumn('motivo', function ($dato) {
                 return $dato->mission_motive->MOTIF;
             })
             ->addColumn('gestion', function ($dato) {
-                // return $dato->mission->CURRENT_STEP;
-                return "-";
+                return $dato->mission->CURRENT_STEP;
             })
             ->addColumn('fecha_de_gestion', function ($dato) {
                 return $dato->mission_motive->SOUS_MOTIF_1;
             })
             ->addColumn('banco', function ($dato) {
-                return $dato->mission_motive->mission->razon_social->banco;
+                return $dato->razon_social->banco;
             })
             ->addColumn('invoice', function ($dato) {
                 return "-";
