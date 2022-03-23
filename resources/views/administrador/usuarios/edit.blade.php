@@ -30,7 +30,7 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input name="email" type="text" class="form-control" id="email" value="{{ $user->email }}">
+                                    <input name="email" type="email" class="form-control" id="email" value="{{ $user->email }}">
                                 </div>
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
