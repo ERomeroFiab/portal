@@ -69,8 +69,9 @@ class UserController extends Controller
     public function admin_update( $id, Request $request )
     {   
         Validator::make($request->all(), [
-            'name' => 'required|string',
-            'empresa_id' =>'required|exists:empresas,id',
+            'name'       => 'required|string',
+            'empresa_id' => 'required|exists:empresas,id',
+            'email'      => 'nullable|email',
         ])->validate();
             
         $user = User::find( $id );
@@ -78,6 +79,7 @@ class UserController extends Controller
             return redirect()->back()->with('error','El administrador no se puede editar');
         }
         $user->name = $request->get('name');
+        $user->email = $request->get('email');
         $user->empresa_id = $request->get('empresa_id');
         $user->update();
 
