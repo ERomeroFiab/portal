@@ -28,16 +28,7 @@ class GestionController extends Controller
     // CLIENTE
     public function cliente_index()
     {
-        $cliente = auth()->user();
-        $empresa_id = $cliente->empresa_id;
-        $gestiones = Gestion::whereHas('razon_social', function($q) use ($empresa_id){
-            $q->where('empresa_id', $empresa_id);
-        })->get();
-        
-        return view('cliente.gestiones.index', [
-            "gestiones" => $gestiones,
-            "cantidad_de_gestiones" => $gestiones->count(),
-        ]);
+        return view('cliente.gestiones.index');
     }
 
     public function cliente_show($id)

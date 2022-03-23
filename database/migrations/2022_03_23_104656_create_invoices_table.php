@@ -37,7 +37,7 @@ class CreateInvoicesTable extends Migration
             $table->string('SYS_USER_MODIFICATION')->nullable();
             $table->double('TOTAL_AMOUNT_INVOICED')->nullable();
             $table->string('TYPE')->nullable();
-            $table->decimal('BALANCE_DUE')->nullable();
+            $table->decimal('BALANCE_DUE', 12, 2)->nullable();
             $table->string('NOM_MODELE_WORD')->nullable();
 
             $table->unsignedBigInteger('razon_social_id')->nullable();
