@@ -20,6 +20,32 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+
+                        <div class="col-12">
+                            <h6>Filtros:</h6>
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Razones Sociales:</label>
+                            <select id="input__razon_social" class="form-control">
+                                <option value="">Todos</option>
+                                @foreach ($razones_sociales as $razon_social)
+                                    <option value="{{ $razon_social->id }}">{{ $razon_social->nombre }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Rut:</label>
+                            <input id="input__rut" type="text" class="form-control" autocomplete="off">
+                        </div>
+
+                        <div class="col-12 form-group">
+                            <button onclick="filtrar_tabla()" class="btn btn-sm btn-success" type="button">Filtrar Datos</button>
+                        </div>
+
+                    </div>
+                    <div class="row mt-5">
                         <div class="col-12">
                             <table id="tabla_gestiones" class="table-hover" style="width:100%">
                                 <thead>
@@ -69,7 +95,9 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function(d) {
-                        d.search_by_empresa = "{{ auth()->user()->empresa->id }}";
+                        d.search_by_empresa      = "{{ auth()->user()->empresa->id }}";
+                        d.search_by_razon_social = document.querySelector('#input__razon_social').value;
+                        d.search_by_rut          = document.querySelector('#input__rut').value;
                     }
                 },
                 columns: [
@@ -83,34 +111,6 @@
                     {data: "ECO_VALIDEE"},
                     {data: "ECO_VALIDEE"},
                     {data: "invoice"},
-                    // {
-                    //     data: 'action',
-                    //     render: function(data, type, row) {
-                    //         let html = "";
-                    //         if (data.path_to_show) {
-                    //             html +=
-                    //                 `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                    //         }
-                    //         if (data.path_to_edit) {
-                    //             html +=
-                    //                 `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
-                    //         }
-                    //         if (data.path_to_destroy) {
-                    //             html += `
-                    //                 <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                    //                 <form action="${data.path_to_destroy}" method="POST" class="d-none">
-                    //                    <input type="hidden" name="_token" value="${CSRF}">
-                    //                    <input type="hidden" name="_method" value="delete">
-                    //                    <input type="submit" id="boton_submit_to_remove_user_${data.id}">
-                    //                 </form>
-                    //           `;
-                    //             html += ``;
-                    //         }
-                    //         return html;
-                    //     },
-                    //     orderable: false,
-                    //     searchable: false
-                    // }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -196,12 +196,16 @@
         //     })
         // }
 
-        function buscar() {
+        function filtrar_tabla() {
             TABLA_GESTIONES.draw();
         }
 
         // Pintar en verde los inputs que contienen algo
-        // $("#input__ID_IDENTIFICATION").change(function() {agregar_quitar_bg_success('input__ID_IDENTIFICATION');});
+        $("#input__razon_social").change(function() {
+            agregar_quitar_bg_success('input__razon_social');
+            filtrar_tabla();
+        });
+        $("#input__rut").change(function() {agregar_quitar_bg_success('input__rut');});
 
         function agregar_quitar_bg_success(id) {
             if ($(`#${id}`).val() !== "") {

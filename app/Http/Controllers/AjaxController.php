@@ -104,38 +104,44 @@ class AjaxController extends Controller
                 });
             })
 
-            )->filter(function ($query) use ($request) {
-                                
-                // if ( $request->get('search_by_empresa') !== null ) {
-                //     $empresa_id = $request->get('search_by_empresa');
-                //     $query
-                // }
+        )->filter(function ($query) use ($request) {
+                            
+            if ( $request->get('search_by_razon_social') !== null ) {
+                $query->where('razon_social_id', $request->get('search_by_razon_social'));
+            }
+                            
+            if ( $request->get('search_by_rut') !== null ) {
+                $rut = "%".$request->get('search_by_rut')."%";
+                $query->whereHas('razon_social', function($q) use ($rut) {
+                    $q->where('rut', 'like', $rut);
+                });
+            }
 
-            })
-            ->addColumn('razon_social', function ($dato) {
-                return $dato->razon_social->nombre;
-            })
-            ->addColumn('rut', function ($dato) {
-                return $dato->razon_social->rut;
-            })
-            ->addColumn('motivo', function ($dato) {
-                return $dato->mission_motive->MOTIF;
-            })
-            ->addColumn('gestion', function ($dato) {
-                return $dato->mission->CURRENT_STEP;
-            })
-            ->addColumn('fecha_de_gestion', function ($dato) {
-                return $dato->mission_motive->SOUS_MOTIF_1;
-            })
-            ->addColumn('banco', function ($dato) {
-                return $dato->razon_social->banco;
-            })
-            ->addColumn('invoice', function ($dato) {
-                return "-";
-            })
-            // ->addColumn('action', function ($dato) {
-            //     //
-            // })
-            ->toJson();
+        })
+        ->addColumn('razon_social', function ($dato) {
+            return $dato->razon_social->nombre;
+        })
+        ->addColumn('rut', function ($dato) {
+            return $dato->razon_social->rut;
+        })
+        ->addColumn('motivo', function ($dato) {
+            return $dato->mission_motive->MOTIF;
+        })
+        ->addColumn('gestion', function ($dato) {
+            return $dato->mission->CURRENT_STEP;
+        })
+        ->addColumn('fecha_de_gestion', function ($dato) {
+            return $dato->mission_motive->SOUS_MOTIF_1;
+        })
+        ->addColumn('banco', function ($dato) {
+            return $dato->razon_social->banco;
+        })
+        ->addColumn('invoice', function ($dato) {
+            return "-";
+        })
+        // ->addColumn('action', function ($dato) {
+        //     //
+        // })
+        ->toJson();
     }
 }

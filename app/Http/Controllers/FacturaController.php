@@ -10,19 +10,7 @@ class FacturaController extends Controller
 {
     public function cliente_index()
     {
-        $empresa_id = auth()->user()->empresa_id;
-        $facturas = Factura::where('status', "Pendiente")->whereHas('gestiones', function($q) use ($empresa_id) {
-                                $q->whereHas('razon_social', function($q2) use ($empresa_id) {
-                                    $q2->whereHas('empresa', function($q3) use ($empresa_id){
-                                        $q3->where('id', $empresa_id);
-                                    });
-                                });
-                            })->get();
-        
-        return view('cliente.facturas.index', [
-            "facturas" => $facturas,
-            "cantidad_de_facturas" => $facturas->count(),
-        ]);
+        return view('cliente.facturas.index');
     }
 
     public function cliente_show($id)
