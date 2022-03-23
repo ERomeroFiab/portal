@@ -15,9 +15,9 @@
                 <div class="card-header">
                     <h2>
                         Nuevo Usuario
-                        <a href="{{ route('silver.actualizar_group_names') }}">
+                        <a href="{{ route('silver.update_database_first_time') }}">
                             <button onclick="$(this).prop('disabled', true).text('Actualizando...');" type="button" class="btn btn-sm btn-info float-right">
-                                Actualizar los nombres de grupos de empresa desde Silvertool
+                                Actualizar la base de datos desde SilverTool
                             </button>
                         </a>
                     </h2>

@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class MissionMotive extends Model
 {
     use HasFactory;
+
+    public function mission()
+    {
+        return $this->belongsTo('App\Models\Mission', 'mission_id'); 
+    }
+
+    public function mission_motive_ecos()
+    {
+        return $this->hasMany('App\Models\MissionMotiveEco', 'mission_motive_id');
+    }
 }

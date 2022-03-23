@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     use HasFactory;
+
+    public function razon_social()
+    {
+        return $this->belongsTo('App\Models\RazonSocial', 'razon_social_id'); 
+    }
 }
