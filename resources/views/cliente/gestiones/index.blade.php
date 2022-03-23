@@ -24,8 +24,19 @@
                             <table id="tabla_gestiones" class="table-hover" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th class="no_exportar">&nbsp;</th>
+                                        <th>Razón Social</th>
+                                        <th>Rut</th>
+                                        <th>Motivo</th>
+                                        <th>Gestion</th>
+                                        <th>Fecha Gestión</th>
+                                        <th>Fecha Depósito</th>
+                                        <th>Banco</th>
+                                        <th>Monto Depositado</th>
+                                        <th>Honorarios Fiabilis</th>
+                                        <th>Montos Facturados</th>
+                                        {{-- <th>Montos a Facturar</th>
+                                        <th>Periodo a Facturar</th>
+                                        <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,70 +55,62 @@
 
 @section('customjs')
     <script>
-        let TABLA_USUARIOS;
+        let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
 
         $(document).ready(function() {
 
-            TABLA_USUARIOS = $('#tabla_usuarios').DataTable({
+            TABLA_GESTIONES = $('#tabla_gestiones').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_usuarios') }}",
+                    url: "{{ route('ajax.get_tabla_mission_motive_eco_by_empresa') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function(d) {
-                        // d.search_by_xxxx = $('#input__xxxx').val();
+                        d.search_by_empresa = "{{ auth()->user()->empresa->id }}";
                     }
                 },
                 columns: [
-                    {
-                        data: "name"
-                    },
-                    {
-                        data: "email"
-                    },
-                    {
-                        data: "rut"
-                    },
-                    {
-                        data: "rol"
-                    },
-                    {
-                        data: "empresa"
-                    },
-                    {
-                        data: "razones_sociales_count"
-                    },
-                    {
-                        data: 'action',
-                        render: function(data, type, row) {
-                            let html = "";
-                            if (data.path_to_show) {
-                                html +=
-                                    `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                            }
-                            if (data.path_to_edit) {
-                                html +=
-                                    `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
-                            }
-                            if (data.path_to_destroy) {
-                                html += `
-                                    <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
-                                    <form action="${data.path_to_destroy}" method="POST" class="d-none">
-                                       <input type="hidden" name="_token" value="${CSRF}">
-                                       <input type="hidden" name="_method" value="delete">
-                                       <input type="submit" id="boton_submit_to_remove_user_${data.id}">
-                                    </form>
-                              `;
-                                html += ``;
-                            }
-                            return html;
-                        },
-                        orderable: false,
-                        searchable: false
-                    }
+                    {data: "razon_social"},
+                    {data: "rut"},
+                    {data: "motivo"},
+                    {data: "gestion"},
+                    {data: "SOUS_MOTIF_1"},
+                    {data: "DATE_PREVISIONNELLE"},
+                    {data: "banco"},
+                    {data: "ECO_VALIDEE"},
+                    {data: "ECO_VALIDEE"},
+                    {data: "invoice"},
+                    // {
+                    //     data: 'action',
+                    //     render: function(data, type, row) {
+                    //         let html = "";
+                    //         if (data.path_to_show) {
+                    //             html +=
+                    //                 `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
+                    //         }
+                    //         if (data.path_to_edit) {
+                    //             html +=
+                    //                 `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
+                    //         }
+                    //         if (data.path_to_destroy) {
+                    //             html += `
+                    //                 <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
+                    //                 <form action="${data.path_to_destroy}" method="POST" class="d-none">
+                    //                    <input type="hidden" name="_token" value="${CSRF}">
+                    //                    <input type="hidden" name="_method" value="delete">
+                    //                    <input type="submit" id="boton_submit_to_remove_user_${data.id}">
+                    //                 </form>
+                    //           `;
+                    //             html += ``;
+                    //         }
+                    //         return html;
+                    //     },
+                    //     orderable: false,
+                    //     searchable: false
+                    // }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -194,7 +197,7 @@
         // }
 
         function buscar() {
-            TABLA_EMPRESAS.draw();
+            TABLA_GESTIONES.draw();
         }
 
         // Pintar en verde los inputs que contienen algo

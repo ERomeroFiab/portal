@@ -12,17 +12,30 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        phola
+
+                    @foreach ($razones_sociales as $razon_social)
+                        <div class="col-3">
+                            <div class="card">
+                                <div class="card-header">
+                                    <b>{{ $razon_social->nombre }}</b>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <p>Rut: <b>{{ $razon_social->rut ?? "-" }}</b></p>
+                                            <p>Ciudad: <b>{{ $razon_social->ciudad ?? "-" }}</b></p>
+                                            <p>Código Postal: <b>{{ $razon_social->codigo_postal ?? "-" }}</b></p>
+                                            <p>Dirección: <b>{{ $razon_social->direccion ?? "-" }}</b></p>
+                                            <p>N° de Cuenta: <b>{{ $razon_social->numero_de_cuenta_bancaria ?? "-" }}</b></p>
+                                            <p>Banco: <b>{{ $razon_social->banco ?? "-" }}</b></p>
+                                            <p>Cuenta: <b>{{ $razon_social->tipo_de_cuenta ?? "-" }}</b></p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </div>
         </div> <!-- End card -->

@@ -164,9 +164,8 @@ class SilverToolController extends Controller
     {
         foreach ($razones_sociales as $razon_social) {
             $new_razon_social = $this->register_new_razon_social( $empresa, $razon_social );
-            // $this->register_new_missions( $new_razon_social, $razon_social );
-            // $missions = $this->register_new_invoices( $new_razon_social, $razon_social );
-
+            $this->register_new_missions( $new_razon_social, $razon_social );
+            $this->register_new_invoices( $new_razon_social, $razon_social );
         }
     }
 
@@ -200,7 +199,7 @@ class SilverToolController extends Controller
         foreach ($razon_social['missions'] as $mission) {
             if ( $mission ) {
                 $new_mission = new Mission();
-                // $new_mission->razon_social_id    = $new_razon_social->id;
+                $new_mission->razon_social_id    = $new_razon_social->id;
                 $new_mission->COORDINATOR        = $mission['COORDINATOR'];
                 $new_mission->CURRENT_STEP       = $mission['CURRENT_STEP'];
                 $new_mission->DATE_DEBUT         = $mission['DATE_DEBUT'];
@@ -215,47 +214,47 @@ class SilverToolController extends Controller
                 $new_mission->PRODUIT            = $mission['PRODUIT'];
                 $new_mission->PROJECT_MANAGER    = $mission['PROJECT_MANAGER'];
                 $new_mission->save();
-                // foreach ($mission['mission_motives'] as $mission_motive) {
-                //     if ( $mission_motive ) {
-                        // $new_mission_motive = new MissionMotive();
-                        // $new_mission_motive->mission_id     = $new_mission->id;
-                        // $new_mission_motive->COMMENTS_SITE  = $mission_motive['COMMENTS_SITE'];
-                        // $new_mission_motive->CONSULTANT     = $mission_motive['CONSULTANT'];
-                        // $new_mission_motive->DATE_LIMITE    = $mission_motive['DATE_LIMITE'];
-                        // $new_mission_motive->ETAPE_COURANTE = $mission_motive['ETAPE_COURANTE'];
-                        // $new_mission_motive->MOTIF          = $mission_motive['MOTIF'];
-                        // $new_mission_motive->POURCENTAGE    = $mission_motive['POURCENTAGE'];
-                        // $new_mission_motive->save();
+                foreach ($mission['mission_motives'] as $mission_motive) {
+                    if ( $mission_motive ) {
+                        $new_motive = new MissionMotive();
+                        $new_motive->mission_id     = $new_mission->id;
+                        $new_motive->COMMENTS_SITE  = $mission_motive['COMMENTS_SITE'];
+                        $new_motive->CONSULTANT     = $mission_motive['CONSULTANT'];
+                        $new_motive->DATE_LIMITE    = $mission_motive['DATE_LIMITE'];
+                        $new_motive->ETAPE_COURANTE = $mission_motive['ETAPE_COURANTE'];
+                        $new_motive->MOTIF          = $mission_motive['MOTIF'];
+                        $new_motive->POURCENTAGE    = $mission_motive['POURCENTAGE'];
+                        $new_motive->save();
 
-                        // foreach ($mission_motive['mission_motive_ecos'] as $mission_motive_eco) {
-                        //     if ( $mission_motive_eco ) {
-                        //         $new_eco = new MissionMotiveEco();
-                        //         $new_eco->mission_motive_id         = $new_mission_motive->id;
-                        //         $new_eco->DATE_PREVISIONNELLE       = $mission_motive_eco['DATE_PREVISIONNELLE'];
-                        //         $new_eco->ECO_ABANDONNEE            = $mission_motive_eco['ECO_ABANDONNEE'];
-                        //         $new_eco->ECO_A_FACTURER            = $mission_motive_eco['ECO_A_FACTURER'];
-                        //         $new_eco->ECO_ECART                 = $mission_motive_eco['ECO_ECART'];
-                        //         $new_eco->ECO_PRESENTEE             = $mission_motive_eco['ECO_PRESENTEE'];
-                        //         $new_eco->ECO_VALIDEE               = $mission_motive_eco['ECO_VALIDEE'];
-                        //         $new_eco->NOTES                     = $mission_motive_eco['NOTES'];
-                        //         $new_eco->PACKAGE                   = $mission_motive_eco['PACKAGE'];
-                        //         $new_eco->SELECTION_ECO_A_FACTURER  = $mission_motive_eco['SELECTION_ECO_A_FACTURER'];
-                        //         $new_eco->SELECTION_ECO_VALIDEE     = $mission_motive_eco['SELECTION_ECO_VALIDEE'];
-                        //         $new_eco->SELECTION_FACTURATION     = $mission_motive_eco['SELECTION_FACTURATION'];
-                        //         $new_eco->SOUS_MOTIF_1              = $mission_motive_eco['SOUS_MOTIF_1'];
-                        //         $new_eco->SOUS_MOTIF_1_FROM_MONTH   = $mission_motive_eco['SOUS_MOTIF_1_FROM_MONTH'];
-                        //         $new_eco->SOUS_MOTIF_1_FROM_YEAR    = $mission_motive_eco['SOUS_MOTIF_1_FROM_YEAR'];
-                        //         $new_eco->SOUS_MOTIF_1_TO_MONTH     = $mission_motive_eco['SOUS_MOTIF_1_TO_MONTH'];
-                        //         $new_eco->SOUS_MOTIF_1_TO_YEAR      = $mission_motive_eco['SOUS_MOTIF_1_TO_YEAR'];
-                        //         $new_eco->SOUS_MOTIF_2              = $mission_motive_eco['SOUS_MOTIF_2'];
-                        //         $new_eco->YEAR                      = $mission_motive_eco['YEAR'];
-                        //         $new_eco->CRITICITY                 = $mission_motive_eco['CRITICITY'];
-                        //         $new_eco->save();
+                        foreach ($mission_motive['mission_motive_ecos'] as $eco) {
+                            if ( $eco ) {
+                                $new_eco = new MissionMotiveEco();
+                                $new_eco->mission_motive_id         = $new_motive->id;
+                                $new_eco->DATE_PREVISIONNELLE       = $eco['DATE_PREVISIONNELLE'];
+                                $new_eco->ECO_ABANDONNEE            = $eco['ECO_ABANDONNEE'];
+                                $new_eco->ECO_A_FACTURER            = $eco['ECO_A_FACTURER'];
+                                $new_eco->ECO_ECART                 = $eco['ECO_ECART'];
+                                $new_eco->ECO_PRESENTEE             = $eco['ECO_PRESENTEE'];
+                                $new_eco->ECO_VALIDEE               = $eco['ECO_VALIDEE'];
+                                $new_eco->NOTES                     = $eco['NOTES'];
+                                $new_eco->PACKAGE                   = $eco['PACKAGE'];
+                                $new_eco->SELECTION_ECO_A_FACTURER  = $eco['SELECTION_ECO_A_FACTURER'];
+                                $new_eco->SELECTION_ECO_VALIDEE     = $eco['SELECTION_ECO_VALIDEE'];
+                                $new_eco->SELECTION_FACTURATION     = $eco['SELECTION_FACTURATION'];
+                                $new_eco->SOUS_MOTIF_1              = $eco['SOUS_MOTIF_1'];
+                                $new_eco->SOUS_MOTIF_1_FROM_MONTH   = $eco['SOUS_MOTIF_1_FROM_MONTH'];
+                                $new_eco->SOUS_MOTIF_1_FROM_YEAR    = $eco['SOUS_MOTIF_1_FROM_YEAR'];
+                                $new_eco->SOUS_MOTIF_1_TO_MONTH     = $eco['SOUS_MOTIF_1_TO_MONTH'];
+                                $new_eco->SOUS_MOTIF_1_TO_YEAR      = $eco['SOUS_MOTIF_1_TO_YEAR'];
+                                $new_eco->SOUS_MOTIF_2              = $eco['SOUS_MOTIF_2'];
+                                $new_eco->YEAR                      = $eco['YEAR'];
+                                $new_eco->CRITICITY                 = $eco['CRITICITY'];
+                                $new_eco->save();
 
-                        //     }
-                        // }
-                    // }
-                // }
+                            }
+                        }
+                    }
+                }
             }
         }
         return;

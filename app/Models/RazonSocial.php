@@ -14,18 +14,15 @@ class RazonSocial extends Model
         return $this->belongsTo('App\Models\Empresa', 'empresa_id'); 
     }
 
-    public function gestiones_pendientes()
+    public function missions()
     {
-        return $this->hasMany('App\Models\Gestion', 'razon_social_id')->where('status', "Pendiente"); 
+        return $this->hasMany('App\Models\Mission', 'razon_social_id');
+    }
+
+    public function invoices()
+    {
+        return $this->hasMany('App\Models\Invoice', 'razon_social_id');
     }
     
-    public function gestiones_finalizadas()
-    {
-        return $this->hasMany('App\Models\Gestion', 'razon_social_id')->where('status', "Finalizada"); 
-    }
     
-    public function gestiones()
-    {
-        return $this->hasMany('App\Models\Gestion', 'razon_social_id'); 
-    }
 }
