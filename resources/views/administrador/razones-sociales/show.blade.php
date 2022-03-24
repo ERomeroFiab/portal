@@ -11,6 +11,9 @@
         #tabla_ecos_filter {
             display: none;
         }
+        #tabla_invoices_filter {
+            display: none;
+        }
     </style>
 @endsection
 
