@@ -14,7 +14,7 @@
                 </div>
                 <div class="row">
                     @foreach ($razones_sociales as $razon_social)
-                        <div class="col-3">
+                        <div class="col-3 my-3">
                             <div class="inside_card" style="cursor: pointer" >
                                 <div class="card-header">
                                     <b>{{ $razon_social->nombre }}</b>
