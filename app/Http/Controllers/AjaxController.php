@@ -8,6 +8,9 @@ use App\Models\Empresa;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\User;
 use App\Models\MissionMotiveEco;
+use App\Models\Mission;
+use App\Models\MissionMotive;
+use App\Models\Invoice;
 
 class AjaxController extends Controller
 {
@@ -141,6 +144,100 @@ class AjaxController extends Controller
         })
         // ->addColumn('action', function ($dato) {
         //     //
+        // })
+        ->toJson();
+    }
+
+    public function get_tabla_missions( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            Mission::query()->wherehas('razon_social', function($q1) use ($razon_social_id) {
+                $q1->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
+        // })
+        ->toJson();
+    }
+
+    public function get_tabla_motives( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            MissionMotive::query()->wherehas('mission', function($q1) use ($razon_social_id) {
+                $q1->wherehas('razon_social', function($q2) use ($razon_social_id) {
+                    $q2->where('id', $razon_social_id);
+                });
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
+        // })
+        ->toJson();
+    }
+
+    public function get_tabla_ecos( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            MissionMotiveEco::query()->wherehas('razon_social', function($q1) use ($razon_social_id) {
+                $q1->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
+        // })
+        ->toJson();
+    }
+
+    public function get_tabla_invoices( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            Invoice::query()->wherehas('razon_social', function($q1) use ($razon_social_id) {
+                $q1->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
         // })
         ->toJson();
     }

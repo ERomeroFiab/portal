@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class MissionMotiveEco extends Model
 {
     use HasFactory;
+    
+    protected $casts = [
+        'DATE_PREVISIONNELLE' => 'date:d-m-Y',
+    ];
 
     public function mission_motive()
     {

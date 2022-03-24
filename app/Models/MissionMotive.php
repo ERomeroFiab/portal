@@ -9,6 +9,10 @@ class MissionMotive extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'DATE_LIMITE' => 'date:d-m-Y',
+    ];
+
     public function mission()
     {
         return $this->belongsTo('App\Models\Mission', 'mission_id'); 

@@ -71,6 +71,9 @@
                                                         @if ( $razon_social->tipo_de_cuenta )
                                                             <p>Cuenta: <b>{{ $razon_social->tipo_de_cuenta }}</b></p>
                                                         @endif
+
+                                                            <p>Misiones: <b>{{ $razon_social->missions->count() ?? "-" }}</b></p>
+
                                                         <a href="{{ route('admin.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">
                                                             Ver
                                                         </a>
