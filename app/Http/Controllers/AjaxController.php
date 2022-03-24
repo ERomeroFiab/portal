@@ -11,6 +11,7 @@ use App\Models\MissionMotiveEco;
 use App\Models\Mission;
 use App\Models\MissionMotive;
 use App\Models\Invoice;
+use App\Models\RazonSocial;
 
 class AjaxController extends Controller
 {
@@ -28,12 +29,6 @@ class AjaxController extends Controller
                                     $query->where('id', $request->get('search_by_empresa'));
                                 }
 
-                            })
-                            ->addColumn('email', function ($dato) {
-                                if ( $dato->representante ) {
-                                    return $dato->representante->email;
-                                }
-                                return "-";
                             })
                             ->editColumn('cliente', function ($dato) {
                                 if ( $dato->representante ) {
@@ -239,6 +234,44 @@ class AjaxController extends Controller
         // ->addColumn('razon_social', function ($dato) {
         //     return $dato->razon_social->nombre;
         // })
+        ->toJson();
+    }
+
+    public function get_tabla_razones_sociales( Request $request )
+    {
+        $relations = [
+            'missions',
+            'invoices',
+        ];
+
+        return DataTables::eloquent( 
+
+            RazonSocial::query()->withCount( $relations )
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        ->addColumn('empresa', function ($dato) {
+            return $dato->empresa->nombre;
+        })
+        ->orderColumn('empresa', function ($query, $order) {
+            $query->orderBy( 
+                Empresa::select('nombre')->whereColumn('empresas.id', 'empresa_id'), 
+                $order 
+            );
+        })
+        ->addColumn('action', function ($dato) {
+            $data['id'] = $dato->id;
+            $data['path_to_show']    = route('admin.razones-sociales.show', ['id' => $dato->id]);
+            $data['path_to_edit']    = route('admin.razones-sociales.edit', ['id' => $dato->id]);
+            $data['path_to_destroy'] = route('admin.razones-sociales.destroy', ['id' => $dato->id]);
+
+            return $data;
+        })
         ->toJson();
     }
 }

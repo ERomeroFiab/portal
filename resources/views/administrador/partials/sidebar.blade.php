@@ -55,6 +55,13 @@
                     <p class="sidebar-normal">Crear empresa</p>
                 </a>
             </li>
+
+            <li class="{{ request()->is('admin/razones-sociales/index') ? 'active' : '' }}">
+                <a href="{{ route('admin.razones-sociales.index') }}">
+                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <p class="sidebar-normal">Razones Sociales</p>
+                </a>
+            </li>
             
             <li class="{{ request()->is('admin/usuarios/index') ? 'active' : '' }}">
                 <a href="{{ route('admin.usuarios.index') }}">
