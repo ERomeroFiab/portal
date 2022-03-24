@@ -166,6 +166,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ajax/get_tabla_motives', [App\Http\Controllers\AjaxController::class, 'get_tabla_motives'])->name('ajax.get_tabla_motives');
     Route::get('/ajax/get_tabla_ecos', [App\Http\Controllers\AjaxController::class, 'get_tabla_ecos'])->name('ajax.get_tabla_ecos');
     Route::get('/ajax/get_tabla_invoices', [App\Http\Controllers\AjaxController::class, 'get_tabla_invoices'])->name('ajax.get_tabla_invoices');
+    Route::get('/ajax/get_tabla_razones_sociales', [App\Http\Controllers\AjaxController::class, 'get_tabla_razones_sociales'])->name('ajax.get_tabla_razones_sociales');
 
     // Api's hacia silvertool database
     Route::get('/silvertool/update_database_first_time', [App\Http\Controllers\SilverToolController::class, 'update_database_first_time'])->name('silver.update_database_first_time');

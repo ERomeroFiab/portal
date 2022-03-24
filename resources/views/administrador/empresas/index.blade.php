@@ -25,8 +25,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Usuario</th>
-                                        <th>Email</th>
+                                        <th>Usuarios</th>
                                         <th>Razones Sociales</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
@@ -72,8 +71,7 @@
                             return `<span title="empresa_id: ${data.id}">${data.nombre}</span>`;
                         }
                     },
-                    { data: "cliente"},
-                    { data: "email"},
+                    { data: "representante_count"},
                     { data: "razones_sociales_count"},
                     { 
                         data: 'action', 
