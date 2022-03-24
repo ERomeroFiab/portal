@@ -31,7 +31,7 @@
                                 <div class="form-group">
                                     <label for="name">Nombre</label>
                                     <input name="name" type="text" class="form-control" id="name"
-                                        aria-describedby="name_error" placeholder="Ejemplo: Juan">
+                                        aria-describedby="name_error" placeholder="Ejemplo: Juan" autocomplete="off" value="{{ old('name') }}">
                                     @if ($errors->has('name'))
                                         <small id="name_error"
                                             class="form-text text-muted text-danger">{{ $errors->first('name') }}</small>
@@ -41,7 +41,7 @@
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input name="email" type="email" class="form-control" id="email"
-                                        aria-describedby="email_error" placeholder="Ejemplo: juan@gmail.com">
+                                        aria-describedby="email_error" placeholder="Ejemplo: juan@gmail.com" autocomplete="off" value="{{ old('email') }}">
                                     @if ($errors->has('email'))
                                         <small id="email_error"
                                             class="form-text text-muted text-danger">{{ $errors->first('email') }}</small>
@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label for="rut">Rut</label>
                                     <input name="rut" type="text" class="form-control" id="rut"
-                                        aria-describedby="rut_error" placeholder="Ejemplo: 12345678-9">
+                                        aria-describedby="rut_error" placeholder="Ejemplo: 12345678-9" autocomplete="off" value="{{ old('rut') }}">
                                     @if ($errors->has('rut'))
                                         <small id="rut_error" class="form-text text-muted text-danger">{{ $errors->first('rut') }}</small>
                                     @endif
@@ -61,7 +61,7 @@
                                     <label>Rol</label>
                                     <select name="rol" class="form-control">
                                         <option value="" selected disabled>-- Seleccione --</option>
-                                        <option value="Cliente">Cliente</option>
+                                        <option {{ old('rol') === "Cliente" ? "selected" : null  }} value="Cliente">Cliente</option>
                                         {{-- <option value="Gestor">Gestor</option> --}}
                                     </select>
                                     @if ($errors->has('rol'))

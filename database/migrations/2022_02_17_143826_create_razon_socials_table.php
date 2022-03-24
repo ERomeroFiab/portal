@@ -22,6 +22,7 @@ class CreateRazonSocialsTable extends Migration
             $table->string('numero_de_cuenta_bancaria')->nullable();
             $table->string('banco')->nullable();
             $table->string('tipo_de_cuenta')->nullable();
+            $table->string('principal')->nullable()->comment('true or null');
             $table->string('status')->nullable();
             
             $table->timestamps();

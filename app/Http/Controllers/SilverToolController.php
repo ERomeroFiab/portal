@@ -185,11 +185,12 @@ class SilverToolController extends Controller
                 $new_razon_social->tipo_de_cuenta            = $value['tipo_de_cuenta'];
             }
         }
-        $new_razon_social->save();
-
+        
         if ( $razon_social['HEAD_OFFICE'] === "X" ) {
+            $new_razon_social->principal = "true";
             $this->create_new_user( $new_razon_social );
         }
+        $new_razon_social->save();
 
         return $new_razon_social;
     }

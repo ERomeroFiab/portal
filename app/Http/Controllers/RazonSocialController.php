@@ -22,7 +22,13 @@ class RazonSocialController extends Controller
 
     public function admin_show($id)
     {
-        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        $relations = [
+            'invoices',
+            'missions',
+            'missions.mission_motives',
+            'missions.mission_motives.mission_motive_ecos',
+        ];
+        $razon_social = RazonSocial::where('id', $id)->with( $relations )->first();
         
         return view('administrador.razones-sociales.show', [
             "razon_social" => $razon_social,

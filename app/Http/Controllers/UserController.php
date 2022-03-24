@@ -37,9 +37,14 @@ class UserController extends Controller
     public function admin_store(Request $request)
     {
         Validator::make($request->all(), [
-            'name' => 'required|string',
-            'rut'  => 'required|string|unique:users',
+            'name'        => 'required|string',
+            'rut'         => 'required|string|unique:users',
+            'rol'         => 'required|string',
         ])->validate();
+
+        if ( $request->rol === "Cliente" && !$request->empresa_id ) {
+            return redirect()->back()->with('error','Los clientes deben tener una empresa asignada');
+        }
 
         $user = new User();
         $user->name       = $request->name;
@@ -47,7 +52,7 @@ class UserController extends Controller
         $user->rut        = $request->rut;
         $user->rol        = $request->rol;
         $user->empresa_id = $request->empresa_id;
-        $user->password   = bcrypt('12345678');
+        $user->password   = bcrypt($request->rut);
         $user->save();
 
         return redirect()->route('admin.usuarios.show', ['id' => $user->id])->with('success', "El usuario {$user->name} fue agregado exitosamente");

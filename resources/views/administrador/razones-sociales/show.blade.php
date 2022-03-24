@@ -36,16 +36,42 @@
                         </div>
 
                         
+                    </div>
 
-                        
-                    </div>
-                    <div class="row">
+                    <div class="row mt-5">
+
                         <div class="col-12">
-                            <a href="{{ route('silver.get_razon_social_by_rut', ['razon_social_id' => $razon_social->id]) }}" class="btn btn-sm btn-info">
-                                Mostrar más datos desde silvertool
-                            </a>
+                            <div class="card">
+                                <div class="card-body">
+                                    <pre>
+                                        @dd($razon_social)
+                                    </pre>
+                                </div>
+                            </div>
                         </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table>
+                                        tabla missions_motives
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <table>
+                                        tabla missions_motive_eco
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
+
                 </div>
             </div> <!-- End card -->
         </div>

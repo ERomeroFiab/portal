@@ -63,7 +63,7 @@ class EmpresaController extends Controller
 
     public function admin_show($id)
     {
-        $empresa = Empresa::where('id', $id)->with('razones_sociales')->first();
+        $empresa = Empresa::where('id', $id)->first();
         
         return view('administrador.empresas.show', [
             "empresa" => $empresa,
