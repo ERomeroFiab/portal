@@ -123,18 +123,15 @@ class AjaxController extends Controller
             return $dato->razon_social->rut;
         })
         ->addColumn('motivo', function ($dato) {
-            return $dato->mission_motive->MOTIF;
-        })
-        ->addColumn('gestion', function ($dato) {
-            return $dato->mission->CURRENT_STEP;
-        })
-        ->addColumn('fecha_de_gestion', function ($dato) {
-            return $dato->mission_motive->SOUS_MOTIF_1;
+            return $dato->mission->PRODUIT ?? "-";
         })
         ->addColumn('banco', function ($dato) {
-            return $dato->razon_social->banco;
+            return $dato->razon_social->banco ?? "-";
         })
-        ->addColumn('invoice', function ($dato) {
+        ->addColumn('honorarios', function ($dato) {
+            return "-";
+        })
+        ->addColumn('monto_facturado', function ($dato) {
             return "-";
         })
         // ->addColumn('action', function ($dato) {
