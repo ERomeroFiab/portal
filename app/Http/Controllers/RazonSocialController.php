@@ -27,6 +27,7 @@ class RazonSocialController extends Controller
             'missions',
             'missions.mission_motives',
             'missions.mission_motives.mission_motive_ecos',
+            
         ];
         $razon_social = RazonSocial::where('id', $id)->with( $relations )->first();
         
@@ -64,7 +65,7 @@ class RazonSocialController extends Controller
 
     public function cliente_show($id)
     {
-        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        $razon_social = RazonSocial::where('id', $id)->first();
         
         return view('cliente.razones-sociales.show', [
             "razon_social" => $razon_social,
@@ -74,7 +75,7 @@ class RazonSocialController extends Controller
     // CONSULTOR
     public function consultor_show($id)
     {
-        $razon_social = RazonSocial::where('id', $id)->with('gestiones')->first();
+        $razon_social = RazonSocial::where('id', $id);
         
         return view('consultor.razones-sociales.show', [
             "razon_social" => $razon_social,
