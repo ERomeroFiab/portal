@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+<link rel="stylesheet" href="{{ URL::asset('css/card.css') }}" />
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -12,10 +13,9 @@
                     </div>
                 </div>
                 <div class="row">
-
                     @foreach ($razones_sociales as $razon_social)
                         <div class="col-3">
-                            <div class="card">
+                            <div class="inside_card" style="cursor: pointer" >
                                 <div class="card-header">
                                     <b>{{ $razon_social->nombre }}</b>
                                 </div>
