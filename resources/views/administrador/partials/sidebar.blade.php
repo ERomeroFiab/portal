@@ -44,14 +44,14 @@
             
             <li class="{{ request()->is('admin/empresas/index') ? 'active' : '' }}">
                 <a href="{{ route('admin.empresas.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa fa-building business_badge"></i></span>
                     <p class="sidebar-normal">Empresas</p>
                 </a>
             </li>
             
             <li class="{{ request()->is('admin/empresas/create') ? 'active' : '' }}">
                 <a href="{{ route('admin.empresas.create') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa fa-industry business_badge"></i></span>
                     <p class="sidebar-normal">Crear empresa</p>
                 </a>
             </li>
@@ -65,21 +65,21 @@
             
             <li class="{{ request()->is('admin/usuarios/index') ? 'active' : '' }}">
                 <a href="{{ route('admin.usuarios.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa fa-fw fa-user business_badge"></i></span>
                     <p class="sidebar-normal">Usuarios</p>
                 </a>
             </li>
             
             <li class="{{ request()->is('admin/usuarios/create') ? 'active' : '' }}">
                 <a href="{{ route('admin.usuarios.create') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa fa-fw fa-users business_badge"></i></span>
                     <p class="sidebar-normal">Crear usuario</p>
                 </a>
             </li>
             
             <li class="{{ request()->is('admin/herramientas/*') ? 'active' : '' }}">
                 <a href="{{ route('admin.herramientas.index') }}">
-                    <span class="sidebar-mini-icon"><i class="now-ui-icons business_badge"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fa fa-fw fa-wrench business_badge"></i></span>
                     <p class="sidebar-normal">Herramientas</p>
                 </a>
             </li>
