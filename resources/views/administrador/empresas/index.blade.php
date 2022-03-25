@@ -25,8 +25,8 @@
                             <input id="input__Nombre" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
-                            <label>Representante:</label>
-                            <input id="input__representante" type="text" class="form-control">
+                            <label>Usuarios:</label>
+                            <input id="input__cliente" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Razones Sociales:</label>
@@ -43,7 +43,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Representante</th>
+                                        <th>Usuaro</th>
                                         <th>Razones Sociales</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
@@ -80,8 +80,7 @@
                     // },
                     data: function ( d ) {
                         d.SEARCH_BY_NOMBRE                      = $('#input__Nombre').val();
-                        d.SEARCH_BY_REPRESENTANTE               = $('input__representante').val();
-                        d.SEARCH_BY_RAZONES_SOCIALES_COUNT      = $('#input__razones_sociales_count').val();
+                        d.SEARCH_BY_CLIENTE                      = $('#input__cliente').val();
                     }
                 },
                 columns: [
@@ -91,7 +90,7 @@
                             return `<span title="empresa_id: ${data.id}">${data.nombre}</span>`;
                         }
                     },
-                    { data: "representante"},
+                    { data: "cliente"},
                     { data: "razones_sociales_count"},
                     { 
                         data: 'action', 
@@ -203,7 +202,7 @@
 
         // Pintar en verde los inputs que contienen algo
         $( "#input__Nombre" ).change(function() { agregar_quitar_bg_success('input__Nombre'); });
-        $( "#input__representante" ).change(function() { agregar_quitar_bg_success('input__representante'); });
+        $( "#input__cliente" ).change(function() { agregar_quitar_bg_success('input__cliente'); });
         $( "#input__razones_sociales_count" ).change(function() { agregar_quitar_bg_success('input__razones_sociales_count'); });
 
         function agregar_quitar_bg_success(id){

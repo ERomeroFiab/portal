@@ -33,15 +33,15 @@ class AjaxController extends Controller
                                 if ($request->get("SEARCH_BY_NOMBRE") !== null){
                                     $query->where("NOMBRE","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
                                 }
-                                if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
-                                    $query->where("REPRESENTANTE","like","%" . $request->get('SEARCH_BY_REPRESENTANTE') . "%");
+                                if ($request->get("SEARCH_BY_CLIENTE") !== null){
+                                    $query->whereHas("cliente","like","%" . $request->get('SEARCH_BY_CLIENTE') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
                                     $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
                                 }
                             })
                             
-                            ->editColumn('cliente', function ($dato) {
+                            ->addColumn('cliente', function ($dato) {
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
                                 }
@@ -85,7 +85,7 @@ class AjaxController extends Controller
                                     $query->where("EMPRESA","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
                                 }
 
                             })
