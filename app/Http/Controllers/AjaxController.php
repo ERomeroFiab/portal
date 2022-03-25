@@ -93,19 +93,13 @@ class AjaxController extends Controller
         $empresa_id = $request->get('search_by_empresa');
         
         return DataTables::eloquent( 
-            // MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
-            //     $q1->wherehas('mission', function($q2) use ($empresa_id) {
-            //         $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
-            //             $q3->wherehas('empresa', function($q4) use ($empresa_id) {
-            //                 $q4->where('id', $empresa_id);
-            //             });
-            //         });
-            //     });
-            // })
-
-            InvoiceLigne::query()->wherehas('razon_social', function($q1) use ($empresa_id) {
-                $q1->wherehas('empresa', function($q2) use ($empresa_id) {
-                    $q2->where('id', $empresa_id);
+            MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
+                $q1->wherehas('mission', function($q2) use ($empresa_id) {
+                    $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
+                        $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+                            $q4->where('id', $empresa_id);
+                        });
+                    });
                 });
             })
 
@@ -130,23 +124,23 @@ class AjaxController extends Controller
             return $dato->razon_social->rut;
         })
         ->addColumn('motivo', function ($dato) {
-            return $dato->PRODUCT ?? "-";
+            return $dato->mission_motive->mission->PRODUIT ?? "-";
         })
         ->addColumn('banco', function ($dato) {
             return $dato->razon_social->banco ?? "-";
         })
-        ->addColumn('monto_facturado', function ($dato) {
-            return $dato->invoice->TOTAL_AMOUNT_INVOICED ?? "-";
+        ->addColumn('honorarios_fiabilis', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
+            return "-";
         })
-        ->addColumn('DATE_PREVISIONNELLE', function ($dato) {
-            return $dato->mission_motive_eco->DATE_PREVISIONNELLE ?? "-";
+        ->addColumn('montos_facturados', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
+            return "-";
         })
-        ->addColumn('ECO_VALIDEE', function ($dato) {
-            return $dato->mission_motive_eco->ECO_VALIDEE ?? "-";
-        })
-        // ->addColumn('action', function ($dato) {
-        //     //
-        // })
         ->toJson();
     }
 
