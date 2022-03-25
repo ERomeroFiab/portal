@@ -20,6 +20,36 @@
                </div>
                <div class="card-body">
                   <div class="row">
+                     <div class="col-3 form-group">
+                        <label>Nombre:</label>
+                        <input id="input__name" type="text" class="form-control">
+                     </div>
+                     <div class="col-3 form-group">
+                        <label>Email:</label>
+                        <input id="input__email" type="text" class="form-control">
+                     </div>
+                     <div class="col-3 form-group">
+                        <label>Rut:</label>
+                        <input id="input__rut" type="text" class="form-control">
+                     </div>
+                     <div class="col-3 form-group">
+                        <label>Rol:</label>
+                        <input id="input__rol" type="text" class="form-control">
+                     </div>
+                     <div class="col-3 form-group">
+                        <label>Empresa:</label>
+                        <input id="input__empresa" type="text" class="form-control">
+                     </div>
+                     <div class="col-3 form-group">
+                        <label>Razones Sociales:</label>
+                        <input id="input__razones_sociales_count" type="text" class="form-control">
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class="col-12">
+                        <button class="btn btn-sm btn-success float-right" type="button" onclick="buscar()">Buscar</button>
+                     </div>
+                  </div>
                      <div class="col-12">
                         <table id="tabla_usuarios" class="table-hover" style="width:100%">
                            <thead>
@@ -70,28 +100,33 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                   data: function ( d ) {
-                        // d.search_by_xxxx = $('#input__xxxx').val();
-                    }
-                },
-                columns: [
-                    { data: "name"},
-                    { data: "email"},
-                    { data: "rut"},
-                    { data: "rol"},
-                    { data: "empresa"},
-                    { data: "razones_sociales_count"},
-                    { 
+                     d.SEARCH_BY_NAME                = $('#input__name').val();
+                     d.SEARCH_BY_EMAIL               = $('#input__email').val();
+                     d.SEARCH_BY_RUT                 = $('#input__rut').val();
+                     d.SEARCH_BY_ROL                 = $('#input__rol').val();
+                     d.SEARCH_BY_EMPRESA             = $('#input__empresa').val();
+                     d.SEARCH_BY_RAZONES_SOCIALES_COUNT              = $('#input__razones_sociales_count').val();
+                  }
+               },
+               columns: [
+                  { data: "name"},
+                  { data: "email"},
+                  { data: "rut"},
+                  { data: "rol"},
+                  { data: "empresa"},
+                  { data: "razones_sociales_count"},
+                  { 
                         data: 'action', 
                         render: function (data, type, row){
-                            let html = "";
-                            if ( data.path_to_show ) {
-                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                            }
-                            if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
-                            }
-                            if ( data.path_to_destroy ) {
-                                html += `
+                           let html = "";
+                           if ( data.path_to_show ) {
+                              html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
+                           }
+                           if ( data.path_to_edit ) {
+                              html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
+                           }
+                           if ( data.path_to_destroy ) {
+                              html += `
                                     <a onclick="sweetAlert_to_remove_user('boton_submit_to_remove_user_${data.id}')" class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></a>
                                     <form action="${data.path_to_destroy}" method="POST" class="d-none">
                                        <input type="hidden" name="_token" value="${CSRF}">
@@ -185,11 +220,16 @@
       }
 
       function buscar(){
-            TABLA_EMPRESAS.draw();
+         TABLA_USUARIOS.draw();
       }
 
         // Pintar en verde los inputs que contienen algo
-      $( "#input__ID_IDENTIFICATION" ).change(function() { agregar_quitar_bg_success('input__ID_IDENTIFICATION'); });
+      $( "#input__name" ).change(function() { agregar_quitar_bg_success('input__name'); });
+      $( "#input__email" ).change(function() { agregar_quitar_bg_success('input__email'); });
+      $( "#input__rut" ).change(function() { agregar_quitar_bg_success('input__rut'); });
+      $( "#input__rol" ).change(function() { agregar_quitar_bg_success('input__rol'); });
+      $( "#input__empresa" ).change(function() { agregar_quitar_bg_success('input__empresa'); });
+      $( "#input__razones_sociales_count" ).change(function() { agregar_quitar_bg_success('input__razones_sociales_count'); });
 
       function agregar_quitar_bg_success(id){
             if ( $(`#${id}`).val() !== "" ) {

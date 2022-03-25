@@ -29,7 +29,18 @@ class AjaxController extends Controller
                                     $query->where('id', $request->get('search_by_empresa'));
                                 }
 
+                                //filtros Tabla
+                                if ($request->get("SEARCH_BY_NOMBRE") !== null){
+                                    $query->where("NOMBRE","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
+                                    $query->where("REPRESENTANTE","like","%" . $request->get('SEARCH_BY_REPRESENTANTE') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
+                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                }
                             })
+                            
                             ->editColumn('cliente', function ($dato) {
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
@@ -57,9 +68,25 @@ class AjaxController extends Controller
         return DataTables::eloquent( User::query() )
                             ->filter(function ($query) use ($request) {
                                 
-                                // if ( $request->get('SEARCH_BY_VILLE') !== null ) {
-                                //     $query->where('VILLE', $request->get('SEARCH_BY_VILLE'));
-                                // }
+                                //filtros Tabla
+                                if ($request->get("SEARCH_BY_NAME") !== null){
+                                    $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_EMAIL") !== null){
+                                    $query->where("EMAIL","like","%" . $request->get('SEARCH_BY_EMAIL') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_RUT") !== null){
+                                    $query->where("RUT","like","%" . $request->get('SEARCH_BY_RUT') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_ROL") !== null){
+                                    $query->where("ROL","like","%" . $request->get('SEARCH_BY_ROL') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_EMPRESA") !== null){
+                                    $query->where("EMPRESA","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
+                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                }
 
                             })
                             ->addColumn('action', function ($dato) {

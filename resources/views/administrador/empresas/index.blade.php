@@ -20,12 +20,30 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+                        <div class="col-3 form-group">
+                            <label>Nombre:</label>
+                            <input id="input__Nombre" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Representante:</label>
+                            <input id="input__representante" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Razones Sociales:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-sm btn-success float-right" type="button" onclick="buscar()">Buscar</button>
+                        </div>
+                    </div>
                         <div class="col-12">
                             <table id="tabla_empresas" class="table-hover" style="width:100%;">
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th>Usuarios</th>
+                                        <th>Representante</th>
                                         <th>Razones Sociales</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
@@ -61,7 +79,9 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function ( d ) {
-                        // d.search_by_xxxx = $('#input__xxxx').val();
+                        d.SEARCH_BY_NOMBRE                      = $('#input__Nombre').val();
+                        d.SEARCH_BY_REPRESENTANTE               = $('input__representante').val();
+                        d.SEARCH_BY_RAZONES_SOCIALES_COUNT      = $('#input__razones_sociales_count').val();
                     }
                 },
                 columns: [
@@ -71,7 +91,7 @@
                             return `<span title="empresa_id: ${data.id}">${data.nombre}</span>`;
                         }
                     },
-                    { data: "representante_count"},
+                    { data: "representante"},
                     { data: "razones_sociales_count"},
                     { 
                         data: 'action', 
@@ -182,7 +202,9 @@
         }
 
         // Pintar en verde los inputs que contienen algo
-        $( "#input__ID_IDENTIFICATION" ).change(function() { agregar_quitar_bg_success('input__ID_IDENTIFICATION'); });
+        $( "#input__Nombre" ).change(function() { agregar_quitar_bg_success('input__Nombre'); });
+        $( "#input__representante" ).change(function() { agregar_quitar_bg_success('input__representante'); });
+        $( "#input__razones_sociales_count" ).change(function() { agregar_quitar_bg_success('input__razones_sociales_count'); });
 
         function agregar_quitar_bg_success(id){
             if ( $(`#${id}`).val() !== "" ) {
