@@ -12,6 +12,7 @@ use App\Models\Mission;
 use App\Models\MissionMotive;
 use App\Models\Invoice;
 use App\Models\RazonSocial;
+use App\Models\InvoiceLigne;
 
 class AjaxController extends Controller
 {
@@ -150,23 +151,29 @@ class AjaxController extends Controller
             return $dato->razon_social->rut;
         })
         ->addColumn('motivo', function ($dato) {
-            return $dato->mission_motive->MOTIF;
-        })
-        ->addColumn('gestion', function ($dato) {
-            return $dato->mission->CURRENT_STEP;
-        })
-        ->addColumn('fecha_de_gestion', function ($dato) {
-            return $dato->mission_motive->SOUS_MOTIF_1;
+            return $dato->mission_motive->mission->PRODUIT ?? "-";
         })
         ->addColumn('banco', function ($dato) {
-            return $dato->razon_social->banco;
+            return $dato->razon_social->banco ?? "-";
         })
-        ->addColumn('invoice', function ($dato) {
+        ->addColumn('honorarios_fiabilis', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
             return "-";
         })
-        // ->addColumn('action', function ($dato) {
-        //     //
-        // })
+        ->addColumn('montos_facturados', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
+            return "-";
+        })
+        ->addColumn('monto_a_facturar', function ($dato) {
+            if ( !$dato->invoice_ligne ) {
+                return ($dato->ECO_PRESENTEE * 0.3);
+            }
+            return "-";
+        })
         ->toJson();
     }
 
@@ -299,6 +306,29 @@ class AjaxController extends Controller
 
             return $data;
         })
+        ->toJson();
+    }
+
+    public function get_tabla_lignes( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            InvoiceLigne::query()->wherehas('razon_social', function($q1) use ($razon_social_id) {
+                $q1->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
+        // })
         ->toJson();
     }
 }

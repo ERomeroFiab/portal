@@ -13,6 +13,7 @@ use App\Models\Mission;
 use App\Models\MissionMotive;
 use App\Models\MissionMotiveEco;
 use App\Models\Invoice;
+use App\Models\InvoiceLigne;
 
 class SilverToolController extends Controller
 {
@@ -165,7 +166,7 @@ class SilverToolController extends Controller
         foreach ($razones_sociales as $razon_social) {
             $new_razon_social = $this->register_new_razon_social( $empresa, $razon_social );
             $this->register_new_missions( $new_razon_social, $razon_social );
-            $this->register_new_invoices( $new_razon_social, $razon_social );
+            // $this->register_new_invoices( $new_razon_social, $razon_social );
         }
     }
 
@@ -201,19 +202,35 @@ class SilverToolController extends Controller
             if ( $mission ) {
                 $new_mission = new Mission();
                 $new_mission->razon_social_id    = $new_razon_social->id;
-                $new_mission->COORDINATOR        = $mission['COORDINATOR'];
-                $new_mission->CURRENT_STEP       = $mission['CURRENT_STEP'];
-                $new_mission->DATE_DEBUT         = $mission['DATE_DEBUT'];
-                $new_mission->DATE_DEBUT_ANALYSE = $mission['DATE_DEBUT_ANALYSE'];
-                $new_mission->DATE_FIN_ANALYSE   = $mission['DATE_FIN_ANALYSE'];
-                $new_mission->DATE_FIN_MISSION   = $mission['DATE_FIN_MISSION'];
-                $new_mission->DEADLINE           = $mission['DEADLINE'];
-                $new_mission->NO_CONTRAT         = $mission['NO_CONTRAT'];
-                $new_mission->NO_MISSION         = $mission['NO_MISSION'];
-                $new_mission->POURCENTAGE        = $mission['POURCENTAGE'];
-                $new_mission->PRIORITY           = $mission['PRIORITY'];
-                $new_mission->PRODUIT            = $mission['PRODUIT'];
-                $new_mission->PROJECT_MANAGER    = $mission['PROJECT_MANAGER'];
+                $new_mission->COORDINATOR                = $mission['COORDINATOR'];
+                $new_mission->CURRENT_STEP               = $mission['CURRENT_STEP'];
+                $new_mission->DATE_DEBUT                 = $mission['DATE_DEBUT'];
+                $new_mission->DATE_DEBUT_ANALYSE         = $mission['DATE_DEBUT_ANALYSE'];
+                $new_mission->DATE_FIN_ANALYSE           = $mission['DATE_FIN_ANALYSE'];
+                $new_mission->DATE_FIN_MISSION           = $mission['DATE_FIN_MISSION'];
+                $new_mission->DEADLINE                   = $mission['DEADLINE'];
+                $new_mission->FAMILLE                    = $mission['FAMILLE'];
+                $new_mission->ID_MISSION                 = $mission['ID_MISSION'];
+                $new_mission->NO_CONTRAT                 = $mission['NO_CONTRAT'];
+                $new_mission->NO_MISSION                 = $mission['NO_MISSION'];
+                $new_mission->PID_CONTRAT                = $mission['PID_CONTRAT'];
+                $new_mission->PID_CONTRAT_DETAIL_PRODUIT = $mission['PID_CONTRAT_DETAIL_PRODUIT'];
+                $new_mission->PID_IDENTIFICATION         = $mission['PID_IDENTIFICATION'];
+                $new_mission->POURCENTAGE                = $mission['POURCENTAGE'];
+                $new_mission->PRIORITY                   = $mission['PRIORITY'];
+                $new_mission->PRODUIT                    = $mission['PRODUIT'];
+                $new_mission->PROJECT_MANAGER            = $mission['PROJECT_MANAGER'];
+                $new_mission->STEPS_MANAGED_FROM_MOTIVE  = $mission['STEPS_MANAGED_FROM_MOTIVE'];
+                $new_mission->SYS_DATE_CREATION          = $mission['SYS_DATE_CREATION'];
+                $new_mission->SYS_DATE_MODIFICATION      = $mission['SYS_DATE_MODIFICATION'];
+                $new_mission->SYS_HEURE_CREATION         = $mission['SYS_HEURE_CREATION'];
+                $new_mission->SYS_HEURE_MODIFICATION     = $mission['SYS_HEURE_MODIFICATION'];
+                $new_mission->SYS_USER_CREATION          = $mission['SYS_USER_CREATION'];
+                $new_mission->SYS_USER_MODIFICATION      = $mission['SYS_USER_MODIFICATION'];
+                $new_mission->VP_FEES                    = $mission['VP_FEES'];
+                $new_mission->VP_N_CONTRAT_CADRE         = $mission['VP_N_CONTRAT_CADRE'];
+                $new_mission->VP_N_CONTRAT_PARTIEL       = $mission['VP_N_CONTRAT_PARTIEL'];
+                $new_mission->VP_PRODUCT                 = $mission['VP_PRODUCT'];
                 $new_mission->save();
                 foreach ($mission['mission_motives'] as $mission_motive) {
                     if ( $mission_motive ) {
@@ -254,6 +271,78 @@ class SilverToolController extends Controller
                                 $new_eco->YEAR                      = $eco['YEAR'];
                                 $new_eco->CRITICITY                 = $eco['CRITICITY'];
                                 $new_eco->save();
+
+                                foreach ($eco['invoice_lignes'] as $ligne) {
+                                    if ( $ligne ) {
+                                        $invoice_existente = Invoice::where('ID_INVOICE', $ligne['PID_INVOICE'])->first();
+                                        if ( !$invoice_existente ) {
+                                            $new_invoice = new Invoice();
+                                            $new_invoice->razon_social_id        = $new_razon_social->id;
+                                            $new_invoice->CONTRACT_NBER          = $ligne['invoice']['CONTRACT_NBER'];
+                                            $new_invoice->DATE_EXPORT_SAGE       = $ligne['invoice']['DATE_EXPORT_SAGE'];
+                                            $new_invoice->DUE_DATE               = $ligne['invoice']['DUE_DATE'];
+                                            $new_invoice->ENTITY_NBER            = $ligne['invoice']['ENTITY_NBER'];
+                                            $new_invoice->FIABILIS_GROUP_ENTITY  = $ligne['invoice']['FIABILIS_GROUP_ENTITY'];
+                                            $new_invoice->ID_INVOICE             = $ligne['invoice']['ID_INVOICE'];
+                                            $new_invoice->INVOICE_DATE           = $ligne['invoice']['INVOICE_DATE'];
+                                            $new_invoice->INVOICE_NBER           = $ligne['invoice']['INVOICE_NBER'];
+                                            $new_invoice->NO_CONTRAT             = $ligne['invoice']['NO_CONTRAT'];
+                                            $new_invoice->PAYE                   = $ligne['invoice']['PAYE'];
+                                            $new_invoice->PAYMENT_DATE           = $ligne['invoice']['PAYMENT_DATE'];
+                                            $new_invoice->PID_CONTRAT            = $ligne['invoice']['PID_CONTRAT'];
+                                            $new_invoice->PID_IDENTIFICATION     = $ligne['invoice']['PID_IDENTIFICATION'];
+                                            $new_invoice->PID_INVOICE            = $ligne['invoice']['PID_INVOICE'];
+                                            $new_invoice->PO                     = $ligne['invoice']['PO'];
+                                            $new_invoice->PRODUCT                = $ligne['invoice']['PRODUCT'];
+                                            $new_invoice->SELECTION_EXPORT       = $ligne['invoice']['SELECTION_EXPORT'];
+                                            $new_invoice->STATUS                 = $ligne['invoice']['STATUS'];
+                                            $new_invoice->SYS_DATE_CREATION      = $ligne['invoice']['SYS_DATE_CREATION'];
+                                            $new_invoice->SYS_DATE_MODIFICATION  = $ligne['invoice']['SYS_DATE_MODIFICATION'];
+                                            $new_invoice->SYS_HEURE_CREATION     = $ligne['invoice']['SYS_HEURE_CREATION'];
+                                            $new_invoice->SYS_HEURE_MODIFICATION = $ligne['invoice']['SYS_HEURE_MODIFICATION'];
+                                            $new_invoice->SYS_USER_CREATION      = $ligne['invoice']['SYS_USER_CREATION'];
+                                            $new_invoice->SYS_USER_MODIFICATION  = $ligne['invoice']['SYS_USER_MODIFICATION'];
+                                            $new_invoice->TOTAL_AMOUNT_INVOICED  = $ligne['invoice']['TOTAL_AMOUNT_INVOICED'];
+                                            $new_invoice->TYPE                   = $ligne['invoice']['TYPE'];
+                                            $new_invoice->BALANCE_DUE            = $ligne['invoice']['BALANCE_DUE'];
+                                            $new_invoice->NOM_MODELE_WORD        = $ligne['invoice']['NOM_MODELE_WORD'];
+                                            $new_invoice->save();
+                                            $invoice_existente = $new_invoice;
+                                        }
+
+                                        $new_ligne = new InvoiceLigne();
+                                        $new_ligne->AMOUNT                  = $ligne['AMOUNT'];
+                                        $new_ligne->CN_CHOICE               = $ligne['CN_CHOICE'];
+                                        $new_ligne->CN_ESTIMATED_DATE       = $ligne['CN_ESTIMATED_DATE'];
+                                        $new_ligne->COMMENTAIRE             = $ligne['COMMENTAIRE'];
+                                        $new_ligne->DISPLAY_NEW_FEE         = $ligne['DISPLAY_NEW_FEE'];
+                                        $new_ligne->ECO_AMOUNT              = $ligne['ECO_AMOUNT'];
+                                        $new_ligne->FEES                    = $ligne['FEES'];
+                                        $new_ligne->FEE_INCLUDES_VAT        = $ligne['FEE_INCLUDES_VAT'];
+                                        $new_ligne->ID_INVOICE_LIGNE        = $ligne['ID_INVOICE_LIGNE'];
+                                        $new_ligne->MOTIVE                  = $ligne['MOTIVE'];
+                                        $new_ligne->NO_LIGNE                = $ligne['NO_LIGNE'];
+                                        $new_ligne->PID_INVOICE             = $ligne['PID_INVOICE'];
+                                        $new_ligne->PID_INVOICE_LIGNE       = $ligne['PID_INVOICE_LIGNE'];
+                                        $new_ligne->PID_MISSION_MOTIVE_ECO  = $ligne['PID_MISSION_MOTIVE_ECO'];
+                                        $new_ligne->PRODUCT                 = $ligne['PRODUCT'];
+                                        $new_ligne->SUB_MOTIVE1             = $ligne['SUB_MOTIVE1'];
+                                        $new_ligne->SUB_MOTIVE2             = $ligne['SUB_MOTIVE2'];
+                                        $new_ligne->SYS_DATE_CREATION       = $ligne['SYS_DATE_CREATION'];
+                                        $new_ligne->SYS_DATE_MODIFICATION   = $ligne['SYS_DATE_MODIFICATION'];
+                                        $new_ligne->SYS_HEURE_CREATION      = $ligne['SYS_HEURE_CREATION'];
+                                        $new_ligne->SYS_HEURE_MODIFICATION  = $ligne['SYS_HEURE_MODIFICATION'];
+                                        $new_ligne->SYS_USER_CREATION       = $ligne['SYS_USER_CREATION'];
+                                        $new_ligne->SYS_USER_MODIFICATION   = $ligne['SYS_USER_MODIFICATION'];
+                                        $new_ligne->TYPE                    = $ligne['TYPE'];
+                                        $new_ligne->YEAR                    = $ligne['YEAR'];
+                                        $new_ligne->invoice_id              = $invoice_existente->id;
+                                        $new_ligne->mission_motive_eco_id   = $new_eco->id;
+                                        $new_ligne->razon_social_id         = $new_razon_social->id;
+                                        $new_ligne->mission_motive_id       = $new_motive->id;
+                                        $new_ligne->save();
+                                    }
+                                }
 
                             }
                         }
