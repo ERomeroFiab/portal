@@ -32,21 +32,30 @@ class AjaxController extends Controller
 
                                 //filtros Tabla
                                 if ($request->get("SEARCH_BY_NOMBRE") !== null){
-                                    $query->where("NOMBRE","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
+                                    $query->where("nombre","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
-                                    $query->where("REPRESENTANTE","like","%" . $request->get('SEARCH_BY_REPRESENTANTE') . "%");
+                                    $palabra = "%".$request->get("SEARCH_BY_REPRESENTANTE")."%";
+                                    $query->whereHas("representante", function($q) use ($palabra){
+                                        $q->where('name', 'like', $palabra);
+                                    });
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                    $query->has("razones_sociales", $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT'));
                                 }
                             })
                             
-                            ->editColumn('cliente', function ($dato) {
+                            ->addColumn('representante', function ($dato) {
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
                                 }
                                 return "-";
+                            })
+                            ->orderColumn('representante', function ($query, $order) {
+                                $query->orderBy(
+                                    User::select('name')->whereColumn('empresas.id', 'empresa_id'),
+                                    $order
+                                );
                             })
                             ->editColumn('nombre', function ($dato) {
                                 $data['nombre'] = $dato->nombre;
@@ -66,27 +75,34 @@ class AjaxController extends Controller
 
     public function get_tabla_usuarios( Request $request )
     {
+
         return DataTables::eloquent( User::query() )
                             ->filter(function ($query) use ($request) {
                                 
                                 //filtros Tabla
                                 if ($request->get("SEARCH_BY_NAME") !== null){
-                                    $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
+                                    $query->where("name","like","%" . $request->get('SEARCH_BY_NAME') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_EMAIL") !== null){
-                                    $query->where("EMAIL","like","%" . $request->get('SEARCH_BY_EMAIL') . "%");
+                                    $query->where("email","like","%" . $request->get('SEARCH_BY_EMAIL') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RUT") !== null){
-                                    $query->where("RUT","like","%" . $request->get('SEARCH_BY_RUT') . "%");
+                                    $query->where("rut","like","%" . $request->get('SEARCH_BY_RUT') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_ROL") !== null){
-                                    $query->where("ROL","like","%" . $request->get('SEARCH_BY_ROL') . "%");
+                                    $query->where("rol","like","%" . $request->get('SEARCH_BY_ROL') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_EMPRESA") !== null){
-                                    $query->where("EMPRESA","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
+                                    $palabra = "%".$request->get('SEARCH_BY_EMPRESA')."%";
+                                    $query->whereHas("empresa", function ($q) use ($palabra){
+                                        $q->where('nombre', 'like', $palabra);
+                                    });
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                    $cantidad_de_razones_sociales = $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT');
+                                    $query->whereHas("empresa", function ($q) use ($cantidad_de_razones_sociales){
+                                        $q->has('razones_sociales', $cantidad_de_razones_sociales);
+                                    });
                                 }
 
                             })
@@ -105,6 +121,12 @@ class AjaxController extends Controller
                                     return $dato->empresa->nombre;
                                 }
                                 return "-";
+                            })
+                            ->orderColumn('empresa', function ($query, $order){
+                                $query->orderBy(
+                                    Empresa::select('nombre')->whereColumn('empresas.id', 'empresa_id'),
+                                    $order
+                                );
                             })
                             ->addColumn('razones_sociales_count', function ($dato) {
                                 if ( $dato->empresa ) {

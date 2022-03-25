@@ -80,7 +80,7 @@
                     // },
                     data: function ( d ) {
                         d.SEARCH_BY_NOMBRE                      = $('#input__Nombre').val();
-                        d.SEARCH_BY_REPRESENTANTE               = $('input__representante').val();
+                        d.SEARCH_BY_REPRESENTANTE               = $('#input__representante').val();
                         d.SEARCH_BY_RAZONES_SOCIALES_COUNT      = $('#input__razones_sociales_count').val();
                     }
                 },
