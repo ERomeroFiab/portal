@@ -12,6 +12,7 @@ use App\Models\Mission;
 use App\Models\MissionMotive;
 use App\Models\Invoice;
 use App\Models\RazonSocial;
+use App\Models\InvoiceLigne;
 
 class AjaxController extends Controller
 {
@@ -119,13 +120,19 @@ class AjaxController extends Controller
         $empresa_id = $request->get('search_by_empresa');
         
         return DataTables::eloquent( 
-            MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
-                $q1->wherehas('mission', function($q2) use ($empresa_id) {
-                    $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
-                        $q3->wherehas('empresa', function($q4) use ($empresa_id) {
-                            $q4->where('id', $empresa_id);
-                        });
-                    });
+            // MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
+            //     $q1->wherehas('mission', function($q2) use ($empresa_id) {
+            //         $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
+            //             $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+            //                 $q4->where('id', $empresa_id);
+            //             });
+            //         });
+            //     });
+            // })
+
+            InvoiceLigne::query()->wherehas('razon_social', function($q1) use ($empresa_id) {
+                $q1->wherehas('empresa', function($q2) use ($empresa_id) {
+                    $q2->where('id', $empresa_id);
                 });
             })
 
@@ -150,19 +157,19 @@ class AjaxController extends Controller
             return $dato->razon_social->rut;
         })
         ->addColumn('motivo', function ($dato) {
-            return $dato->mission_motive->MOTIF;
-        })
-        ->addColumn('gestion', function ($dato) {
-            return $dato->mission->CURRENT_STEP;
-        })
-        ->addColumn('fecha_de_gestion', function ($dato) {
-            return $dato->mission_motive->SOUS_MOTIF_1;
+            return $dato->PRODUCT ?? "-";
         })
         ->addColumn('banco', function ($dato) {
-            return $dato->razon_social->banco;
+            return $dato->razon_social->banco ?? "-";
         })
-        ->addColumn('invoice', function ($dato) {
-            return "-";
+        ->addColumn('monto_facturado', function ($dato) {
+            return $dato->invoice->TOTAL_AMOUNT_INVOICED ?? "-";
+        })
+        ->addColumn('DATE_PREVISIONNELLE', function ($dato) {
+            return $dato->mission_motive_eco->DATE_PREVISIONNELLE ?? "-";
+        })
+        ->addColumn('ECO_VALIDEE', function ($dato) {
+            return $dato->mission_motive_eco->ECO_VALIDEE ?? "-";
         })
         // ->addColumn('action', function ($dato) {
         //     //
