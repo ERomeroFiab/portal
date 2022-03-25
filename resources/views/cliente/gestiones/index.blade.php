@@ -61,9 +61,7 @@
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
                                         <th>Monto a Facturar</th>
-                                        {{-- <th>Montos a Facturar</th>
-                                        <th>Periodo a Facturar</th>
-                                        <th class="no_exportar">&nbsp;</th> --}}
+                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
