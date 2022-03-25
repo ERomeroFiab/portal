@@ -141,6 +141,12 @@ class AjaxController extends Controller
             }
             return "-";
         })
+        ->addColumn('monto_a_facturar', function ($dato) {
+            if ( !$dato->invoice_ligne ) {
+                return ($dato->ECO_PRESENTEE * 0.3);
+            }
+            return "-";
+        })
         ->toJson();
     }
 

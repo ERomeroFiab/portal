@@ -54,12 +54,13 @@
                                         <th>Rut</th>
                                         <th>Motivo</th>
                                         <th>Gestion</th>
-                                        <th>Fecha Gestión</th>
+                                        <th>Periodo Gestión</th>
                                         <th>Fecha Depósito</th>
                                         <th>Banco</th>
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
+                                        <th>Monto a Facturar</th>
                                         {{-- <th>Montos a Facturar</th>
                                         <th>Periodo a Facturar</th>
                                         <th class="no_exportar">&nbsp;</th> --}}
@@ -111,6 +112,7 @@
                     {data: "ECO_PRESENTEE"},
                     {data: "honorarios_fiabilis"},
                     {data: "montos_facturados"},
+                    {data: "monto_a_facturar"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
