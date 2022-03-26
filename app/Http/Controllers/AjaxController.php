@@ -142,13 +142,9 @@ class AjaxController extends Controller
         $empresa_id = $request->get('search_by_empresa');
         
         return DataTables::eloquent( 
-            MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
-                $q1->wherehas('mission', function($q2) use ($empresa_id) {
-                    $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
-                        $q3->wherehas('empresa', function($q4) use ($empresa_id) {
-                            $q4->where('id', $empresa_id);
-                        });
-                    });
+            MissionMotiveEco::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
+                $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+                    $q4->where('id', $empresa_id);
                 });
             })
 
@@ -195,6 +191,30 @@ class AjaxController extends Controller
                 return ($dato->ECO_PRESENTEE * 0.3);
             }
             return "-";
+        })
+        ->orderColumn('razon_social', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('nombre')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('rut', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('rut')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('motivo', function($query, $order){
+            $query->orderBy(
+                Mission::select('PRODUIT')->whereColumn('missions.id', 'mission_id'),
+                $order
+            );
+        })
+        ->orderColumn('honorarios_fiabilis', function($query, $order){
+            $query->orderBy(
+                InvoiceLigne::select('AMOUNT')->whereColumn('mission_motive_ecos.id', 'mission_motive_eco_id'),
+                $order
+            );
         })
         ->toJson();
     }
