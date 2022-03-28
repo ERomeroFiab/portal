@@ -11,7 +11,7 @@ class RazonSocial extends Model
 
     public function empresa()
     {
-        return $this->belongsTo('App\Models\Empresa', 'id'); 
+        return $this->belongsTo('App\Models\Empresa', 'empresa_id'); 
     }
 
     public function missions()
