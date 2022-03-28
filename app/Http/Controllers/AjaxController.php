@@ -35,20 +35,6 @@ class AjaxController extends Controller
                                 if ($request->get("SEARCH_BY_NOMBRE") !== null){
                                     $query->where("nombre","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
                                 }
-<<<<<<< HEAD
-
-                                //no filtra
-                                /*if ($request->get("SEARCH_BY_CLIENTE") !== null){
-                                    $query->whereHas("cliente","like","%" . $request->get('SEARCH_BY_CLIENTE') . "%");
-                                }
-                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->whereHas("razones_sociales_count","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
-                                }*/
-                            })
-                            
-                            
-                            ->addColumn('cliente', function ($dato) {
-=======
                                 if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
                                     $palabra = "%".$request->get("SEARCH_BY_REPRESENTANTE")."%";
                                     $query->whereHas("representante", function($q) use ($palabra){
@@ -61,7 +47,6 @@ class AjaxController extends Controller
                             })
                             
                             ->addColumn('representante', function ($dato) {
->>>>>>> bf365528c548af8b7a8318b2383d87cbaa30259d
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
                                 }
@@ -108,16 +93,6 @@ class AjaxController extends Controller
                                 if ($request->get("SEARCH_BY_ROL") !== null){
                                     $query->where("rol","like","%" . $request->get('SEARCH_BY_ROL') . "%");
                                 }
-<<<<<<< HEAD
-
-                                //no filtra
-                                /*if ($request->get("SEARCH_BY_EMPRESA") !== null){
-                                    $query->whereHas("empresa","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
-                                }
-                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
-                                }*/
-=======
                                 if ($request->get("SEARCH_BY_EMPRESA") !== null){
                                     $palabra = "%".$request->get('SEARCH_BY_EMPRESA')."%";
                                     $query->whereHas("empresa", function ($q) use ($palabra){
@@ -130,7 +105,6 @@ class AjaxController extends Controller
                                         $q->has('razones_sociales', $cantidad_de_razones_sociales);
                                     });
                                 }
->>>>>>> bf365528c548af8b7a8318b2383d87cbaa30259d
 
                             })
                             ->addColumn('action', function ($dato) {
