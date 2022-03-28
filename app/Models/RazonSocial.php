@@ -23,6 +23,11 @@ class RazonSocial extends Model
     {
         return $this->hasMany('App\Models\Invoice', 'id');
     }
+
+    public function gestiones()
+    {
+        return $this->hasMany('App\Models\Gestion', 'razon_social_id');
+    }
     
     
 }

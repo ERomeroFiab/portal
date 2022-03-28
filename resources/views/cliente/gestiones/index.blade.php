@@ -89,7 +89,7 @@
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_mission_motive_eco_by_empresa') }}",
+                    url: "{{ route('ajax.get_tabla_gestiones_by_empresa') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
@@ -103,11 +103,11 @@
                     {data: "razon_social"},
                     {data: "rut"},
                     {data: "motivo"},
-                    {data: "SOUS_MOTIF_2"},
-                    {data: "SOUS_MOTIF_1"},
-                    {data: "DATE_PREVISIONNELLE"},
+                    {data: "gestion"},
+                    {data: "periodo_gestion"},
+                    {data: "fecha_deposito"},
                     {data: "banco"},
-                    {data: "ECO_PRESENTEE"},
+                    {data: "monto_depositado"},
                     {data: "honorarios_fiabilis"},
                     {data: "montos_facturados"},
                     {data: "monto_a_facturar"},
@@ -120,6 +120,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla empresas - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {

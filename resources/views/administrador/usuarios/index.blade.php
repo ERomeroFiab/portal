@@ -151,6 +151,7 @@
                dom: 'Bfrtip',
                buttons: [{
                   extend: 'excelHtml5',
+                  text: "Exportar a Excel",
                   title: "tabla empresas - " + new Date().toLocaleString(),
                   className: "bt_excel",
                   exportOptions: {

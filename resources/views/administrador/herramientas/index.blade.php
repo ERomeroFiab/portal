@@ -15,11 +15,38 @@
                     <h2>Herramientas</h2>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-12">
-                            <button class="btn btn-sm btn-info" type="button">Botón</button>
+                    <form action="{{ route('excel.import_excel_historico') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="col-12">
+                                    <h6>Subir excel histórico (CN)</h6>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <p>Modelo del archivo aceptado (La hoja debe estar de primera):</p>
+                            </div>
+                            <div class="col-6">
+                                <img class="img-fluid" src="{{ asset('imagen-modelo/seguimiento_produccion.png') }}" alt="Imagen modelo del excel aceptado">
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-12">
+                                <input name="file" type="file">
+                                @error('file')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                                <input type="submit" class="btn btn-success" value="Subir Excel">
+                            </div>
+                        </div>
+
+                    </form>
                 </div>
             </div> <!-- End card -->
         </div>

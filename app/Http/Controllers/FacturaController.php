@@ -5,12 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Factura;
 use App\Http\Requests\StoreFacturaRequest;
 use App\Http\Requests\UpdateFacturaRequest;
+use App\Models\Empresa;
 
 class FacturaController extends Controller
 {
     public function cliente_index()
     {
-        return view('cliente.facturas.index');
+        $empresa = Empresa::find( auth()->user()->empresa->id );
+
+        return view('cliente.facturas.index', [
+            'razones_sociales' => $empresa->razones_sociales,
+        ]);
     }
 
     public function cliente_show($id)
@@ -26,10 +31,10 @@ class FacturaController extends Controller
     // CONSULTOR
     public function consultor_index()
     {
-        $facturas = Factura::all();
-        
+        $empresa = Empresa::find( auth()->user()->empresa->id );
+
         return view('consultor.facturas.index', [
-            "facturas" => $facturas,
+            'razones_sociales' => $empresa->razones_sociales,
         ]);
     }
 
