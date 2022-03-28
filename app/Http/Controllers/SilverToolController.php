@@ -202,19 +202,35 @@ class SilverToolController extends Controller
             if ( $mission ) {
                 $new_mission = new Mission();
                 $new_mission->razon_social_id    = $new_razon_social->id;
-                $new_mission->COORDINATOR        = $mission['COORDINATOR'];
-                $new_mission->CURRENT_STEP       = $mission['CURRENT_STEP'];
-                $new_mission->DATE_DEBUT         = $mission['DATE_DEBUT'];
-                $new_mission->DATE_DEBUT_ANALYSE = $mission['DATE_DEBUT_ANALYSE'];
-                $new_mission->DATE_FIN_ANALYSE   = $mission['DATE_FIN_ANALYSE'];
-                $new_mission->DATE_FIN_MISSION   = $mission['DATE_FIN_MISSION'];
-                $new_mission->DEADLINE           = $mission['DEADLINE'];
-                $new_mission->NO_CONTRAT         = $mission['NO_CONTRAT'];
-                $new_mission->NO_MISSION         = $mission['NO_MISSION'];
-                $new_mission->POURCENTAGE        = $mission['POURCENTAGE'];
-                $new_mission->PRIORITY           = $mission['PRIORITY'];
-                $new_mission->PRODUIT            = $mission['PRODUIT'];
-                $new_mission->PROJECT_MANAGER    = $mission['PROJECT_MANAGER'];
+                $new_mission->COORDINATOR                = $mission['COORDINATOR'];
+                $new_mission->CURRENT_STEP               = $mission['CURRENT_STEP'];
+                $new_mission->DATE_DEBUT                 = $mission['DATE_DEBUT'];
+                $new_mission->DATE_DEBUT_ANALYSE         = $mission['DATE_DEBUT_ANALYSE'];
+                $new_mission->DATE_FIN_ANALYSE           = $mission['DATE_FIN_ANALYSE'];
+                $new_mission->DATE_FIN_MISSION           = $mission['DATE_FIN_MISSION'];
+                $new_mission->DEADLINE                   = $mission['DEADLINE'];
+                $new_mission->FAMILLE                    = $mission['FAMILLE'];
+                $new_mission->ID_MISSION                 = $mission['ID_MISSION'];
+                $new_mission->NO_CONTRAT                 = $mission['NO_CONTRAT'];
+                $new_mission->NO_MISSION                 = $mission['NO_MISSION'];
+                $new_mission->PID_CONTRAT                = $mission['PID_CONTRAT'];
+                $new_mission->PID_CONTRAT_DETAIL_PRODUIT = $mission['PID_CONTRAT_DETAIL_PRODUIT'];
+                $new_mission->PID_IDENTIFICATION         = $mission['PID_IDENTIFICATION'];
+                $new_mission->POURCENTAGE                = $mission['POURCENTAGE'];
+                $new_mission->PRIORITY                   = $mission['PRIORITY'];
+                $new_mission->PRODUIT                    = $mission['PRODUIT'];
+                $new_mission->PROJECT_MANAGER            = $mission['PROJECT_MANAGER'];
+                $new_mission->STEPS_MANAGED_FROM_MOTIVE  = $mission['STEPS_MANAGED_FROM_MOTIVE'];
+                $new_mission->SYS_DATE_CREATION          = $mission['SYS_DATE_CREATION'];
+                $new_mission->SYS_DATE_MODIFICATION      = $mission['SYS_DATE_MODIFICATION'];
+                $new_mission->SYS_HEURE_CREATION         = $mission['SYS_HEURE_CREATION'];
+                $new_mission->SYS_HEURE_MODIFICATION     = $mission['SYS_HEURE_MODIFICATION'];
+                $new_mission->SYS_USER_CREATION          = $mission['SYS_USER_CREATION'];
+                $new_mission->SYS_USER_MODIFICATION      = $mission['SYS_USER_MODIFICATION'];
+                $new_mission->VP_FEES                    = $mission['VP_FEES'];
+                $new_mission->VP_N_CONTRAT_CADRE         = $mission['VP_N_CONTRAT_CADRE'];
+                $new_mission->VP_N_CONTRAT_PARTIEL       = $mission['VP_N_CONTRAT_PARTIEL'];
+                $new_mission->VP_PRODUCT                 = $mission['VP_PRODUCT'];
                 $new_mission->save();
                 foreach ($mission['mission_motives'] as $mission_motive) {
                     if ( $mission_motive ) {

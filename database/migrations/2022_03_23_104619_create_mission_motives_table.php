@@ -11,20 +11,20 @@ class CreateMissionMotivesTable extends Migration
         Schema::create('mission_motives', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('COMMENTS_SITE')->nullable();
-            $table->string('CONSULTANT')->nullable();
-            $table->dateTime('DATE_LIMITE')->nullable();
-            $table->string('ETAPE_COURANTE')->nullable();
-            $table->string('ID_MISSION_MOTIVE')->nullable();
-            $table->string('MOTIF')->nullable();
-            $table->string('PID_MISSION')->nullable();
+            $table->string('COMMENTS_SITE', 50)->nullable();
+            $table->string('CONSULTANT', 20)->nullable();
+            $table->date('DATE_LIMITE')->nullable();
+            $table->string('ETAPE_COURANTE', 50)->nullable();
+            $table->string('ID_MISSION_MOTIVE', 32)->nullable();
+            $table->string('MOTIF', 70)->nullable();
+            $table->string('PID_MISSION', 32)->nullable();
             $table->double('POURCENTAGE')->nullable();
-            $table->dateTime('SYS_DATE_CREATION')->nullable();
-            $table->dateTime('SYS_DATE_MODIFICATION')->nullable();
+            $table->date('SYS_DATE_CREATION')->nullable();
+            $table->date('SYS_DATE_MODIFICATION')->nullable();
             $table->time('SYS_HEURE_CREATION')->nullable();
             $table->time('SYS_HEURE_MODIFICATION')->nullable();
-            $table->string('SYS_USER_CREATION')->nullable();
-            $table->string('SYS_USER_MODIFICATION')->nullable();
+            $table->string('SYS_USER_CREATION', 20)->nullable();
+            $table->string('SYS_USER_MODIFICATION', 20)->nullable();
 
             $table->unsignedBigInteger('mission_id')->nullable();
             $table->foreign('mission_id')->references('id')->on('missions')->onDelete('set null')->onUpdate('cascade');

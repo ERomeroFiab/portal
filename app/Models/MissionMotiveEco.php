@@ -28,6 +28,11 @@ class MissionMotiveEco extends Model
         return $this->belongsTo('App\Models\RazonSocial', 'razon_social_id'); 
     }
 
+    public function invoice_ligne()
+    {
+        return $this->hasOne('App\Models\InvoiceLigne', 'mission_motive_eco_id');
+    }
+
     public function invoice_lignes()
     {
         return $this->hasMany('App\Models\InvoiceLigne', 'mission_motive_eco_id');

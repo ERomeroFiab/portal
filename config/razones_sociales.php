@@ -151,13 +151,13 @@ return [
         "numero" => "180100053789",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "76881650-6 " => [
+    "76881650-6" => [
         "razon_social_nombre" => "Alternattiva EST Ltda",
         "banco" => "BCI",
         "numero" => "35402067",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "79777010-8 " => [
+    "79777010-8" => [
         "razon_social_nombre" => "Marketing y Promociones S.A",
         "banco" => "BCI",
         "numero" => "84009438",
@@ -349,13 +349,13 @@ return [
         "numero" => "30039424",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "96528140-1 " => [
+    "96528140-1" => [
         "razon_social_nombre" => "Constructora Lyd SA",
         "banco" => "Banco de Chile",
         "numero" => "2800754702",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "96528140-1 " => [
+    "96528140-1" => [
         "razon_social_nombre" => "Constructora Lyd SA",
         "banco" => "Banco de Chile",
         "numero" => "58997-07",
@@ -889,7 +889,7 @@ return [
         "numero" => null,
         "tipo_de_cuenta" => "Corriente",
     ],
-    "76360678-3 " => [
+    "76360678-3" => [
         "razon_social_nombre" => "Hotelera Cordillera Luz SpA",
         "banco" => "ITAÚ",
         "numero" => "210491130",
@@ -1171,7 +1171,7 @@ return [
         "numero" => "6395420-9",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "76577390-3 " => [
+    "76577390-3" => [
         "razon_social_nombre" => "Chocolates Del Mundo SA",
         "banco" => "Banco de Chile",
         "numero" => "4720020007",
@@ -1291,7 +1291,7 @@ return [
         "numero" => "205204649",
         "tipo_de_cuenta" => "Corriente",
     ],
-    "86020700-1 " => [
+    "86020700-1" => [
         "razon_social_nombre" => "Michelin Chile Ltda",
         "banco" => null,
         "numero" => null,
@@ -1725,12 +1725,6 @@ return [
     ],
     "76746454-1" => [
         "razon_social_nombre" => "Suez Biofactoria Andina SpA",
-        "banco" => null,
-        "numero" => null,
-        "tipo_de_cuenta" => "Corriente",
-    ],
-    "111" => [
-        "razon_social_nombre" => "Iam",
         "banco" => null,
         "numero" => null,
         "tipo_de_cuenta" => "Corriente",

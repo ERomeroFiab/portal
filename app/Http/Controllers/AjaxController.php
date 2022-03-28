@@ -31,8 +31,9 @@ class AjaxController extends Controller
                                 }
                                 //filtros Tabla
                                 if ($request->get("SEARCH_BY_NOMBRE") !== null){
-                                    $query->where("NOMBRE","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
+                                    $query->where("nombre","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
                                 }
+<<<<<<< HEAD
 
                                 //no filtra
                                 /*if ($request->get("SEARCH_BY_CLIENTE") !== null){
@@ -45,10 +46,30 @@ class AjaxController extends Controller
                             
                             
                             ->addColumn('cliente', function ($dato) {
+=======
+                                if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
+                                    $palabra = "%".$request->get("SEARCH_BY_REPRESENTANTE")."%";
+                                    $query->whereHas("representante", function($q) use ($palabra){
+                                        $q->where('name', 'like', $palabra);
+                                    });
+                                }
+                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
+                                    $query->has("razones_sociales", $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT'));
+                                }
+                            })
+                            
+                            ->addColumn('representante', function ($dato) {
+>>>>>>> bf365528c548af8b7a8318b2383d87cbaa30259d
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
                                 }
                                 return " ";
+                            })
+                            ->orderColumn('representante', function ($query, $order) {
+                                $query->orderBy(
+                                    User::select('name')->whereColumn('empresas.id', 'empresa_id'),
+                                    $order
+                                );
                             })
                             ->editColumn('nombre', function ($dato) {
                                 $data['nombre'] = $dato->nombre;
@@ -68,22 +89,24 @@ class AjaxController extends Controller
 
     public function get_tabla_usuarios( Request $request )
     {
+
         return DataTables::eloquent( User::query() )
                             ->filter(function ($query) use ($request) {
                                 
                                 //filtros Tabla
                                 if ($request->get("SEARCH_BY_NAME") !== null){
-                                    $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
+                                    $query->where("name","like","%" . $request->get('SEARCH_BY_NAME') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_EMAIL") !== null){
-                                    $query->where("EMAIL","like","%" . $request->get('SEARCH_BY_EMAIL') . "%");
+                                    $query->where("email","like","%" . $request->get('SEARCH_BY_EMAIL') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RUT") !== null){
-                                    $query->where("RUT","like","%" . $request->get('SEARCH_BY_RUT') . "%");
+                                    $query->where("rut","like","%" . $request->get('SEARCH_BY_RUT') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_ROL") !== null){
-                                    $query->where("ROL","like","%" . $request->get('SEARCH_BY_ROL') . "%");
+                                    $query->where("rol","like","%" . $request->get('SEARCH_BY_ROL') . "%");
                                 }
+<<<<<<< HEAD
 
                                 //no filtra
                                 /*if ($request->get("SEARCH_BY_EMPRESA") !== null){
@@ -92,6 +115,20 @@ class AjaxController extends Controller
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
                                     $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
                                 }*/
+=======
+                                if ($request->get("SEARCH_BY_EMPRESA") !== null){
+                                    $palabra = "%".$request->get('SEARCH_BY_EMPRESA')."%";
+                                    $query->whereHas("empresa", function ($q) use ($palabra){
+                                        $q->where('nombre', 'like', $palabra);
+                                    });
+                                }
+                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
+                                    $cantidad_de_razones_sociales = $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT');
+                                    $query->whereHas("empresa", function ($q) use ($cantidad_de_razones_sociales){
+                                        $q->has('razones_sociales', $cantidad_de_razones_sociales);
+                                    });
+                                }
+>>>>>>> bf365528c548af8b7a8318b2383d87cbaa30259d
 
                             })
                             ->addColumn('action', function ($dato) {
@@ -110,6 +147,12 @@ class AjaxController extends Controller
                                 }
                                 return "-";
                             })
+                            ->orderColumn('empresa', function ($query, $order){
+                                $query->orderBy(
+                                    Empresa::select('nombre')->whereColumn('empresas.id', 'empresa_id'),
+                                    $order
+                                );
+                            })
                             ->addColumn('razones_sociales_count', function ($dato) {
                                 if ( $dato->empresa ) {
                                     return $dato->empresa->razones_sociales->count();
@@ -124,19 +167,13 @@ class AjaxController extends Controller
         $empresa_id = $request->get('search_by_empresa');
         
         return DataTables::eloquent( 
-            // MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
-            //     $q1->wherehas('mission', function($q2) use ($empresa_id) {
-            //         $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
-            //             $q3->wherehas('empresa', function($q4) use ($empresa_id) {
-            //                 $q4->where('id', $empresa_id);
-            //             });
-            //         });
-            //     });
-            // })
-
-            InvoiceLigne::query()->wherehas('razon_social', function($q1) use ($empresa_id) {
-                $q1->wherehas('empresa', function($q2) use ($empresa_id) {
-                    $q2->where('id', $empresa_id);
+            MissionMotiveEco::query()->wherehas('mission_motive', function($q1) use ($empresa_id) {
+                $q1->wherehas('mission', function($q2) use ($empresa_id) {
+                    $q2->wherehas('razon_social', function($q3) use ($empresa_id) {
+                        $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+                            $q4->where('id', $empresa_id);
+                        });
+                    });
                 });
             })
 
@@ -161,23 +198,29 @@ class AjaxController extends Controller
             return $dato->razon_social->rut;
         })
         ->addColumn('motivo', function ($dato) {
-            return $dato->PRODUCT ?? "-";
+            return $dato->mission_motive->mission->PRODUIT ?? "-";
         })
         ->addColumn('banco', function ($dato) {
             return $dato->razon_social->banco ?? "-";
         })
-        ->addColumn('monto_facturado', function ($dato) {
-            return $dato->invoice->TOTAL_AMOUNT_INVOICED ?? "-";
+        ->addColumn('honorarios_fiabilis', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
+            return "-";
         })
-        ->addColumn('DATE_PREVISIONNELLE', function ($dato) {
-            return $dato->mission_motive_eco->DATE_PREVISIONNELLE ?? "-";
+        ->addColumn('montos_facturados', function ($dato) {
+            if ( $dato->invoice_ligne ) {
+                return $dato->invoice_ligne->AMOUNT ?? "-";
+            }
+            return "-";
         })
-        ->addColumn('ECO_VALIDEE', function ($dato) {
-            return $dato->mission_motive_eco->ECO_VALIDEE ?? "-";
+        ->addColumn('monto_a_facturar', function ($dato) {
+            if ( !$dato->invoice_ligne ) {
+                return ($dato->ECO_PRESENTEE * 0.3);
+            }
+            return "-";
         })
-        // ->addColumn('action', function ($dato) {
-        //     //
-        // })
         ->toJson();
     }
 
@@ -310,6 +353,29 @@ class AjaxController extends Controller
 
             return $data;
         })
+        ->toJson();
+    }
+
+    public function get_tabla_lignes( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+
+            InvoiceLigne::query()->wherehas('razon_social', function($q1) use ($razon_social_id) {
+                $q1->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            // if ( $request->get('search_by_xxxxx') !== null ) {
+            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
+            // }
+
+        })
+        // ->addColumn('razon_social', function ($dato) {
+        //     return $dato->razon_social->nombre;
+        // })
         ->toJson();
     }
 }

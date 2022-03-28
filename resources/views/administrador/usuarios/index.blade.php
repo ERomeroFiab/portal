@@ -115,7 +115,7 @@
                   { data: "rut"},
                   { data: "rol"},
                   { data: "empresa"},
-                  { data: "razones_sociales_count"},
+                  { data: "razones_sociales_count", orderable: false},
                   { 
                         data: 'action', 
                         render: function (data, type, row){
