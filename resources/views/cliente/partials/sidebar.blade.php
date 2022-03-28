@@ -34,6 +34,12 @@
                     <p class="sidebar-normal">Servicios por cobrar</p>
                 </a>
             </li>
+            <li class="{{ request()->is('cliente/gestiones-historicas/index') ? 'active' : '' }}">
+                <a href="{{ route('cliente.gestiones-historicas.index') }}">
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                    <p class="sidebar-normal">gestiones Históricas</p>
+                </a>
+            </li>
 
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">

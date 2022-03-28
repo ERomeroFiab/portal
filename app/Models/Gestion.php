@@ -18,10 +18,12 @@ class Gestion extends Model
     {
         return $this->belongsTo('App\Models\RazonSocial', 'razon_social_id'); 
     }
+
     public function factura()
     {
         return $this->belongsTo('App\Models\Factura', 'factura_id'); 
     }
+
     public function reportes()
     {
         return $this->hasMany('App\Models\Reporte', 'gestion_id'); 

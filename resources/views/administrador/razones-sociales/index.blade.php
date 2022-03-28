@@ -40,8 +40,7 @@
                                         <th>banco</th>
                                         <th>tipo_de_cuenta</th>
                                         <th>principal</th>
-                                        <th>Misiones</th>
-                                        <th>Invoices</th>
+                                        <th>Gestiones</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -92,8 +91,7 @@
                     { data: "banco"},
                     { data: "tipo_de_cuenta"},
                     { data: "principal"},
-                    { data: "missions_count"},
-                    { data: "invoices_count"},
+                    { data: "gestiones_count"},
                     { 
                         data: 'action', 
                         render: function (data, type, row){

@@ -112,6 +112,8 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/facturas/show/{id}', [App\Http\Controllers\FacturaController::class, 'cliente_show'])->name('cliente.facturas.show');
         Route::get('/facturas/edit/{id}', [App\Http\Controllers\FacturaController::class, 'cliente_edit'])->name('cliente.facturas.edit');
         Route::post('/facturas/update/{id}', [App\Http\Controllers\FacturaController::class, 'cliente_update'])->name('cliente.facturas.update');
+
+        Route::get('/gestiones-historicas/index', [App\Http\Controllers\GestionesHistoricasController::class, 'cliente_index'])->name('cliente.gestiones-historicas.index');
     });
 
     // CONSULTOR
@@ -172,6 +174,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ajax/get_tabla_gestiones_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_empresa'])->name('ajax.get_tabla_gestiones_by_empresa');
     Route::get('/ajax/get_tabla_servicios_por_cobrar_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_servicios_por_cobrar_by_empresa'])->name('ajax.get_tabla_servicios_por_cobrar_by_empresa');
     Route::get('/ajax/get_tabla_gestiones_by_razon_social', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_razon_social'])->name('ajax.get_tabla_gestiones_by_razon_social');
+    Route::get('/ajax/get_tabla_gestiones_historicas_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_historicas_by_empresa'])->name('ajax.get_tabla_gestiones_historicas_by_empresa');
 
     // Api's hacia silvertool database
     Route::get('/silvertool/update_database_first_time', [App\Http\Controllers\SilverToolController::class, 'update_database_first_time'])->name('silver.update_database_first_time');

@@ -14,6 +14,7 @@ use Maatwebsite\Excel\Concerns\RegistersEventListeners;
 use Maatwebsite\Excel\Events\AfterImport;
 use Maatwebsite\Excel\Concerns\WithCalculatedFormulas;
 use App\Models\RazonSocial;
+use App\Models\GestionesHistoricas;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
@@ -39,33 +40,33 @@ class GestionesHistoricasImport implements ToModel, WithChunkReading, WithEvents
             $gestion             = $row[8];
             $periodo_gestion     = $row[14];
             $fecha_deposito      = $row[22];
-            $monto_depositado    = floatval($row[19]);
-            $honorarios_fiabilis = floatval($row[20]);
-            $montos_facturados   = floatval($row[20]);
-            $monto_a_facturar    = floatval($row[78]);
+            $monto_depositado    = $row[19];
+            $honorarios_fiabilis = $row[20];
+            $montos_facturados   = $row[20];
+            $monto_a_facturar    = $row[78];
             $origin              = "CN";
 
-            $validator1 = Validator::make(['periodo_gestion' => $periodo_gestion], ['periodo_gestion'  => 'nullable|date_format:d-m-Y',]);
-            if ( $validator1->fails() ) {$periodo_gestion = null;}
-            if ( $periodo_gestion !== null ) {
-                $periodo_gestion = Carbon::createFromFormat("d-m-Y", $periodo_gestion)->format('Y-m-d');
-            }
+            // $validator1 = Validator::make(['periodo_gestion' => $periodo_gestion], ['periodo_gestion'  => 'nullable|date_format:d-m-Y',]);
+            // if ( $validator1->fails() ) {$periodo_gestion = null;}
+            // if ( $periodo_gestion !== null ) {
+            //     $periodo_gestion = Carbon::createFromFormat("d-m-Y", $periodo_gestion)->format('Y-m-d');
+            // }
             
-            $validator2 = Validator::make(['fecha_deposito' => $fecha_deposito], ['fecha_deposito'  => 'nullable|date_format:d-m-Y',]);
-            if ( $validator2->fails() ) {$fecha_deposito = null;}
-            if ( $fecha_deposito !== null ) {
-                $fecha_deposito = Carbon::createFromFormat("d-m-Y", $fecha_deposito)->format('Y-m-d');
-            }
+            // $validator2 = Validator::make(['fecha_deposito' => $fecha_deposito], ['fecha_deposito'  => 'nullable|date_format:d-m-Y',]);
+            // if ( $validator2->fails() ) {$fecha_deposito = null;}
+            // if ( $fecha_deposito !== null ) {
+            //     $fecha_deposito = Carbon::createFromFormat("d-m-Y", $fecha_deposito)->format('Y-m-d');
+            // }
 
-            $new_gestion = new Gestion();
+            $new_gestion = new GestionesHistoricas();
             $new_gestion->motivo              = $motivo;
             $new_gestion->gestion             = $gestion;
             $new_gestion->periodo_gestion     = $periodo_gestion;
             $new_gestion->fecha_deposito      = $fecha_deposito;
-            $new_gestion->monto_depositado    = $monto_depositado;
-            $new_gestion->honorarios_fiabilis = $honorarios_fiabilis;
-            $new_gestion->montos_facturados   = $montos_facturados;
-            $new_gestion->monto_a_facturar    = $monto_a_facturar;
+            $new_gestion->monto_depositado    = $monto_depositado; // aplicar floatval()
+            $new_gestion->honorarios_fiabilis = $honorarios_fiabilis; // aplicar floatval()
+            $new_gestion->montos_facturados   = $montos_facturados; // aplicar floatval()
+            $new_gestion->monto_a_facturar    = $monto_a_facturar; // aplicar floatval()
             $new_gestion->origin              = $origin;
             $new_gestion->razon_social_id     = $razon_social_existente->id;
             $new_gestion->origin              = "CN";
