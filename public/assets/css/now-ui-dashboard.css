@@ -5914,7 +5914,7 @@ a.text-gray:focus, a.text-gray:hover {
 body {
   color: #2c2c2c;
   font-size: 14px;
-  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
+  font-family:
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased; }
 
@@ -6481,8 +6481,12 @@ Created using IcoMoon - icomoon.io
   font-family: 'Nucleo Outline';
   src: url("../fonts/nucleo-outline.eot");
   src: url("../fonts/nucleo-outline.eot") format("embedded-opentype"), url("../fonts/nucleo-outline.woff2") format("woff2"), url("../fonts/nucleo-outline.woff") format("woff"), url("../fonts/nucleo-outline.ttf") format("truetype");
+  src: url("../fonts/LeanOSans\ FY\ Regular.eot");
   font-weight: normal;
-  font-style: normal; }
+  font-style: normal;
+  
+}
+  
 
 /*------------------------
 	base class definition

@@ -9,7 +9,8 @@
 @endsection
 
 @section('content')
-
+<link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
+<link rel="stylesheet" href="{{ URL::asset('css/font.css') }}" />
    @include('includes.messages_in_session')
    
    <div class="row">
@@ -100,12 +101,12 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                   data: function ( d ) {
-                     d.SEARCH_BY_NAME                = $('#input__name').val();
-                     d.SEARCH_BY_EMAIL               = $('#input__email').val();
-                     d.SEARCH_BY_RUT                 = $('#input__rut').val();
-                     d.SEARCH_BY_ROL                 = $('#input__rol').val();
-                     d.SEARCH_BY_EMPRESA             = $('#input__empresa').val();
-                     d.SEARCH_BY_RAZONES_SOCIALES_COUNT              = $('#input__razones_sociales_count').val();
+                     d.SEARCH_BY_NAME                                = $('#input__name').val();
+                     d.SEARCH_BY_EMAIL                               = $('#input__email').val();
+                     d.SEARCH_BY_RUT                                 = $('#input__rut').val();
+                     d.SEARCH_BY_ROL                                 = $('#input__rol').val();
+                     //d.SEARCH_BY_EMPRESA                             = $('#input__empresa').val();
+                     //d.SEARCH_BY_RAZONES_SOCIALES_COUNT              = $('#input__razones_sociales_count').val();
                   }
                },
                columns: [
@@ -151,7 +152,7 @@
                buttons: [{
                   extend: 'excelHtml5',
                   title: "tabla empresas - " + new Date().toLocaleString(),
-                  className: "bg-info",
+                  className: "bt_excel",
                   exportOptions: {
                         columns: ':not(.no_exportar)'
                   },

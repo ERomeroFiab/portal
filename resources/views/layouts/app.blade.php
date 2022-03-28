@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
     <link rel="icon" type="image/png" href="{{asset('assets/img/brand/favicon.png')}}">
+    <link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('css/font.css') }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>Portal Cliente</title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
@@ -43,7 +45,7 @@
             @endif
 
             {{-- MAINPANEL --}}
-            <div class="main-panel">
+            <div class="main-panel" style="background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
                     <div class="container-fluid">
@@ -90,7 +92,7 @@
                 </nav>
                 <!-- End Navbar -->
 
-                <div class="panel-header panel-header-sm"></div>
+                <div class="panel-header panel-header-sm" style="background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;"></div>
 
                 <!-- Start Content -->
                 <div class="content">

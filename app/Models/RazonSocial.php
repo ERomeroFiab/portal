@@ -11,17 +11,17 @@ class RazonSocial extends Model
 
     public function empresa()
     {
-        return $this->belongsTo('App\Models\Empresa', 'empresa_id'); 
+        return $this->belongsTo('App\Models\Empresa', 'id'); 
     }
 
     public function missions()
     {
-        return $this->hasMany('App\Models\Mission', 'razon_social_id');
+        return $this->hasMany('App\Models\Mission', 'id');
     }
 
     public function invoices()
     {
-        return $this->hasMany('App\Models\Invoice', 'razon_social_id');
+        return $this->hasMany('App\Models\Invoice', 'id');
     }
     
     

@@ -9,6 +9,7 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="{{ URL::asset('css/bt_excel.css') }}" />
 
     @include('includes.messages_in_session')
 
@@ -20,11 +21,64 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-12">
-                            <h6>Filtros</h6>
+                        <div class="col-3 form-group">
+                            <label>ID:</label>
+                            <input id="input__Nombre" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Empresa:</label>
+                            <input id="input__cliente" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Nombre:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Rut:</label>
+                            <input id="input__Nombre" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Ciudad:</label>
+                            <input id="input__cliente" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Codigo Postal:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Direccion:</label>
+                            <input id="input__Nombre" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Numero de Cuenta Bancaria:</label>
+                            <input id="input__cliente" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Banco:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Tipo de Cuenta:</label>
+                            <input id="input__Nombre" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Principal:</label>
+                            <input id="input__cliente" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Misiones:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                        </div>
+                        <div class="col-3 form-group">
+                            <label>Invoices:</label>
+                            <input id="input__razones_sociales_count" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-sm btn-success float-right" type="button" onclick="buscar()">Buscar</button>
+                        </div>
+                    </div>
                         <div class="col" style="overflow-x:auto;">
                             <table id="tabla_razones_sociales" class="table-hover" style="width:100%;">
                                 <thead>
@@ -130,7 +184,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     title: "tabla razones sociales - " + new Date().toLocaleString(),
-                    className: "bg-info",
+                    className: "bt_excel",
                     exportOptions: {
                         columns: ':not(.no_exportar)'
                     },
@@ -198,9 +252,9 @@
             })
         }
 
-        // function buscar(){
-        //     TABLA_EMPRESAS.draw();
-        // }
+        function buscar(){
+            TABLA_RAZONES_SOCIALES.draw();
+        }
 
         // Pintar en verde los inputs que contienen algo
         // $( "#input__ID_IDENTIFICATION" ).change(function() { agregar_quitar_bg_success('input__ID_IDENTIFICATION'); });

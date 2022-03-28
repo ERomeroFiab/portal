@@ -1,0 +1,130 @@
+.dt-button.bt_excel {
+    max-width:200px;
+    min-width:100px; 
+    color:azure !important;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0.5em 1.2em;
+    background: #4590E6;
+    border: 2px solid;
+    border-radius: 5px;
+    border-color: #4590E6;
+    position: relative;
+    padding: 5px 15px;    
+    
+}
+
+.dt-button.bt_excel:hover{
+    color:azure!important;
+    background: #4bb5ff !important;
+    border-color:#4bb5ff !important;
+    box-shadow: 0 3px 8px 0 rgb(0 0 0 / 17%) !important;
+    transition: all 0.2s ease!important;
+
+}
+
+.btn-primary{
+    background-color: #e95c40;
+}
+
+.btn-success{
+    background-color: #e7317c  !important;
+    margin-right: 10px;
+
+}
+.btn-success:hover{
+    background-color: #f25c9a !important;
+}
+
+.btn-info{
+    background-color: #4590E6;
+    margin-right:5px;
+
+}
+
+.btn-info:hover{
+    background-color:#2ca6ff;
+}
+
+.btn-warning{
+    background-color: #99acc1;
+
+}
+
+.btn-warning:hover{
+    background-color:#c9c3c3 !important;
+    
+
+}
+.bbtn-danger{
+    background-color: #e53140;
+    margin-right:10px;
+
+}
+
+.off-canvas-sidebar{
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
+}
+
+.off-canvas-sidebar:after{
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
+}
+
+.off-canvas-sidebar[data-color=blue] .nav li.active>a:not([data-toggle=collapse]), .sidebar[data-color=blue] .nav li.active>a:not([data-toggle=collapse]) {
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
+}
+
+
+@font-face {font-family: "Poppins";
+    src: url("2f86dc938a55788d3416b876b43a116a.eot"); /* IE9*/
+    src: url("2f86dc938a55788d3416b876b43a116a.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("2f86dc938a55788d3416b876b43a116a.woff2") format("woff2"), /* chrome、firefox */
+    url("2f86dc938a55788d3416b876b43a116a.woff") format("woff"), /* chrome、firefox */
+    url("2f86dc938a55788d3416b876b43a116a.ttf") format("truetype"), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+    url("2f86dc938a55788d3416b876b43a116a.svg#Poppins") format("svg"); /* iOS 4.1- */
+}
+
+h2{
+    font-family:"Poppins" !important;
+    font-size:50px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;}
+
+label{
+    font-family:"Poppins" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+th{
+    font-family:"Poppins" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+span{
+    font-family:"Poppins" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+    font-family:"Poppins" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+button{
+    font-family:"Poppins" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}

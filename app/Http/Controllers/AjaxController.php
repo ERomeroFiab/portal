@@ -24,29 +24,31 @@ class AjaxController extends Controller
         ];
         
         return DataTables::eloquent( Empresa::query()->withCount($relations) )
-                            ->filter(function ($query) use ($request) {
+                            ->filter(function ($query) use ($request ) {
                                 
-                                if ( $request->get('search_by_empresa') !== null ) {
-                                    $query->where('id', $request->get('search_by_empresa'));
+                                if ( $request->get('search_by_empresas') !== null ) {
+                                    $query->where('id', $request->get('search_by_empresas'));
                                 }
-
                                 //filtros Tabla
                                 if ($request->get("SEARCH_BY_NOMBRE") !== null){
                                     $query->where("NOMBRE","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
                                 }
-                                if ($request->get("SEARCH_BY_CLIENTE") !== null){
+
+                                //no filtra
+                                /*if ($request->get("SEARCH_BY_CLIENTE") !== null){
                                     $query->whereHas("cliente","like","%" . $request->get('SEARCH_BY_CLIENTE') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
-                                    $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
-                                }
+                                    $query->whereHas("razones_sociales_count","like","%" . $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT') . "%");
+                                }*/
                             })
+                            
                             
                             ->addColumn('cliente', function ($dato) {
                                 if ( $dato->representante ) {
                                     return $dato->representante->name;
                                 }
-                                return "-";
+                                return " ";
                             })
                             ->editColumn('nombre', function ($dato) {
                                 $data['nombre'] = $dato->nombre;
@@ -82,12 +84,14 @@ class AjaxController extends Controller
                                 if ($request->get("SEARCH_BY_ROL") !== null){
                                     $query->where("ROL","like","%" . $request->get('SEARCH_BY_ROL') . "%");
                                 }
-                                if ($request->get("SEARCH_BY_EMPRESA") !== null){
-                                    $query->where("EMPRESA","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
+
+                                //no filtra
+                                /*if ($request->get("SEARCH_BY_EMPRESA") !== null){
+                                    $query->whereHas("empresa","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
                                     $query->where("RAZONES_SOCIALES_COUNT","like","%" . $request->get('SEARCH_BY_EMPRESA') . "%");
-                                }
+                                }*/
 
                             })
                             ->addColumn('action', function ($dato) {
@@ -276,17 +280,17 @@ class AjaxController extends Controller
         $relations = [
             'missions',
             'invoices',
+
         ];
 
-        return DataTables::eloquent( 
-
-            RazonSocial::query()->withCount( $relations )
+        return DataTables::eloquent( RazonSocial::query()->withCount( $relations )
 
         )->filter(function ($query) use ($request) {
                             
-            // if ( $request->get('search_by_xxxxx') !== null ) {
-            //     $query->where('xxxxx', $request->get('search_by_xxxxx'));
-            // }
+            //filtros Tabla
+            if ($request->get("SEARCH_BY_NAME") !== null){
+                $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
+            }
 
         })
         ->addColumn('empresa', function ($dato) {
