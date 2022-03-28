@@ -115,7 +115,7 @@
             @include('partials.sidebar')
 
             {{-- MAINPANEL --}}
-            <div class="main-panel">
+            <div class="main-panel custom-gradient-fiabilis">
                 <!-- Navbar -->
                 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
                     <div class="container-fluid">
@@ -154,7 +154,7 @@
                 </nav>
                 <!-- End Navbar -->
 
-                <div class="panel-header panel-header-sm"></div>
+                <div class="panel-header panel-header-sm custom-gradient-fiabilis"></div>
 
                 <!-- Start Content -->
                 <div class="content">
