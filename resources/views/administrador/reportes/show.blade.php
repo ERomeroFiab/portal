@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Reporte <b>{{ $reporte->titulo }}</b></h2>
+                    <h5>Reporte <b>{{ $reporte->titulo }}</b></h5>
                 </div>
                 <div class="card-body">
                     <div class="row">

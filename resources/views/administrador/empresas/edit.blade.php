@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Empresa <b>{{ $empresa->nombre }}</b></h2>
+                    <h5>Empresa <b>{{ $empresa->nombre }}</b></h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('admin.empresas.update', ['id' =>  $empresa->id]) }}" method="POST">

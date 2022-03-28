@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Bienvenido</h2>
+                    <h5>Bienvenido</h5>
                 </div>
             </div> <!-- End card -->
         </div>

@@ -23,7 +23,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Empresas</h2>
+                    <h5>Empresas</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">

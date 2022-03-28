@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Servicios Por Cobrar</h2>
+                    <h5>Servicios Por Cobrar</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">

@@ -1,4 +1,4 @@
-<div class="sidebar" data-color="blue">
+<div class="sidebar off-canvas-sidebar" data-color="blue">
     <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
     <div class="logo">
         <a href="#" class="simple-text logo-mini" title="Portal">
@@ -36,7 +36,7 @@
             </li>
             <li class="{{ request()->is('cliente/gestiones-historicas/index') ? 'active' : '' }}">
                 <a href="{{ route('cliente.gestiones-historicas.index') }}">
-                    <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
+                    <span class="sidebar-mini-icon"><i class="fas fa-history"></i></span>
                     <p class="sidebar-normal">gestiones Históricas</p>
                 </a>
             </li>

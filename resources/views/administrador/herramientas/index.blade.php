@@ -12,7 +12,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Herramientas</h2>
+                    <h5>Herramientas</h5>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('excel.import_excel_historico') }}" method="POST" enctype="multipart/form-data">

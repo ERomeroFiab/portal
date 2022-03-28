@@ -8,7 +8,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Nueva Empresa</h2>
+                    <h5>Nueva Empresa</h5>
                 </div>
                 <div class="card-body">
                     <div class="row">

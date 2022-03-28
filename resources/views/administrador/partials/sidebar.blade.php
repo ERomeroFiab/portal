@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
 <div class="sidebar off-canvas-sidebar" data-color="blue">
     <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
     <div class="logo">

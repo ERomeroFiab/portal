@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h2>Usuario <b>{{ $user->name }}</b></h2>
+                    <h5>Usuario <b>{{ $user->name }}</b></h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
