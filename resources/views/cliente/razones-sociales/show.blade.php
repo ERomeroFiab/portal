@@ -139,6 +139,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: `Gestiones de ${RAZON_SOCIAL_NAME} - ` + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {

@@ -371,6 +371,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla missions - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
@@ -418,6 +419,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla motives - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
@@ -482,6 +484,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla ecos - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
@@ -543,6 +546,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla ecos - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
@@ -604,6 +608,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla invoices - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {

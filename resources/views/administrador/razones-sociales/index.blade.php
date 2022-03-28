@@ -127,6 +127,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
                     title: "tabla razones sociales - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {

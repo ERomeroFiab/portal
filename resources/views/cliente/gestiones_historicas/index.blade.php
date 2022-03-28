@@ -120,6 +120,8 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
+                    text: "Exportar a Excel",
+                    text: "Exportar a Excel",
                     title: "Gestiones Históricas - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
