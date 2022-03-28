@@ -36,6 +36,11 @@ class RazonSocialController extends Controller
         ]);
     }
 
+    public function admin_edit()
+    {
+        dd( 'en construccion' );
+    }
+
     
     public function admin_destroy( $id )
     {
