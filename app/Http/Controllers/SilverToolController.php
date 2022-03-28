@@ -14,6 +14,8 @@ use App\Models\MissionMotive;
 use App\Models\MissionMotiveEco;
 use App\Models\Invoice;
 use App\Models\InvoiceLigne;
+use App\Models\Gestion;
+use Carbon\Carbon;
 
 class SilverToolController extends Controller
 {
@@ -341,7 +343,7 @@ class SilverToolController extends Controller
                                     $new_ligne->mission_motive_id       = $new_motive->id;
                                     $new_ligne->save();
                                 }
-                                // $this->register_new_gestion($new_eco);
+                                $this->register_new_gestion($new_eco);
                             }
                         }
                     }
@@ -351,8 +353,43 @@ class SilverToolController extends Controller
         return;
     }
 
-    public function register_new_gestion($new_eco)
+    public function register_new_gestion($eco)
     {
-        dd( $new_eco->invoice_ligne );
+        $gestion = new Gestion();
+        $gestion->mission_motive_eco_id = $eco->id;
+        $gestion->mission_motive_id     = $eco->mission_motive->id;
+        $gestion->mission_id            = $eco->mission->id;
+        $gestion->razon_social_id       = $eco->razon_social_id;
+        $gestion->motivo                = $eco->mission_motive->mission->PRODUIT;
+        $gestion->gestion               = $eco->SOUS_MOTIF_2;
+        // $gestion->periodo_gestion       = "2022-02-01";
+        $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco->SOUS_MOTIF_1); // convertir en fecha
+        $gestion->fecha_deposito        = $eco->DATE_PREVISIONNELLE;
+        $gestion->monto_depositado      = $eco->ECO_PRESENTEE;
+        $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
+        $gestion->montos_facturados     = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
+        $gestion->monto_a_facturar      = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3), 2) : null;
+        $gestion->save();
+    }
+
+    public static function convert_custom_string_to_date( $string )
+    {
+        if ( $string ) {
+            $new_string = $string;
+            $year = substr( $string, 0, 4 );
+            $month = substr( $new_string, 4, 6 );
+            // $format = 'Y-m-d';
+            $date = $year."-".$month."-01";
+            // $new_date = Carbon::createFromFormat($format, $input)->format('Y-m-d');
+            $validator = Validator::make(['date' => $date], [
+                'date'  => 'nullable|date_format:Y-m-d',
+            ]);
+    
+            if ( $validator->fails() ) {
+                $date = null;
+            }
+            return $date;
+        }
+        return null;
     }
 }
