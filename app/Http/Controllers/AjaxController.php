@@ -13,6 +13,7 @@ use App\Models\MissionMotive;
 use App\Models\Invoice;
 use App\Models\RazonSocial;
 use App\Models\InvoiceLigne;
+use App\Models\Gestion;
 
 class AjaxController extends Controller
 {
@@ -371,6 +372,157 @@ class AjaxController extends Controller
         // ->addColumn('razon_social', function ($dato) {
         //     return $dato->razon_social->nombre;
         // })
+        ->toJson();
+    }
+
+    public function get_tabla_gestiones_by_empresa( Request $request )
+    {
+        $empresa_id = $request->get('search_by_empresa');
+        
+        return DataTables::eloquent( 
+            Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
+                $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+                    $q4->where('id', $empresa_id);
+                });
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            if ( $request->get('search_by_razon_social') !== null ) {
+                $query->where('razon_social_id', $request->get('search_by_razon_social'));
+            }
+                            
+            if ( $request->get('search_by_rut') !== null ) {
+                $rut = "%".$request->get('search_by_rut')."%";
+                $query->whereHas('razon_social', function($q) use ($rut) {
+                    $q->where('rut', 'like', $rut);
+                });
+            }
+
+        })
+        ->addColumn('razon_social', function ($dato) {
+            return $dato->razon_social->nombre;
+        })
+        ->addColumn('rut', function ($dato) {
+            return $dato->razon_social->rut;
+        })
+        ->addColumn('banco', function ($dato) {
+            return $dato->razon_social->banco ?? "-";
+        })
+        ->orderColumn('razon_social', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('nombre')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('rut', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('rut')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('banco', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->toJson();
+    }
+
+    public function get_tabla_gestiones_by_razon_social( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+            Gestion::query()->wherehas('razon_social', function($q) use ($razon_social_id) {
+                $q->where('id', $razon_social_id);
+            })
+
+        )->filter(function ($query) use ($request) {
+                            
+            if ( $request->get('search_by_rut') !== null ) {
+                $rut = "%".$request->get('search_by_rut')."%";
+                $query->whereHas('razon_social', function($q) use ($rut) {
+                    $q->where('rut', 'like', $rut);
+                });
+            }
+
+        })
+        ->orderColumn('razon_social', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('nombre')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('rut', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('rut')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('banco', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->toJson();
+    }
+
+    public function get_tabla_servicios_por_cobrar_by_empresa( Request $request )
+    {
+        $empresa_id = $request->get('search_by_empresa');
+        
+        return DataTables::eloquent( 
+            Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
+                $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+                    $q4->where('id', $empresa_id);
+                });
+            })
+            ->whereNotNull('monto_a_facturar')
+
+        )->filter(function ($query) use ($request) {
+                            
+            if ( $request->get('search_by_razon_social') !== null ) {
+                $query->where('razon_social_id', $request->get('search_by_razon_social'));
+            }
+                            
+            if ( $request->get('search_by_rut') !== null ) {
+                $rut = "%".$request->get('search_by_rut')."%";
+                $query->whereHas('razon_social', function($q) use ($rut) {
+                    $q->where('rut', 'like', $rut);
+                });
+            }
+
+        })
+        ->addColumn('razon_social', function ($dato) {
+            return $dato->razon_social->nombre;
+        })
+        ->addColumn('rut', function ($dato) {
+            return $dato->razon_social->rut;
+        })
+        ->addColumn('banco', function ($dato) {
+            return $dato->razon_social->banco ?? "-";
+        })
+        ->orderColumn('razon_social', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('nombre')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('rut', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('rut')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('banco', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
         ->toJson();
     }
 }

@@ -168,6 +168,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ajax/get_tabla_invoices', [App\Http\Controllers\AjaxController::class, 'get_tabla_invoices'])->name('ajax.get_tabla_invoices');
     Route::get('/ajax/get_tabla_razones_sociales', [App\Http\Controllers\AjaxController::class, 'get_tabla_razones_sociales'])->name('ajax.get_tabla_razones_sociales');
     Route::get('/ajax/get_tabla_lignes', [App\Http\Controllers\AjaxController::class, 'get_tabla_lignes'])->name('ajax.get_tabla_lignes');
+    Route::get('/ajax/get_tabla_gestiones_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_empresa'])->name('ajax.get_tabla_gestiones_by_empresa');
+    Route::get('/ajax/get_tabla_servicios_por_cobrar_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_servicios_por_cobrar_by_empresa'])->name('ajax.get_tabla_servicios_por_cobrar_by_empresa');
+    Route::get('/ajax/get_tabla_gestiones_by_razon_social', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_razon_social'])->name('ajax.get_tabla_gestiones_by_razon_social');
 
     // Api's hacia silvertool database
     Route::get('/silvertool/update_database_first_time', [App\Http\Controllers\SilverToolController::class, 'update_database_first_time'])->name('silver.update_database_first_time');

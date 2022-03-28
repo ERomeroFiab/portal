@@ -208,6 +208,62 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
+                                            <h6>Lignes:</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col" style="overflow-x:auto;">
+                                            <table id="tabla_lignes" class="table-hover" style="width:100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>id</th>
+                                                        <th>invoice_id</th>
+                                                        <th>mission_motive_eco_id</th>
+                                                        <th>razon_social_id</th>
+                                                        <th>mission_motive_id</th>
+                                                        <th>AMOUNT</th>
+                                                        <th>CN_CHOICE</th>
+                                                        <th>CN_ESTIMATED_DATE</th>
+                                                        <th>COMMENTAIRE</th>
+                                                        <th>DISPLAY_NEW_FEE</th>
+                                                        <th>ECO_AMOUNT</th>
+                                                        <th>FEES</th>
+                                                        <th>FEE_INCLUDES_VAT</th>
+                                                        <th>ID_INVOICE_LIGNE</th>
+                                                        <th>MOTIVE</th>
+                                                        <th>NO_LIGNE</th>
+                                                        <th>PID_INVOICE</th>
+                                                        <th>PID_INVOICE_LIGNE</th>
+                                                        <th>PID_MISSION_MOTIVE_ECO</th>
+                                                        <th>PRODUCT</th>
+                                                        <th>SUB_MOTIVE1</th>
+                                                        <th>SUB_MOTIVE2</th>
+                                                        <th>SYS_DATE_CREATION</th>
+                                                        <th>SYS_DATE_MODIFICATION</th>
+                                                        <th>SYS_HEURE_CREATION</th>
+                                                        <th>SYS_HEURE_MODIFICATION</th>
+                                                        <th>SYS_USER_CREATION</th>
+                                                        <th>SYS_USER_MODIFICATION</th>
+                                                        <th>TYPE</th>
+                                                        <th>YEAR</th>
+                                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {{-- SERVER SIDE RENDERING --}}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-12">
                                             <h6>Invoices:</h6>
                                         </div>
                                     </div>
@@ -272,6 +328,7 @@
         let TABLA_MISSIONS;
         let TABLA_MOTIVES;
         let TABLA_ECOS;
+        let TABLA_LIGNES;
         let TABLA_INVOICES;
         const CSRF = "{{ csrf_token() }}";
 
@@ -416,6 +473,67 @@
                     {data: "YEAR"},
                     {data: "CRITICITY"},
                     {data: "TIME"},
+                ],
+                // order: [[ 1, 'desc' ]],
+                pageLength: 20,
+                language: {
+                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
+                },
+                dom: 'Bfrtip',
+                buttons: [{
+                    extend: 'excelHtml5',
+                    title: "tabla ecos - " + new Date().toLocaleString(),
+                    className: "bg-info",
+                    exportOptions: {
+                        columns: ':not(.no_exportar)'
+                    },
+                    action: newExportAction
+                }],
+            });
+
+            TABLA_LIGNES = $('#tabla_lignes').DataTable({
+                serverSide: true,
+                processing: true,
+                ajax: {
+                    url: "{{ route('ajax.get_tabla_lignes') }}",
+                    // error: function(jqXHR, ajaxOptions, thrownError) {
+                    //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
+                    // },
+                    data: function(d) {
+                        d.search_by_razon_social_id = "{{ $razon_social->id }}";
+                    }
+                },
+                columns: [
+                    {data: "id"},
+                    {data: "invoice_id"},
+                    {data: "mission_motive_eco_id"},
+                    {data: "razon_social_id"},
+                    {data: "mission_motive_id"},
+                    {data: "AMOUNT"},
+                    {data: "CN_CHOICE"},
+                    {data: "CN_ESTIMATED_DATE"},
+                    {data: "COMMENTAIRE"},
+                    {data: "DISPLAY_NEW_FEE"},
+                    {data: "ECO_AMOUNT"},
+                    {data: "FEES"},
+                    {data: "FEE_INCLUDES_VAT"},
+                    {data: "ID_INVOICE_LIGNE"},
+                    {data: "MOTIVE"},
+                    {data: "NO_LIGNE"},
+                    {data: "PID_INVOICE"},
+                    {data: "PID_INVOICE_LIGNE"},
+                    {data: "PID_MISSION_MOTIVE_ECO"},
+                    {data: "PRODUCT"},
+                    {data: "SUB_MOTIVE1"},
+                    {data: "SUB_MOTIVE2"},
+                    {data: "SYS_DATE_CREATION"},
+                    {data: "SYS_DATE_MODIFICATION"},
+                    {data: "SYS_HEURE_CREATION"},
+                    {data: "SYS_HEURE_MODIFICATION"},
+                    {data: "SYS_USER_CREATION"},
+                    {data: "SYS_USER_MODIFICATION"},
+                    {data: "TYPE"},
+                    {data: "YEAR"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,

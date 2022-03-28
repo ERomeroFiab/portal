@@ -258,8 +258,10 @@ class SilverToolController extends Controller
                                 $new_eco->ECO_ECART                 = $eco['ECO_ECART'];
                                 $new_eco->ECO_PRESENTEE             = $eco['ECO_PRESENTEE'];
                                 $new_eco->ECO_VALIDEE               = $eco['ECO_VALIDEE'];
+                                $new_eco->ID_MISSION_MOTIVE_ECO     = $eco['ID_MISSION_MOTIVE_ECO'];
                                 $new_eco->NOTES                     = $eco['NOTES'];
                                 $new_eco->PACKAGE                   = $eco['PACKAGE'];
+                                $new_eco->PID_MISSION_MOTIVE        = $eco['PID_MISSION_MOTIVE'];
                                 $new_eco->SELECTION_ECO_A_FACTURER  = $eco['SELECTION_ECO_A_FACTURER'];
                                 $new_eco->SELECTION_ECO_VALIDEE     = $eco['SELECTION_ECO_VALIDEE'];
                                 $new_eco->SELECTION_FACTURATION     = $eco['SELECTION_FACTURATION'];
@@ -269,6 +271,12 @@ class SilverToolController extends Controller
                                 $new_eco->SOUS_MOTIF_1_TO_MONTH     = $eco['SOUS_MOTIF_1_TO_MONTH'];
                                 $new_eco->SOUS_MOTIF_1_TO_YEAR      = $eco['SOUS_MOTIF_1_TO_YEAR'];
                                 $new_eco->SOUS_MOTIF_2              = $eco['SOUS_MOTIF_2'];
+                                $new_eco->SYS_DATE_CREATION         = $eco['SYS_DATE_CREATION'];
+                                $new_eco->SYS_DATE_MODIFICATION     = $eco['SYS_DATE_MODIFICATION'];
+                                $new_eco->SYS_HEURE_CREATION        = $eco['SYS_HEURE_CREATION'];
+                                $new_eco->SYS_HEURE_MODIFICATION    = $eco['SYS_HEURE_MODIFICATION'];
+                                $new_eco->SYS_USER_CREATION         = $eco['SYS_USER_CREATION'];
+                                $new_eco->SYS_USER_MODIFICATION     = $eco['SYS_USER_MODIFICATION'];
                                 $new_eco->YEAR                      = $eco['YEAR'];
                                 $new_eco->CRITICITY                 = $eco['CRITICITY'];
                                 $new_eco->save();
@@ -362,13 +370,13 @@ class SilverToolController extends Controller
         $gestion->razon_social_id       = $eco->razon_social_id;
         $gestion->motivo                = $eco->mission_motive->mission->PRODUIT;
         $gestion->gestion               = $eco->SOUS_MOTIF_2;
-        // $gestion->periodo_gestion       = "2022-02-01";
         $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco->SOUS_MOTIF_1); // convertir en fecha
         $gestion->fecha_deposito        = $eco->DATE_PREVISIONNELLE;
         $gestion->monto_depositado      = $eco->ECO_PRESENTEE;
         $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
         $gestion->montos_facturados     = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
         $gestion->monto_a_facturar      = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3), 2) : null;
+        $gestion->origin                = "ST";
         $gestion->save();
     }
 

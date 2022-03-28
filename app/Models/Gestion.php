@@ -10,9 +10,8 @@ class Gestion extends Model
     use HasFactory;
 
     protected $casts = [
-        'fecha_inicio'  => 'datetime',
-        'fecha_cierre'  => 'datetime',
-        'fecha_deposito'  => 'datetime',
+        'periodo_gestion' => 'date:m-Y',
+        'fecha_deposito'  => 'date:d-m-Y',
     ];
 
     public function razon_social()

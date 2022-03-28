@@ -2,16 +2,7 @@
 
 @section('customcss')
     <style>
-        #tabla_missions_filter {
-            display: none;
-        }
-        #tabla_motives_filter {
-            display: none;
-        }
-        #tabla_ecos_filter {
-            display: none;
-        }
-        #tabla_invoices_filter {
+        #tabla_gestiones_filter {
             display: none;
         }
     </style>
@@ -23,7 +14,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Razón Social <b>{{ $razon_social->nombre }}</b> (id: {{$razon_social->id}})</h5>
+                    <h5><b>{{ $razon_social->nombre }}</b></h5>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -41,18 +32,25 @@
                                     value="{{ $razon_social->rut }}">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="contrato">Ciudad</label>
                                 <input disabled type="text" class="form-control" id="contrato"
                                     value="{{ $razon_social->ciudad }}">
                             </div>
                         </div>
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="form-group">
                                 <label for="date_signature">Codigo Postal</label>
                                 <input disabled type="text" class="form-control" id="date_signature"
                                     value="{{ $razon_social->codigo_postal }}">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group">
+                                <label for="date_signature">Banco</label>
+                                <input disabled type="text" class="form-control" id="date_signature"
+                                    value="{{ $razon_social->banco }}">
                             </div>
                         </div>
 
@@ -66,242 +64,22 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-12">
-                                            <h6>Missions:</h6>
+                                            <h6>Gestiones:</h6>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col" style="overflow-x:auto;">
-                                            <table id="tabla_missions" class="table-hover" style="width:100%">
+                                            <table id="tabla_gestiones" class="table-hover" style="width:100%">
                                                 <thead>
                                                     <tr>
-                                                        <th>id</th>
-                                                        <th>razon_social_id</th>
-                                                        <th>COORDINATOR</th>
-                                                        <th>CURRENT_STEP</th>
-                                                        <th>DATE_DEBUT</th>
-                                                        <th>DATE_DEBUT_ANALYSE</th>
-                                                        <th>DATE_FIN_ANALYSE</th>
-                                                        <th>DATE_FIN_MISSION</th>
-                                                        <th>DEADLINE</th>
-                                                        <th>NO_CONTRAT</th>
-                                                        <th>NO_MISSION</th>
-                                                        <th>POURCENTAGE</th>
-                                                        <th>PRIORITY</th>
-                                                        <th>PRODUIT</th>
-                                                        <th>PROJECT_MANAGER</th>
-                                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {{-- SERVER SIDE RENDERING --}}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12" style="overflow-x:auto;">
-                                            <h6>Motivos:</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" style="overflow-x:auto;">
-                                            <table id="tabla_motives" class="table-hover" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>id</th>
-                                                        <th>mission_id</th>
-                                                        <th>COMMENTS_SITE</th>
-                                                        <th>CONSULTANT</th>
-                                                        <th>DATE_LIMITE</th>
-                                                        <th>ETAPE_COURANTE</th>
-                                                        <th>ID_MISSION_MOTIVE</th>
-                                                        <th>MOTIF</th>
-                                                        <th>PID_MISSION</th>
-                                                        <th>POURCENTAGE</th>
-                                                        <th>SYS_DATE_CREATION</th>
-                                                        <th>SYS_DATE_MODIFICATION</th>
-                                                        <th>SYS_HEURE_CREATION</th>
-                                                        <th>SYS_HEURE_MODIFICATION</th>
-                                                        <th>SYS_USER_CREATION</th>
-                                                        <th>SYS_USER_MODIFICATION</th>
-                                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {{-- SERVER SIDE RENDERING --}}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h6>Ecos:</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" style="overflow-x:auto;">
-                                            <table id="tabla_ecos" class="table-hover" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>id</th>
-                                                        <th>motive_id</th>
-                                                        <th>mission_id</th>
-                                                        <th>razon_social_id</th>
-                                                        <th>DATE_PREVISIONNELLE</th>
-                                                        <th>ECO_ABANDONNEE</th>
-                                                        <th>ECO_A_FACTURER</th>
-                                                        <th>ECO_ECART</th>
-                                                        <th>ECO_PRESENTEE</th>
-                                                        <th>ECO_VALIDEE</th>
-                                                        <th>ID_MISSION_MOTIVE_ECO</th>
-                                                        <th>NOTES</th>
-                                                        <th>PACKAGE</th>
-                                                        <th>PID_MISSION_MOTIVE</th>
-                                                        <th>SELECTION_ECO_A_FACTURER</th>
-                                                        <th>SELECTION_ECO_VALIDEE</th>
-                                                        <th>SELECTION_FACTURATION</th>
-                                                        <th>SOUS_MOTIF_1</th>
-                                                        <th>SOUS_MOTIF_1_FROM_MONTH</th>
-                                                        <th>SOUS_MOTIF_1_FROM_YEAR</th>
-                                                        <th>SOUS_MOTIF_1_TO_MONTH</th>
-                                                        <th>SOUS_MOTIF_1_TO_YEAR</th>
-                                                        <th>SOUS_MOTIF_2</th>
-                                                        <th>SYS_DATE_CREATION</th>
-                                                        <th>SYS_DATE_MODIFICATION</th>
-                                                        <th>SYS_HEURE_CREATION</th>
-                                                        <th>SYS_HEURE_MODIFICATION</th>
-                                                        <th>SYS_USER_CREATION</th>
-                                                        <th>SYS_USER_MODIFICATION</th>
-                                                        <th>TMP_NO_INVOICE</th>
-                                                        <th>YEAR</th>
-                                                        <th>CRITICITY</th>
-                                                        <th>TIME</th>
-                                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {{-- SERVER SIDE RENDERING --}}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h6>Lignes:</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" style="overflow-x:auto;">
-                                            <table id="tabla_lignes" class="table-hover" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>id</th>
-                                                        <th>invoice_id</th>
-                                                        <th>mission_motive_eco_id</th>
-                                                        <th>razon_social_id</th>
-                                                        <th>mission_motive_id</th>
-                                                        <th>AMOUNT</th>
-                                                        <th>CN_CHOICE</th>
-                                                        <th>CN_ESTIMATED_DATE</th>
-                                                        <th>COMMENTAIRE</th>
-                                                        <th>DISPLAY_NEW_FEE</th>
-                                                        <th>ECO_AMOUNT</th>
-                                                        <th>FEES</th>
-                                                        <th>FEE_INCLUDES_VAT</th>
-                                                        <th>ID_INVOICE_LIGNE</th>
-                                                        <th>MOTIVE</th>
-                                                        <th>NO_LIGNE</th>
-                                                        <th>PID_INVOICE</th>
-                                                        <th>PID_INVOICE_LIGNE</th>
-                                                        <th>PID_MISSION_MOTIVE_ECO</th>
-                                                        <th>PRODUCT</th>
-                                                        <th>SUB_MOTIVE1</th>
-                                                        <th>SUB_MOTIVE2</th>
-                                                        <th>SYS_DATE_CREATION</th>
-                                                        <th>SYS_DATE_MODIFICATION</th>
-                                                        <th>SYS_HEURE_CREATION</th>
-                                                        <th>SYS_HEURE_MODIFICATION</th>
-                                                        <th>SYS_USER_CREATION</th>
-                                                        <th>SYS_USER_MODIFICATION</th>
-                                                        <th>TYPE</th>
-                                                        <th>YEAR</th>
-                                                        {{-- <th class="no_exportar">&nbsp;</th> --}}
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {{-- SERVER SIDE RENDERING --}}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <h6>Invoices:</h6>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col" style="overflow-x:auto;">
-                                            <table id="tabla_invoices" class="table-hover" style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>id</th>
-                                                        <th>razon_social_id</th>
-                                                        <th>CONTRACT_NBER</th>
-                                                        <th>DATE_EXPORT_SAGE</th>
-                                                        <th>DUE_DATE</th>
-                                                        <th>ENTITY_NBER</th>
-                                                        <th>FIABILIS_GROUP_ENTITY</th>
-                                                        <th>ID_INVOICE</th>
-                                                        <th>INVOICE_DATE</th>
-                                                        <th>INVOICE_NBER</th>
-                                                        <th>NO_CONTRAT</th>
-                                                        <th>PAYE</th>
-                                                        <th>PAYMENT_DATE</th>
-                                                        <th>PID_CONTRAT</th>
-                                                        <th>PID_IDENTIFICATION</th>
-                                                        <th>PID_INVOICE</th>
-                                                        <th>PO</th>
-                                                        <th>PRODUCT</th>
-                                                        <th>SELECTION_EXPORT</th>
-                                                        <th>STATUS</th>
-                                                        <th>SYS_DATE_CREATION</th>
-                                                        <th>SYS_DATE_MODIFICATION</th>
-                                                        <th>SYS_HEURE_CREATION</th>
-                                                        <th>SYS_HEURE_MODIFICATION</th>
-                                                        <th>SYS_USER_CREATION</th>
-                                                        <th>SYS_USER_MODIFICATION</th>
-                                                        <th>TOTAL_AMOUNT_INVOICED</th>
-                                                        <th>TYPE</th>
-                                                        <th>BALANCE_DUE</th>
-                                                        <th>NOM_MODELE_WORD</th>
+                                                        <th>Motivo</th>
+                                                        <th>Gestion</th>
+                                                        <th>Periodo Gestión</th>
+                                                        <th>Fecha Depósito</th>
+                                                        <th>Monto Depositado</th>
+                                                        <th>Honorarios Fiabilis</th>
+                                                        <th>Montos Facturados</th>
+                                                        <th>Monto a Facturar</th>
                                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                                     </tr>
                                                 </thead>
@@ -325,20 +103,17 @@
 
 @section('customjs')
     <script>
-        let TABLA_MISSIONS;
-        let TABLA_MOTIVES;
-        let TABLA_ECOS;
-        let TABLA_LIGNES;
-        let TABLA_INVOICES;
+        let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
+        const RAZON_SOCIAL_NAME = "{{ $razon_social->nombre }}";
 
         $(document).ready(function() {
 
-            TABLA_MISSIONS = $('#tabla_missions').DataTable({
+            TABLA_GESTIONES = $('#tabla_gestiones').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_missions') }}",
+                    url: "{{ route('ajax.get_tabla_gestiones_by_razon_social') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
@@ -347,21 +122,14 @@
                     }
                 },
                 columns: [
-                    {data: "id"},
-                    {data: "razon_social_id"},
-                    {data: "COORDINATOR"},
-                    {data: "CURRENT_STEP"},
-                    {data: "DATE_DEBUT"},
-                    {data: "DATE_DEBUT_ANALYSE"},
-                    {data: "DATE_FIN_ANALYSE"},
-                    {data: "DATE_FIN_MISSION"},
-                    {data: "DEADLINE"},
-                    {data: "NO_CONTRAT"},
-                    {data: "NO_MISSION"},
-                    {data: "POURCENTAGE"},
-                    {data: "PRIORITY"},
-                    {data: "PRODUIT"},
-                    {data: "PROJECT_MANAGER"},
+                    {data: "motivo"},
+                    {data: "gestion"},
+                    {data: "periodo_gestion"},
+                    {data: "fecha_deposito"},
+                    {data: "monto_depositado"},
+                    {data: "honorarios_fiabilis"},
+                    {data: "montos_facturados"},
+                    {data: "monto_a_facturar"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -371,240 +139,7 @@
                 dom: 'Bfrtip',
                 buttons: [{
                     extend: 'excelHtml5',
-                    title: "tabla missions - " + new Date().toLocaleString(),
-                    className: "bg-info",
-                    exportOptions: {
-                        columns: ':not(.no_exportar)'
-                    },
-                    action: newExportAction
-                }],
-            });
-
-            TABLA_MOTIVES = $('#tabla_motives').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('ajax.get_tabla_motives') }}",
-                    // error: function(jqXHR, ajaxOptions, thrownError) {
-                    //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
-                    // },
-                    data: function(d) {
-                        d.search_by_razon_social_id = "{{ $razon_social->id }}";
-                    }
-                },
-                columns: [
-                    {data: "id"},
-                    {data: "mission_id"},
-                    {data: "COMMENTS_SITE"},
-                    {data: "CONSULTANT"},
-                    {data: "DATE_LIMITE"},
-                    {data: "ETAPE_COURANTE"},
-                    {data: "ID_MISSION_MOTIVE"},
-                    {data: "MOTIF"},
-                    {data: "PID_MISSION"},
-                    {data: "POURCENTAGE"},
-                    {data: "SYS_DATE_CREATION"},
-                    {data: "SYS_DATE_MODIFICATION"},
-                    {data: "SYS_HEURE_CREATION"},
-                    {data: "SYS_HEURE_MODIFICATION"},
-                    {data: "SYS_USER_CREATION"},
-                    {data: "SYS_USER_MODIFICATION"},
-                ],
-                // order: [[ 1, 'desc' ]],
-                pageLength: 20,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
-                },
-                dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    title: "tabla motives - " + new Date().toLocaleString(),
-                    className: "bg-info",
-                    exportOptions: {
-                        columns: ':not(.no_exportar)'
-                    },
-                    action: newExportAction
-                }],
-            });
-
-            TABLA_ECOS = $('#tabla_ecos').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('ajax.get_tabla_ecos') }}",
-                    // error: function(jqXHR, ajaxOptions, thrownError) {
-                    //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
-                    // },
-                    data: function(d) {
-                        d.search_by_razon_social_id = "{{ $razon_social->id }}";
-                    }
-                },
-                columns: [
-                    {data: "id"},
-                    {data: "mission_motive_id"},
-                    {data: "mission_id"},
-                    {data: "razon_social_id"},
-                    {data: "DATE_PREVISIONNELLE"},
-                    {data: "ECO_ABANDONNEE"},
-                    {data: "ECO_A_FACTURER"},
-                    {data: "ECO_ECART"},
-                    {data: "ECO_PRESENTEE"},
-                    {data: "ECO_VALIDEE"},
-                    {data: "ID_MISSION_MOTIVE_ECO"},
-                    {data: "NOTES"},
-                    {data: "PACKAGE"},
-                    {data: "PID_MISSION_MOTIVE"},
-                    {data: "SELECTION_ECO_A_FACTURER"},
-                    {data: "SELECTION_ECO_VALIDEE"},
-                    {data: "SELECTION_FACTURATION"},
-                    {data: "SOUS_MOTIF_1"},
-                    {data: "SOUS_MOTIF_1_FROM_MONTH"},
-                    {data: "SOUS_MOTIF_1_FROM_YEAR"},
-                    {data: "SOUS_MOTIF_1_TO_MONTH"},
-                    {data: "SOUS_MOTIF_1_TO_YEAR"},
-                    {data: "SOUS_MOTIF_2"},
-                    {data: "SYS_DATE_CREATION"},
-                    {data: "SYS_DATE_MODIFICATION"},
-                    {data: "SYS_HEURE_CREATION"},
-                    {data: "SYS_HEURE_MODIFICATION"},
-                    {data: "SYS_USER_CREATION"},
-                    {data: "SYS_USER_MODIFICATION"},
-                    {data: "TMP_NO_INVOICE"},
-                    {data: "YEAR"},
-                    {data: "CRITICITY"},
-                    {data: "TIME"},
-                ],
-                // order: [[ 1, 'desc' ]],
-                pageLength: 20,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
-                },
-                dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    title: "tabla ecos - " + new Date().toLocaleString(),
-                    className: "bg-info",
-                    exportOptions: {
-                        columns: ':not(.no_exportar)'
-                    },
-                    action: newExportAction
-                }],
-            });
-
-            TABLA_LIGNES = $('#tabla_lignes').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('ajax.get_tabla_lignes') }}",
-                    // error: function(jqXHR, ajaxOptions, thrownError) {
-                    //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
-                    // },
-                    data: function(d) {
-                        d.search_by_razon_social_id = "{{ $razon_social->id }}";
-                    }
-                },
-                columns: [
-                    {data: "id"},
-                    {data: "invoice_id"},
-                    {data: "mission_motive_eco_id"},
-                    {data: "razon_social_id"},
-                    {data: "mission_motive_id"},
-                    {data: "AMOUNT"},
-                    {data: "CN_CHOICE"},
-                    {data: "CN_ESTIMATED_DATE"},
-                    {data: "COMMENTAIRE"},
-                    {data: "DISPLAY_NEW_FEE"},
-                    {data: "ECO_AMOUNT"},
-                    {data: "FEES"},
-                    {data: "FEE_INCLUDES_VAT"},
-                    {data: "ID_INVOICE_LIGNE"},
-                    {data: "MOTIVE"},
-                    {data: "NO_LIGNE"},
-                    {data: "PID_INVOICE"},
-                    {data: "PID_INVOICE_LIGNE"},
-                    {data: "PID_MISSION_MOTIVE_ECO"},
-                    {data: "PRODUCT"},
-                    {data: "SUB_MOTIVE1"},
-                    {data: "SUB_MOTIVE2"},
-                    {data: "SYS_DATE_CREATION"},
-                    {data: "SYS_DATE_MODIFICATION"},
-                    {data: "SYS_HEURE_CREATION"},
-                    {data: "SYS_HEURE_MODIFICATION"},
-                    {data: "SYS_USER_CREATION"},
-                    {data: "SYS_USER_MODIFICATION"},
-                    {data: "TYPE"},
-                    {data: "YEAR"},
-                ],
-                // order: [[ 1, 'desc' ]],
-                pageLength: 20,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
-                },
-                dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    title: "tabla ecos - " + new Date().toLocaleString(),
-                    className: "bg-info",
-                    exportOptions: {
-                        columns: ':not(.no_exportar)'
-                    },
-                    action: newExportAction
-                }],
-            });
-
-            TABLA_INVOICES = $('#tabla_invoices').DataTable({
-                serverSide: true,
-                processing: true,
-                ajax: {
-                    url: "{{ route('ajax.get_tabla_invoices') }}",
-                    // error: function(jqXHR, ajaxOptions, thrownError) {
-                    //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
-                    // },
-                    data: function(d) {
-                        d.search_by_razon_social_id = "{{ $razon_social->id }}";
-                    }
-                },
-                columns: [
-                    {data: "id"},
-                    {data: "razon_social_id"},
-                    {data: "CONTRACT_NBER"},
-                    {data: "DATE_EXPORT_SAGE"},
-                    {data: "DUE_DATE"},
-                    {data: "ENTITY_NBER"},
-                    {data: "FIABILIS_GROUP_ENTITY"},
-                    {data: "ID_INVOICE"},
-                    {data: "INVOICE_DATE"},
-                    {data: "INVOICE_NBER"},
-                    {data: "NO_CONTRAT"},
-                    {data: "PAYE"},
-                    {data: "PAYMENT_DATE"},
-                    {data: "PID_CONTRAT"},
-                    {data: "PID_IDENTIFICATION"},
-                    {data: "PID_INVOICE"},
-                    {data: "PO"},
-                    {data: "PRODUCT"},
-                    {data: "SELECTION_EXPORT"},
-                    {data: "STATUS"},
-                    {data: "SYS_DATE_CREATION"},
-                    {data: "SYS_DATE_MODIFICATION"},
-                    {data: "SYS_HEURE_CREATION"},
-                    {data: "SYS_HEURE_MODIFICATION"},
-                    {data: "SYS_USER_CREATION"},
-                    {data: "SYS_USER_MODIFICATION"},
-                    {data: "TOTAL_AMOUNT_INVOICED"},
-                    {data: "TYPE"},
-                    {data: "BALANCE_DUE"},
-                    {data: "NOM_MODELE_WORD"},
-                ],
-                // order: [[ 1, 'desc' ]],
-                pageLength: 20,
-                language: {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.19/i18n/Spanish.json',
-                },
-                dom: 'Bfrtip',
-                buttons: [{
-                    extend: 'excelHtml5',
-                    title: "tabla invoices - " + new Date().toLocaleString(),
+                    title: `Gestiones de ${RAZON_SOCIAL_NAME} - ` + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'
