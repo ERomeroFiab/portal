@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('/reportes/update/{id}', [App\Http\Controllers\ReporteController::class, 'admin_update'])->name('admin.reportes.update');
 
         Route::get('/herramientas/index', [App\Http\Controllers\HerramientaController::class, 'admin_index'])->name('admin.herramientas.index');
+        Route::post('/excel/import_excel_historico', [App\Http\Controllers\HerramientaController::class, 'import_excel_historico'])->name('excel.import_excel_historico');
 
     });
 

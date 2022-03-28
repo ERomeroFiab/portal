@@ -18,7 +18,7 @@ class CreateGestionsTable extends Migration
             $table->double('monto_depositado')->nullable()->comment('tabla mission_motive_eco, columna ECO_PRESENTEE');
             $table->double('honorarios_fiabilis')->nullable()->comment('tabla invoice_ligne, columna AMOUNT');
             $table->double('montos_facturados')->nullable()->comment('tabla invoice_ligne, columna AMOUNT');
-            $table->double('monto_a_facturar')->nullable()->comment('30% de la columna ECO_PRESENTEE');
+            $table->double('monto_a_facturar')->nullable()->comment('30% de la columna ECO_PRESENTEE (monto depositado)');
             $table->string('origin')->nullable()->comment('ST (Silvertool), CN (excel histórico)');
 
             $table->unsignedBigInteger('razon_social_id')->nullable();
