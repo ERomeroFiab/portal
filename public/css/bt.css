@@ -133,3 +133,8 @@ button{
 .custom-gradient-fiabilis {
     background: -webkit-linear-gradient(left, #002f63, #4590e6) !important;
 }
+
+.table-header-fiabilis {
+    background-color: #1d3d61;
+    color: white;
+}

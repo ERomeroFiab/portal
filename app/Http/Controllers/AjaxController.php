@@ -614,6 +614,7 @@ class AjaxController extends Controller
         ->editColumn('monto_a_facturar', function($dato){
             return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
         })
+        ->addIndexColumn()
         ->toJson();
     }
 }
