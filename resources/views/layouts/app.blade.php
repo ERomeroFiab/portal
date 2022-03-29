@@ -80,6 +80,17 @@
                                         <span class="mx-1">{{ auth()->user()->name }} ({{ auth()->user()->rol }}) </span>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navUserDropdown">
+                                        
+                                        @if ( auth()->user()->rol === "Administrador" )
+                                            <a class="dropdown-item" href="#">Perfil</a>
+                                        @elseif( auth()->user()->rol === "Consultor" )
+                                            <a class="dropdown-item" href="#">Perfil</a>
+                                        @elseif( auth()->user()->rol === "Cliente" )
+                                            <a class="dropdown-item" href="{{ route('cliente.perfil.show') }}">Perfil</a>
+                                        @else
+                                            <a class="dropdown-item" href="#">Perfil</a>
+                                        @endif
+
                                         <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                             <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
                                         </a>
