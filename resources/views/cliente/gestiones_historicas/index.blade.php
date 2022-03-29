@@ -82,6 +82,7 @@
     <script>
         let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
+        const EMPRESA_NAME = "{{ auth()->user()->empresa->nombre }}";
 
         $(document).ready(function() {
 
@@ -121,8 +122,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    text: "Exportar a Excel",
-                    title: "Gestiones Históricas - " + new Date().toLocaleString(),
+                    title: `Gestiones de ${EMPRESA_NAME}`,
                     className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'

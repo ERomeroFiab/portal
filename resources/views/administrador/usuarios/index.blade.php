@@ -152,7 +152,7 @@
                buttons: [{
                   extend: 'excelHtml5',
                   text: "Exportar a Excel",
-                  title: "tabla empresas - " + new Date().toLocaleString(),
+                  title: "Usuarios - " + new Date().toLocaleString(),
                   className: "bt_excel",
                   exportOptions: {
                         columns: ':not(.no_exportar)'

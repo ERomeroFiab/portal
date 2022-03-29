@@ -140,7 +140,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: `Gestiones de ${RAZON_SOCIAL_NAME} - ` + new Date().toLocaleString(),
+                    title: `Gestiones de ${RAZON_SOCIAL_NAME}`,
                     className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'

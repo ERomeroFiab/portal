@@ -547,7 +547,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: "tabla ecos - " + new Date().toLocaleString(),
+                    title: "tabla lignes - " + new Date().toLocaleString(),
                     className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'

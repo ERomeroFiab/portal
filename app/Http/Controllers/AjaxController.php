@@ -427,6 +427,18 @@ class AjaxController extends Controller
                 $order
             );
         })
+        ->editColumn('monto_depositado', function($dato){
+            return $dato->monto_depositado ? "$ ".number_format( $dato->monto_depositado, 0, ",", ".") : null;
+        })
+        ->editColumn('honorarios_fiabilis', function($dato){
+            return $dato->honorarios_fiabilis ? "$ ".number_format( $dato->honorarios_fiabilis, 0, ",", ".") : null;
+        })
+        ->editColumn('montos_facturados', function($dato){
+            return $dato->montos_facturados ? "$ ".number_format( $dato->montos_facturados, 0, ",", ".") : null;
+        })
+        ->editColumn('monto_a_facturar', function($dato){
+            return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
+        })
         ->toJson();
     }
 
@@ -522,6 +534,18 @@ class AjaxController extends Controller
                 $order
             );
         })
+        ->editColumn('monto_depositado', function($dato){
+            return $dato->monto_depositado ? "$ ".number_format( $dato->monto_depositado, 0, ",", ".") : null;
+        })
+        ->editColumn('honorarios_fiabilis', function($dato){
+            return $dato->honorarios_fiabilis ? "$ ".number_format( $dato->honorarios_fiabilis, 0, ",", ".") : null;
+        })
+        ->editColumn('montos_facturados', function($dato){
+            return $dato->montos_facturados ? "$ ".number_format( $dato->montos_facturados, 0, ",", ".") : null;
+        })
+        ->editColumn('monto_a_facturar', function($dato){
+            return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
+        })
         ->toJson();
     }
 
@@ -577,6 +601,18 @@ class AjaxController extends Controller
                 RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
                 $order
             );
+        })
+        ->editColumn('monto_depositado', function($dato){
+            return $dato->monto_depositado ? "$ ".number_format( $dato->monto_depositado, 0, ",", ".") : null;
+        })
+        ->editColumn('honorarios_fiabilis', function($dato){
+            return $dato->honorarios_fiabilis ? "$ ".number_format( $dato->honorarios_fiabilis, 0, ",", ".") : null;
+        })
+        ->editColumn('montos_facturados', function($dato){
+            return $dato->montos_facturados ? "$ ".number_format( $dato->montos_facturados, 0, ",", ".") : null;
+        })
+        ->editColumn('monto_a_facturar', function($dato){
+            return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
         })
         ->toJson();
     }
