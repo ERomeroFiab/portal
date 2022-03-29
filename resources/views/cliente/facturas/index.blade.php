@@ -46,9 +46,9 @@
 
                     </div>
                     <div class="row mt-5">
-                        <div class="col-12">
-                            <table id="tabla_gestiones" class="table-hover" style="width:100%">
-                                <thead>
+                        <div class="col" style="overflow-x: auto;">
+                            <table id="tabla_gestiones" class="table-hover table-striped table-bordered table-sm table-responsive" style="width:100%">
+                                <thead class="table-header-fiabilis">
                                     <tr>
                                         <th>Razón Social</th>
                                         <th>Rut</th>
@@ -82,6 +82,7 @@
     <script>
         let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
+        const EMPRESA_NAME = "{{ auth()->user()->empresa->nombre }}";
 
         $(document).ready(function() {
 
@@ -121,7 +122,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: "tabla empresas - " + new Date().toLocaleString(),
+                    title: `Servicios por cobrar de ${EMPRESA_NAME}`,
                     className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'

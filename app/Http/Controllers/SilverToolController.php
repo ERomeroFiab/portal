@@ -375,7 +375,7 @@ class SilverToolController extends Controller
         $gestion->monto_depositado      = $eco->ECO_PRESENTEE;
         $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
         $gestion->montos_facturados     = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
-        $gestion->monto_a_facturar      = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3), 2) : null;
+        $gestion->monto_a_facturar      = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3)) : null;
         $gestion->origin                = "ST";
         $gestion->save();
     }
