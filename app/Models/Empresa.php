@@ -11,12 +11,12 @@ class Empresa extends Model
 
     public function razones_sociales()
     {
-        return $this->hasMany('App\Models\RazonSocial', 'id'); 
+        return $this->hasMany('App\Models\RazonSocial', 'empresa_id', 'id'); 
     }
 
     public function representante()
     {
-        return $this->hasOne('App\Models\User', 'id'); 
+        return $this->hasOne('App\Models\User', 'empresa_id', 'id'); 
     }
 
     public function get_razones_sociales_quantity_in_text()
