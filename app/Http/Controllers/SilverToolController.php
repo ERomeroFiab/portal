@@ -148,7 +148,7 @@ class SilverToolController extends Controller
     {
         $new_user = new User();
         $new_user->empresa_id = $razon_social->empresa->id;
-        $new_user->name       = "Nombre";
+        $new_user->name       = $razon_social->rut;
         $new_user->rut        = $razon_social->rut;
         $new_user->rol        = "Cliente";
         $new_user->password   = bcrypt($razon_social->rut);
