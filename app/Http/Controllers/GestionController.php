@@ -33,8 +33,22 @@ class GestionController extends Controller
     {
         $empresa = Empresa::find( auth()->user()->empresa->id );
 
+        $gestiones = Gestion::distinct('gestion')
+                                ->whereHas('razon_social', function($q) use ($empresa){
+                                    $q->where('empresa_id', $empresa->id);
+                                })
+                                ->pluck('gestion');
+
+        $motivos = Gestion::distinct('motivo')
+                                ->whereHas('razon_social', function($q) use ($empresa){
+                                    $q->where('empresa_id', $empresa->id);
+                                })
+                                ->pluck('motivo');
+
         return view('cliente.gestiones.index', [
             'razones_sociales' => $empresa->razones_sociales,
+            'gestiones'        => $gestiones,
+            'motivos'          => $motivos,
         ]);
     }
 

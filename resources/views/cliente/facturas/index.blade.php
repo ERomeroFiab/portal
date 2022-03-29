@@ -40,6 +40,28 @@
                             <input id="input__rut" type="text" class="form-control" autocomplete="off">
                         </div>
 
+                        <div class="col-3 form-group">
+                            <label>Gestión:</label>
+                            <input class="form-control" list="gestiones" name="browser" id="input__gestion">
+    
+                            <datalist id="gestiones">
+                                @foreach ($gestiones as $gestion)
+                                    <option value="{{$gestion}}">{{$gestion}}</option>
+                                @endforeach
+                            </datalist>
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Motivo:</label>
+                            <input class="form-control" list="motivos" name="browser" id="input__motivo">
+    
+                            <datalist id="motivos">
+                                @foreach ($motivos as $motivo)
+                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @endforeach
+                            </datalist>
+                        </div>
+
                         <div class="col-12 form-group">
                             <button onclick="filtrar_tabla()" class="btn btn-sm btn-success" type="button">Filtrar Datos</button>
                         </div>
@@ -98,6 +120,8 @@
                         d.search_by_empresa      = "{{ auth()->user()->empresa->id }}";
                         d.search_by_razon_social = document.querySelector('#input__razon_social').value;
                         d.search_by_rut          = document.querySelector('#input__rut').value;
+                        d.search_by_gestion      = document.querySelector('#input__gestion').value;
+                        d.search_by_motivo       = document.querySelector('#input__motivo').value;
                     }
                 },
                 columns: [
@@ -205,6 +229,14 @@
         // Pintar en verde los inputs que contienen algo
         $("#input__razon_social").change(function() {
             agregar_quitar_bg_success('input__razon_social');
+            filtrar_tabla();
+        });
+        $("#input__gestion").change(function() {
+            agregar_quitar_bg_success('input__gestion');
+            filtrar_tabla();
+        });
+        $("#input__motivo").change(function() {
+            agregar_quitar_bg_success('input__motivo');
             filtrar_tabla();
         });
         $("#input__rut").change(function() {agregar_quitar_bg_success('input__rut');});

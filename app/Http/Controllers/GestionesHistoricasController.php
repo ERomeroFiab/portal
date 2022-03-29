@@ -6,15 +6,31 @@ use App\Models\GestionesHistoricas;
 use App\Http\Requests\StoreGestionesHistoricasRequest;
 use App\Http\Requests\UpdateGestionesHistoricasRequest;
 use App\Models\Empresa;
+use App\Models\Gestion;
 
 class GestionesHistoricasController extends Controller
 {
     public function cliente_index()
     {
         $empresa = Empresa::find( auth()->user()->empresa->id );
+        $gestiones = Gestion::distinct('gestion')
+                                ->where('origin', 'CN')
+                                ->whereHas('razon_social', function($q) use ($empresa){
+                                    $q->where('empresa_id', $empresa->id);
+                                })
+                                ->pluck('gestion');
+
+        $motivos = Gestion::distinct('motivo')
+                                ->where('origin', 'CN')
+                                ->whereHas('razon_social', function($q) use ($empresa){
+                                    $q->where('empresa_id', $empresa->id);
+                                })
+                                ->pluck('motivo');
 
         return view('cliente.gestiones_historicas.index', [
             'razones_sociales' => $empresa->razones_sociales,
+            'gestiones'        => $gestiones,
+            'motivos'          => $motivos,
         ]);
     }
 
