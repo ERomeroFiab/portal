@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+<link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
     @include('includes.messages_in_session')
 
     <div class="row">
@@ -15,6 +16,29 @@
                 </div>
 
                 <div class="card-body">
+                    <form action="{{ route('cliente.perfil.update',['id' =>  $user->id]) }}" method="POST">
+                        @csrf
+                        <div class="row">
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Nueva Contraseña</label>
+                                    <input name="password" type="password" class="form-control" id="name" value="">
+                                    
+                                    @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <input class="btn btn-sm btn-success" type="submit" value="Cambiar Contraseña">
+                            </div>
+
+                        </div>
+                    </form>
 
                 </div>
 

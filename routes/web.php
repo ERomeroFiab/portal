@@ -114,6 +114,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::post('/facturas/update/{id}', [App\Http\Controllers\FacturaController::class, 'cliente_update'])->name('cliente.facturas.update');
 
         Route::get('/perfil/show', [App\Http\Controllers\PerfilController::class, 'cliente_show'])->name('cliente.perfil.show');
+        Route::post('/perfil/update/{id}', [App\Http\Controllers\perfilController::class, 'perfil_update'])->name('cliente.perfil.update');
 
         Route::get('/gestiones-historicas/index', [App\Http\Controllers\GestionesHistoricasController::class, 'cliente_index'])->name('cliente.gestiones-historicas.index');
     });
