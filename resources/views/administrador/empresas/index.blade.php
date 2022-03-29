@@ -86,15 +86,9 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function ( d ) {
-<<<<<<< HEAD
-                        d.SEARCH_BY_NOMBRE                       = $('#input__Nombre').val();
-                        //d.SEARCH_BY_CLIENTE                      = $('#input__cliente').val();
-                        //d.SEARCH_BY_RAZONES_SOCIALES_COUNT       = $('#input__razones_sociales_count').val();
-=======
                         d.SEARCH_BY_NOMBRE                      = $('#input__Nombre').val();
                         d.SEARCH_BY_REPRESENTANTE               = $('#input__representante').val();
                         d.SEARCH_BY_RAZONES_SOCIALES_COUNT      = $('#input__razones_sociales_count').val();
->>>>>>> bf365528c548af8b7a8318b2383d87cbaa30259d
                     }
                 },
                 columns: [
@@ -104,7 +98,7 @@
                             return `<span title="empresa_id: ${data.id}">${data.nombre}</span>`;
                         }
                     },
-                    { data: "cliente"},
+                    { data: "representante"},
                     { data: "razones_sociales_count"},
                     { 
                         data: 'action', 
