@@ -447,11 +447,12 @@ class AjaxController extends Controller
         $empresa_id = $request->get('search_by_empresa');
         
         return DataTables::eloquent( 
-            GestionesHistoricas::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
+            Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
                 $q3->wherehas('empresa', function($q4) use ($empresa_id) {
                     $q4->where('id', $empresa_id);
                 });
             })
+            ->where('origin', "CN")
 
         )->filter(function ($query) use ($request) {
                             
@@ -493,6 +494,18 @@ class AjaxController extends Controller
                 RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
                 $order
             );
+        })
+        ->editColumn('monto_depositado', function($dato){
+            return $dato->monto_depositado ? "$ ".number_format( $dato->monto_depositado, 0, ",", ".") : null;
+        })
+        ->editColumn('honorarios_fiabilis', function($dato){
+            return $dato->honorarios_fiabilis ? "$ ".number_format( $dato->honorarios_fiabilis, 0, ",", ".") : null;
+        })
+        ->editColumn('montos_facturados', function($dato){
+            return $dato->montos_facturados ? "$ ".number_format( $dato->montos_facturados, 0, ",", ".") : null;
+        })
+        ->editColumn('monto_a_facturar', function($dato){
+            return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
         })
         ->toJson();
     }
