@@ -37,7 +37,7 @@ class GestionesHistoricasImport implements ToModel, WithChunkReading, WithEvents
 
         if ( $razon_social_existente ) {
             $motivo              = $row[10];
-            $gestion             = $row[8];
+            $gestion             = $row[9];
             $periodo_gestion     = $row[16];
             $fecha_deposito      = $row[22];
             $monto_depositado    = preg_replace("/[^0-9]/", "", round($row[19]));
