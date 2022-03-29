@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
+
     @include('includes.messages_in_session')
 
     <div class="row">

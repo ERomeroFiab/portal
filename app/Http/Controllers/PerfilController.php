@@ -24,7 +24,7 @@ class PerfilController extends Controller
         Validator::make($request->all(), [
             'password' => 'required|string',
         ])->validate();
-
+            
 
         $user = User::find( $id );
         $user->password = bcrypt($request->get('password'));

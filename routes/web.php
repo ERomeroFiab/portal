@@ -49,6 +49,7 @@ Route::group(['middleware' => ['auth']], function() {
         Route::get('/razones-sociales/edit/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_edit'])->name('admin.razones-sociales.edit');
         Route::post('/razones-sociales/update/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_update'])->name('admin.razones-sociales.update');
         Route::delete('/razones-sociales/destroy/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_destroy'])->name('admin.razones-sociales.destroy');
+        Route::get('/razones-sociales/resetear_password/{id}', [App\Http\Controllers\RazonSocialController::class, 'admin_resetear_password'])->name('admin.razones-sociales.resetear_password');
 
         Route::get('/gestiones/index', [App\Http\Controllers\GestionController::class, 'admin_index'])->name('admin.gestiones.index');
         Route::get('/gestiones/create', [App\Http\Controllers\GestionController::class, 'admin_create'])->name('admin.gestiones.create');
