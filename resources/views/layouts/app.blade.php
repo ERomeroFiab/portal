@@ -116,6 +116,7 @@
                     <div class="container-fluid">
                         <div class="copyright">
                             © {{ date('Y') }}, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
+                            Soporte: portalclientes@fiabiliscg.com
                         </div>
                     </div>
                 </footer>
@@ -176,6 +177,7 @@
                     <div class="container-fluid">
                         <div class="copyright">
                             © {{ date('Y') }}, Developed by <a href="https://www.fiabilis.cl/" target="_blank">Fiabilis</a>.
+                            Soporte: portalclientes@fiabiliscg.com
                         </div>
                     </div>
                 </footer>

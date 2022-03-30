@@ -17,7 +17,7 @@ class ClienteMiddleware
     public function handle(Request $request, Closure $next)
     {
         if ( auth()->user()->rol !== "Cliente" ) {
-            abort(403, "No tienes permisos para ingresar a esta sección");
+            return redirect('/');
         }
         return $next($request);
     }

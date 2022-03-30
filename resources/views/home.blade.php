@@ -52,6 +52,9 @@
 @endsection
 
 @section('content')
+
+    @include('includes.messages_in_session')
+
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -63,19 +66,28 @@
                         </div>
                     </div>
 
-                    <div class="row my-5">
-                        <div class="col-12">
-                            <figure class="highcharts-figure">
-                                <div id="container"></div>
-                                {{-- <p class="highcharts-description">
-                                  A variation of a 3D pie chart with an inner radius added.
-                                  These charts are often referred to as donut charts.
-                                </p> --}}
-                            </figure>
-                        </div>
-                    </div>
 
-                    {{-- @if ( $gestiones )
+                    @if ( count($gestiones) > 0 )
+
+                        <div class="row my-5">
+                            <div class="col-12">
+                                <figure class="highcharts-figure">
+                                    <div id="dona"></div>
+                                    {{-- <p class="highcharts-description">
+                                    A variation of a 3D pie chart with an inner radius added.
+                                    These charts are often referred to as donut charts.
+                                    </p> --}}
+                                </figure>
+                            </div>
+                            {{-- <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <p>otro grafico</p>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        </div>
+                        
                         <div class="row mb-3">
                             <div class="col-12">
                                 <h6>Gestiones</h6>
@@ -90,9 +102,9 @@
                                 @endforeach
                             </div>
                         </div>
-                    @endif --}}
+                    @endif
 
-
+                    {{-- @dd( $gestiones_para_el_grafico ) --}}
 
                 </div>
             </div> <!-- End card -->
@@ -108,9 +120,12 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        const GESTIONES_GRAFICO = JSON.parse({!! json_encode($gestiones_para_el_grafico) !!});
+        const MONTO_DEPOSITADO_TOTAL = JSON.parse({!! json_encode($monto_depositado_total) !!});
 
-            Highcharts.chart('container', {
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            Highcharts.chart('dona', {
                 chart: {
                     type: 'pie',
                     options3d: {
@@ -122,7 +137,7 @@
                     text: 'Gestiones'
                 },
                 subtitle: {
-                    text: '(Montos Depositados)'
+                    text: `Total de montos depositados: ${MONTO_DEPOSITADO_TOTAL}`,
                 },
                 plotOptions: {
                     pie: {
@@ -132,18 +147,14 @@
                 },
                 series: [{
                     name: 'Delivered amount',
-                    data: [
-                        ['SIS PlanVital', 8],
-                        ['Subsidio Al Empleo (SE)', 3],
-                        ['Mixed nuts', 1],
-                        ['Oranges', 6],
-                        ['Apples', 8],
-                        ['Pears', 4],
-                        ['Clementines', 4],
-                        ['Reddish (bag)', 1],
-                        ['Grapes (bunch)', 1]
-                    ]
-                }]
+                    data: GESTIONES_GRAFICO
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
             });
             
         });

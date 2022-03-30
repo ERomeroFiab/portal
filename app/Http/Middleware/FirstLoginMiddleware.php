@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class AdminMiddleware
+class FirstLoginMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,8 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if ( auth()->user()->rol !== "Administrador" ) {
-            return redirect('/');
+        if ( auth()->user()->rol === "Cliente" && auth()->user()->first_login == null ) {
+            return redirect()->route('cliente.first_login');
         }
         return $next($request);
     }

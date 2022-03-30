@@ -78,6 +78,7 @@ class RazonSocialController extends Controller
     {   
         $razon_social= RazonSocial::find($id);
         $razon_social->empresa->representante->password = bcrypt($razon_social->rut);
+        $razon_social->empresa->representante->first_login = null;
         $razon_social->empresa->representante->update();
         return redirect()->back()->with('success', "La contraseña se a reseteado correctamente.");
     }

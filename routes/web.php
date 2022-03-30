@@ -19,7 +19,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth', 'firstLogin']);
+Route::get('/cliente/first-login', [App\Http\Controllers\PerfilController::class, 'first_login'])->middleware('auth')->name('cliente.first_login');
+Route::post('/cliente/change-password', [App\Http\Controllers\PerfilController::class, 'change_password_first_time'])->name('cliente.change_password_first_time')->middleware('auth');
 // Route::get('/prueba', [App\Http\Controllers\HomeController::class, 'prueba'])->name('prueba');
 
 
@@ -71,7 +73,7 @@ Route::group(['middleware' => ['auth']], function() {
     });
 
     // CLIENTE
-    Route::group(['prefix' => 'cliente', 'middleware' => ['cliente']], function() {
+    Route::group(['prefix' => 'cliente', 'middleware' => ['cliente', 'firstLogin']], function() {
         Route::get('/empresas/index', [App\Http\Controllers\EmpresaController::class, 'cliente_index'])->name('cliente.empresas.index');
         Route::get('/empresas/create', [App\Http\Controllers\EmpresaController::class, 'cliente_create'])->name('cliente.empresas.create');
         Route::post('/empresas/store', [App\Http\Controllers\EmpresaController::class, 'cliente_store'])->name('cliente.empresas.store');
