@@ -385,11 +385,20 @@ class AjaxController extends Controller
                     $q4->where('id', $empresa_id);
                 });
             })
+            ->where('origin', "ST")
 
         )->filter(function ($query) use ($request) {
                             
             if ( $request->get('search_by_razon_social') !== null ) {
                 $query->where('razon_social_id', $request->get('search_by_razon_social'));
+            }
+                            
+            if ( $request->get('search_by_gestion') !== null ) {
+                $query->where('gestion', $request->get('search_by_gestion'));
+            }
+                            
+            if ( $request->get('search_by_motivo') !== null ) {
+                $query->where('motivo', $request->get('search_by_motivo'));
             }
                             
             if ( $request->get('search_by_rut') !== null ) {
@@ -459,6 +468,14 @@ class AjaxController extends Controller
             if ( $request->get('search_by_razon_social') !== null ) {
                 $query->where('razon_social_id', $request->get('search_by_razon_social'));
             }
+
+            if ( $request->get('search_by_gestion') !== null ) {
+                $query->where('gestion', $request->get('search_by_gestion'));
+            }
+
+            if ( $request->get('search_by_motivo') !== null ) {
+                $query->where('motivo', $request->get('search_by_motivo'));
+            }
                             
             if ( $request->get('search_by_rut') !== null ) {
                 $rut = "%".$request->get('search_by_rut')."%";
@@ -518,6 +535,7 @@ class AjaxController extends Controller
             Gestion::query()->wherehas('razon_social', function($q) use ($razon_social_id) {
                 $q->where('id', $razon_social_id);
             })
+            ->where('origin', "ST")
 
         )->filter(function ($query) use ($request) {
                             
@@ -573,11 +591,21 @@ class AjaxController extends Controller
                 });
             })
             ->whereNotNull('monto_a_facturar')
+            ->whereNull('montos_facturados')
+            ->where('origin', "ST")
 
         )->filter(function ($query) use ($request) {
                             
             if ( $request->get('search_by_razon_social') !== null ) {
                 $query->where('razon_social_id', $request->get('search_by_razon_social'));
+            }
+                            
+            if ( $request->get('search_by_gestion') !== null ) {
+                $query->where('gestion', $request->get('search_by_gestion'));
+            }
+                            
+            if ( $request->get('search_by_motivo') !== null ) {
+                $query->where('motivo', $request->get('search_by_motivo'));
             }
                             
             if ( $request->get('search_by_rut') !== null ) {

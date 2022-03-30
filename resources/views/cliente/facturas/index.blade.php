@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('customcss')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
         #tabla_gestiones_filter {
             display: none;
@@ -40,6 +41,28 @@
                             <input id="input__rut" type="text" class="form-control" autocomplete="off">
                         </div>
 
+                        <div class="col-3 form-group">
+                            <label>Gestion</label>
+                            <select id="input__gestion" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($gestiones as $gestion)
+                                    <option value="{{$gestion}}">{{$gestion}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Motivo</label>
+                            <select id="input__motivo" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($motivos as $motivo)
+                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="col-12 form-group">
                             <button onclick="filtrar_tabla()" class="btn btn-sm btn-success" type="button">Filtrar Datos</button>
                         </div>
@@ -61,6 +84,7 @@
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
                                         <th>Monto a Facturar</th>
+                                        <th>Estado</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
@@ -79,12 +103,16 @@
 @endsection
 
 @section('customjs')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
         const EMPRESA_NAME = "{{ auth()->user()->empresa->nombre }}";
 
         $(document).ready(function() {
+
+            $('.js-example-basic-single').select2();
 
             TABLA_GESTIONES = $('#tabla_gestiones').DataTable({
                 serverSide: true,
@@ -98,6 +126,8 @@
                         d.search_by_empresa      = "{{ auth()->user()->empresa->id }}";
                         d.search_by_razon_social = document.querySelector('#input__razon_social').value;
                         d.search_by_rut          = document.querySelector('#input__rut').value;
+                        d.search_by_gestion      = document.querySelector('#input__gestion').value;
+                        d.search_by_motivo       = document.querySelector('#input__motivo').value;
                     }
                 },
                 columns: [
@@ -112,6 +142,7 @@
                     {data: "honorarios_fiabilis"},
                     {data: "montos_facturados"},
                     {data: "monto_a_facturar"},
+                    {data: "status"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -207,6 +238,14 @@
             agregar_quitar_bg_success('input__razon_social');
             filtrar_tabla();
         });
+        $("#input__gestion").change(function() {
+            agregar_quitar_bg_success_select2('input__gestion');
+            filtrar_tabla();
+        });
+        $("#input__motivo").change(function() {
+            agregar_quitar_bg_success_select2('input__motivo');
+            filtrar_tabla();
+        });
         $("#input__rut").change(function() {agregar_quitar_bg_success('input__rut');});
 
         function agregar_quitar_bg_success(id) {
@@ -214,6 +253,14 @@
                 $(`#${id}`).addClass('bg-success');
             } else {
                 $(`#${id}`).removeClass('bg-success');
+            }
+        }
+
+        function agregar_quitar_bg_success_select2(id) {
+            if ($(`#${id}`).val() !== "") {
+                $(`#${id}`).next().children().children().children().addClass('bg-success')
+            } else {
+                $(`#${id}`).next().children().children().children().removeClass('bg-success')
             }
         }
     </script>

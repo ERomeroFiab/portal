@@ -20,6 +20,7 @@ class CreateGestionsTable extends Migration
             $table->double('montos_facturados')->nullable()->comment('tabla invoice_ligne, columna AMOUNT');
             $table->double('monto_a_facturar')->nullable()->comment('30% de la columna ECO_PRESENTEE (monto depositado)');
             $table->string('origin')->nullable()->comment('ST (Silvertool), CN (excel histórico)');
+            $table->string('status')->nullable()->comment('Facturado o Pendiente');
 
             $table->unsignedBigInteger('razon_social_id')->nullable();
             $table->foreign('razon_social_id')->references('id')->on('razon_socials')->onDelete('set null')->onUpdate('cascade');

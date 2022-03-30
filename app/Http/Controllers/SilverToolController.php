@@ -363,6 +363,8 @@ class SilverToolController extends Controller
 
     public function register_new_gestion($eco)
     {
+        $monto_a_facturar = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3)) : null;
+
         $gestion = new Gestion();
         $gestion->mission_motive_eco_id = $eco->id;
         $gestion->mission_motive_id     = $eco->mission_motive->id;
@@ -375,8 +377,9 @@ class SilverToolController extends Controller
         $gestion->monto_depositado      = $eco->ECO_PRESENTEE;
         $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
         $gestion->montos_facturados     = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
-        $gestion->monto_a_facturar      = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3)) : null;
+        $gestion->monto_a_facturar      = $monto_a_facturar;
         $gestion->origin                = "ST";
+        $gestion->status                = $monto_a_facturar ? "Pendiente" : "Facturado";
         $gestion->save();
     }
 
