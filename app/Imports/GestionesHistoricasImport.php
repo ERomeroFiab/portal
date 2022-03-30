@@ -69,6 +69,7 @@ class GestionesHistoricasImport implements ToModel, WithChunkReading, WithEvents
             $new_gestion->monto_a_facturar    = $monto_a_facturar;
             $new_gestion->origin              = $origin;
             $new_gestion->razon_social_id     = $razon_social_existente->id;
+            $new_gestion->status              = $monto_a_facturar ? "Pendiente" : "Facturado";
             $new_gestion->save();
             return;
         }

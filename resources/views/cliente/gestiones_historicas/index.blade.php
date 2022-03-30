@@ -108,7 +108,7 @@
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
-                                        <th>Monto a Facturar</th>
+                                        <th>Estado</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
@@ -166,7 +166,7 @@
                     {data: "monto_depositado"},
                     {data: "honorarios_fiabilis"},
                     {data: "montos_facturados"},
-                    {data: "monto_a_facturar"},
+                    {data: "status"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,

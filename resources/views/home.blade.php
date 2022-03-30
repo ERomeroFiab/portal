@@ -75,7 +75,7 @@
                         </div>
                     </div>
 
-                    @if ( $gestiones )
+                    {{-- @if ( $gestiones )
                         <div class="row mb-3">
                             <div class="col-12">
                                 <h6>Gestiones</h6>
@@ -90,7 +90,7 @@
                                 @endforeach
                             </div>
                         </div>
-                    @endif
+                    @endif --}}
 
 
 
