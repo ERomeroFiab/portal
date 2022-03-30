@@ -26,6 +26,7 @@
 
     <link rel="stylesheet" href="{{ URL::asset('css/font.css') }}" />
     <link rel="stylesheet" href="{{ URL::asset('css/bt.css') }}" />
+    
 
     @yield('customcss')
 </head>
