@@ -408,6 +408,30 @@ class AjaxController extends Controller
                 });
             }
 
+            if ($request->get("search_by_banco") !== null){
+                $query->where("banco","like","%" . $request->get('search_by_banco') . "%");
+            }
+
+            if ($request->get("search_by_monto_depositado") !== null){
+                $query->where("monto_depositado","like","%" . $request->get('search_by_monto_depositado') . "%");
+            }
+
+            if ($request->get("search_by_honorarios_fiabilis") !== null){
+                $query->where("honorarios_fiabilis","like","%" . $request->get('search_by_honorarios_fiabilis') . "%");
+            }
+
+            if ($request->get("search_by_montos_facturados") !== null){
+                $query->where("montos_facturados","like","%" . $request->get('search_by_montos_facturados') . "%");
+            }
+
+            if ($request->get("search_by_monto_a_facturar") !== null){
+                $query->where("monto_a_facturar","like","%" . $request->get('search_by_monto_a_facturar') . "%");
+            }
+
+            if ( $request->get('search_by_status') !== null ) {
+                $query->where('status', $request->get('search_by_status'));
+            }
+
         })
         ->addColumn('razon_social', function ($dato) {
             return $dato->razon_social->nombre;

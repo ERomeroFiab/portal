@@ -43,6 +43,17 @@
                         </div>
 
                         <div class="col-3 form-group">
+                            <label>Motivo</label>
+                            <select id="input__motivo" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($motivos as $motivo)
+                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-3 form-group">
                             <label>Gestion</label>
                             <select id="input__gestion" class="js-example-basic-single form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
@@ -54,15 +65,46 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Motivo</label>
-                            <select id="input__motivo" class="js-example-basic-single form-control">
+                            <label>Fecha Depostito:</label>
+                            <input id="input__fecha_deposito" type="date" class="form-control" autocomplete="off" min="1999-01-01">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Banco:</label>
+                            <input id="input__banco" type="text" class="form-control" autocomplete="off">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Monto Depositado:</label>
+                            <input id="input__monto_depositado" type="number" class="form-control" autocomplete="off" min="0">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Honorarios Fiabilis:</label>
+                            <input id="input__honorarios_fiabilis" type="number" class="form-control" autocomplete="off" min="0">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Montos Facturados:</label>
+                            <input id="input__montos_facturados" type="number" class="form-control" autocomplete="off" min="0">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Monto a Facturar:</label>
+                            <input id="input__monto_a_facturar" type="number" class="form-control" autocomplete="off" min="0">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Estado</label>
+                            <select id="input__status" class="js-example-basic-single form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
                                 <option value="">TODOS</option>
-                                @foreach ($motivos as $motivo)
-                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @foreach ($gestiones as $status)
+                                    <option value="{{$status}}">{{$status}}</option>
                                 @endforeach
                             </select>
                         </div>
+
 
                         <div class="col-12 form-group">
                             <button onclick="filtrar_tabla()" class="btn btn-sm btn-success" type="button">Filtrar Datos</button>
@@ -124,11 +166,20 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function(d) {
-                        d.search_by_empresa      = "{{ auth()->user()->empresa->id }}";
-                        d.search_by_razon_social = document.querySelector('#input__razon_social').value;
-                        d.search_by_rut          = document.querySelector('#input__rut').value;
-                        d.search_by_gestion      = document.querySelector('#input__gestion').value;
-                        d.search_by_motivo       = document.querySelector('#input__motivo').value;
+                        d.search_by_empresa                = "{{ auth()->user()->empresa->id }}";
+                        d.search_by_razon_social           = document.querySelector('#input__razon_social').value;
+                        d.search_by_rut                    = document.querySelector('#input__rut').value;
+                        d.search_by_gestion                = document.querySelector('#input__gestion').value;
+                        d.search_by_motivo                 = document.querySelector('#input__motivo').value;
+                        d.search_by_periodo_gestion        = document.querySelector('#input__periodo_gestion').value;
+                        d.search_by_fecha_deposito         = document.querySelector('#input__fecha_deposito').value;
+                        d.search_by_banco                  = document.querySelector('#input__banco').value;
+                        d.search_by_monto_depositado       = document.querySelector('#input__monto_depositado').value;
+                        d.search_by_honorarios_fiabilis    = document.querySelector('#input__honorarios_fiabilis').value;
+                        d.search_by_montos_facturados      = document.querySelector('#input__montos_facturados').value;
+                        d.search_by_monto_a_facturar       = document.querySelector('#input__monto_a_facturar').value;
+                        d.search_by_status                 = document.querySelector('#input__status').value;
+
                     }
                 },
                 columns: [
@@ -247,7 +298,20 @@
             agregar_quitar_bg_success_select2('input__motivo');
             filtrar_tabla();
         });
+
         $("#input__rut").change(function() {agregar_quitar_bg_success('input__rut');});
+        $("#input__banco").change(function() {agregar_quitar_bg_success('input__banco');});
+        $("#input__monto_depositado").change(function() {agregar_quitar_bg_success('input__monto_depositado');});
+        $("#input__honorarios_fiabilis").change(function() {agregar_quitar_bg_success('input__honorarios_fiabilis');});
+        $("#input__montos_facturados").change(function() {agregar_quitar_bg_success('input__montos_facturados');});
+        $("#input__monto_a_facturar").change(function() {agregar_quitar_bg_success('input__monto_a_facturar');});
+
+        $("#input__status").change(function() {
+            agregar_quitar_bg_success_select2('input__status');
+            filtrar_tabla();
+        });
+
+
 
         function agregar_quitar_bg_success(id) {
             if ($(`#${id}`).val() !== "") {
