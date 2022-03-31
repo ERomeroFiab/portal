@@ -15,6 +15,7 @@ use App\Models\RazonSocial;
 use App\Models\InvoiceLigne;
 use App\Models\Gestion;
 use App\Models\GestionesHistoricas;
+use Carbon\Carbon;
 
 class AjaxController extends Controller
 {
@@ -378,7 +379,10 @@ class AjaxController extends Controller
     public function get_tabla_gestiones_by_empresa( Request $request )
     {
         $empresa_id = $request->get('search_by_empresa');
-        
+        $starts = $request->get('search_by_periodo_gestion_desde') ? Carbon::parse( $request->get('search_by_periodo_gestion_desde') ) : Carbon::now('America/Santiago')
+        ->setTimeZone('America/Santiago')->subYears(100);
+        $ends = $request->get('search_by_periodo_gestion_hasta') ? Carbon::parse( $request->get('search_by_periodo_gestion_hasta') ) : Carbon::now('America/Santiago')
+        ->setTimeZone('America/Santiago')->addYears(100);
         return DataTables::eloquent( 
             Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
                 $q3->wherehas('empresa', function($q4) use ($empresa_id) {
@@ -387,7 +391,7 @@ class AjaxController extends Controller
             })
             ->where('origin', "ST")
 
-        )->filter(function ($query) use ($request) {
+        )->filter(function ($query) use ($request, $starts,$ends) {
                             
             if ( $request->get('search_by_razon_social') !== null ) {
                 $query->where('razon_social_id', $request->get('search_by_razon_social'));
@@ -407,6 +411,12 @@ class AjaxController extends Controller
                     $q->where('rut', 'like', $rut);
                 });
             }
+
+            if ($request->get("search_by_fecha_deposito") !== null){
+                $query->where("fecha_deposito","like","%" . $request->get('search_by_fecha_deposito') . "%");
+            }
+
+            //$request->whereBetween('periodo_gestion', [$starts, $ends]);
 
             if ($request->get("search_by_banco") !== null){
                 $query->where("banco","like","%" . $request->get('search_by_banco') . "%");

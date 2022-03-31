@@ -65,6 +65,16 @@
                         </div>
 
                         <div class="col-3 form-group">
+                            <label>Periodo Gestion Desde:</label>
+                            <input id="input__periodo_gestion_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Periodo Gestion Hasta:</label>
+                            <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
+                        </div>
+
+                        <div class="col-3 form-group">
                             <label>Fecha Depostito:</label>
                             <input id="input__fecha_deposito" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
@@ -96,12 +106,11 @@
 
                         <div class="col-3 form-group">
                             <label>Estado</label>
-                            <select id="input__status" class="js-example-basic-single form-control">
+                            <select id="input__status" class="form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
                                 <option value="">TODOS</option>
-                                @foreach ($gestiones as $status)
-                                    <option value="{{$status}}">{{$status}}</option>
-                                @endforeach
+                                <option value="Facturado">Facturado</option>
+                                <option value="Pendiente">Pendiente</option>
                             </select>
                         </div>
 
@@ -171,7 +180,8 @@
                         d.search_by_rut                    = document.querySelector('#input__rut').value;
                         d.search_by_gestion                = document.querySelector('#input__gestion').value;
                         d.search_by_motivo                 = document.querySelector('#input__motivo').value;
-                        d.search_by_periodo_gestion        = document.querySelector('#input__periodo_gestion').value;
+                        d.search_by_periodo_gestion_desde  = document.querySelector('#input__periodo_gestion_desde').value;
+                        d.search_by_periodo_gestion_hasta  = document.querySelector('#input__periodo_gestion_hasta').value;
                         d.search_by_fecha_deposito         = document.querySelector('#input__fecha_deposito').value;
                         d.search_by_banco                  = document.querySelector('#input__banco').value;
                         d.search_by_monto_depositado       = document.querySelector('#input__monto_depositado').value;
@@ -307,7 +317,7 @@
         $("#input__monto_a_facturar").change(function() {agregar_quitar_bg_success('input__monto_a_facturar');});
 
         $("#input__status").change(function() {
-            agregar_quitar_bg_success_select2('input__status');
+            agregar_quitar_bg_success('input__status');
             filtrar_tabla();
         });
 
