@@ -315,6 +315,26 @@
             filtrar_tabla();
         });
 
+        $("#input__periodo_gestion_desde").change(function() {
+            agregar_quitar_bg_success('input__periodo_gestion_desde');
+            filtrar_tabla();
+        });
+        
+        $("#input__periodo_gestion_hasta").change(function() {
+            agregar_quitar_bg_success('input__periodo_gestion_hasta');
+            filtrar_tabla();
+        });
+
+        $("#input__periodo_depositado_desde").change(function() {
+            agregar_quitar_bg_success('input__periodo_depositado_desde');
+            filtrar_tabla();
+        });
+
+        $("#input__periodo_depositado_hasta").change(function() {
+            agregar_quitar_bg_success('input__periodo_depositado_hasta');
+            filtrar_tabla();
+        });
+
         $("#input__rut").change(function() {agregar_quitar_bg_success('input__rut');});
         $("#input__banco").change(function() {agregar_quitar_bg_success('input__banco');});
         $("#input__monto_depositado").change(function() {agregar_quitar_bg_success('input__monto_depositado');});
