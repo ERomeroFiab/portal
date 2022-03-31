@@ -61,17 +61,16 @@
 
                 <div class="card-body">
 
-                    <div class="row">
-                        <div class="col-12 text-center">
-                            <div class="counter">
-                                <h3>Beneficios Obtenidos Desde Inicio del Proyecto:</h3>
-                                <h1 data-target="{{ $monto_depositado_total_en_numero }}" class="count text-success">0</h1>
+                    @if ( count($gestiones) > 0 )
+
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <div class="counter">
+                                    <h3>Beneficios Obtenidos Desde Inicio del Proyecto:</h3>
+                                    <h1 data-target="{{ $monto_depositado_total_en_numero }}" class="count text-success">0</h1>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-
-                    @if ( count($gestiones) > 0 )
 
                         <div class="row my-5">
 
@@ -103,6 +102,12 @@
                                 @endforeach
                             </div>
                         </div> --}}
+                    @else
+                    <div class="row">
+                        <div class="col-12">
+                            <h5>Home</h5>
+                        </div>
+                    </div>
                     @endif
 
 

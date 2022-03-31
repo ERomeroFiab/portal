@@ -352,7 +352,7 @@ class SilverToolController extends Controller
                                     $new_ligne->mission_motive_id       = $new_motive->id;
                                     $new_ligne->save();
                                 }
-                                $this->register_new_gestion($new_eco);
+                                $this->register_new_gestion_first_time($new_eco);
                             }
                         }
                     }
@@ -362,7 +362,7 @@ class SilverToolController extends Controller
         return;
     }
 
-    public function register_new_gestion($eco)
+    public function register_new_gestion_first_time($eco)
     {
         $monto_a_facturar = !$eco->invoice_ligne ? round(($eco->ECO_PRESENTEE * 0.3)) : null;
 
@@ -403,5 +403,71 @@ class SilverToolController extends Controller
             return $date;
         }
         return null;
+    }
+
+    public function update_gestiones_from_silvertool()
+    {
+        $this->delete_gestiones();
+        
+        $ecos = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos" );
+        foreach ($ecos as $eco) {
+            $razon_social = $this->check_if_razon_social_exists( $eco );
+            if ( $razon_social ) {
+                $this->register_new_gestion( $eco, $razon_social );
+            }
+        }
+        
+        return back()->with('success', "Gestiones actualizadas correctamente.");
+    }
+
+    public function check_if_razon_social_exists( $eco )
+    {
+        $rut = null;
+        if ( $eco ) { 
+            if ( array_key_exists( 'mission_motive', $eco )) {
+                if ( array_key_exists( 'mission', $eco['mission_motive'] ) ) {   
+                    if ( array_key_exists( 'identification', $eco['mission_motive']['mission']) ) {
+                        if ( array_key_exists( 'SIRET', $eco['mission_motive']['mission']['identification']) ) {           
+                            $rut = $eco['mission_motive']['mission']['identification']['SIRET'];
+                        } 
+                    }
+                }
+            }
+        }
+        if ( $rut ) {
+            $razon_social = RazonSocial::where('rut', $rut)->first();
+            return $razon_social;
+        }
+        return false;
+    }
+
+    public function register_new_gestion( $eco, $razon_social )
+    {
+        $monto_a_facturar = !$eco['invoice_ligne'] ? round(($eco['ECO_PRESENTEE'] * 0.3)) : null;
+
+        $gestion = new Gestion();
+        $gestion->razon_social_id       = $razon_social->id;
+        $gestion->motivo                = $eco['mission_motive']['mission']['PRODUIT'];
+        $gestion->gestion               = $eco['SOUS_MOTIF_2'];
+        $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco['SOUS_MOTIF_1']); // convertir en fecha
+        $gestion->fecha_deposito        = $eco['DATE_PREVISIONNELLE'];
+        $gestion->monto_depositado      = $eco['ECO_PRESENTEE'];
+        $gestion->honorarios_fiabilis   = $eco['invoice_ligne'] ? round($eco['invoice_ligne']['AMOUNT']) : null;
+        $gestion->montos_facturados     = $eco['invoice_ligne'] ? round($eco['invoice_ligne']['AMOUNT']) : null;
+        $gestion->monto_a_facturar      = $monto_a_facturar;
+        $gestion->origin                = "ST";
+        $gestion->status                = $monto_a_facturar ? "Pendiente" : "Facturado";
+        $gestion->save();
+    }
+
+    public function delete_gestiones()
+    {
+        $ecos = Gestion::where('origin', 'ST')->get();
+
+        foreach ($ecos as $eco) {
+            if ( $eco ) {
+                $eco->delete();
+            }
+        }
     }
 }

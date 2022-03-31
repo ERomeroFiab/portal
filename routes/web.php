@@ -186,6 +186,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/silvertool/update_database_first_time', [App\Http\Controllers\SilverToolController::class, 'update_database_first_time'])->name('silver.update_database_first_time');
     Route::get('/silvertool/get_razones_sociales_from_silvertool_by_group_name', [App\Http\Controllers\SilverToolController::class, 'get_razones_sociales_from_silvertool_by_group_name'])->name('silver.get_razones_sociales_from_silvertool_by_group_name');
     Route::get('/silvertool/get_razon_social_by_rut', [App\Http\Controllers\SilverToolController::class, 'get_razon_social_by_rut'])->name('silver.get_razon_social_by_rut');
+    Route::get('/silvertool/update_gestiones_from_silvertool', [App\Http\Controllers\SilverToolController::class, 'update_gestiones_from_silvertool'])->name('silver.update_gestiones_from_silvertool');
 
 
 });
