@@ -375,8 +375,8 @@ class SilverToolController extends Controller
         $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco->SOUS_MOTIF_1); // convertir en fecha
         $gestion->fecha_deposito        = $eco->DATE_PREVISIONNELLE;
         $gestion->monto_depositado      = $eco->ECO_PRESENTEE;
-        $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
-        $gestion->montos_facturados     = $eco->invoice_ligne ? $eco->invoice_ligne->AMOUNT : null;
+        $gestion->honorarios_fiabilis   = $eco->invoice_ligne ? round($eco->invoice_ligne->AMOUNT) : null;
+        $gestion->montos_facturados     = $eco->invoice_ligne ? round($eco->invoice_ligne->AMOUNT) : null;
         $gestion->monto_a_facturar      = $monto_a_facturar;
         $gestion->origin                = "ST";
         $gestion->status                = $monto_a_facturar ? "Pendiente" : "Facturado";
