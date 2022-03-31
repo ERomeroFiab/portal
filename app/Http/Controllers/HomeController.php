@@ -66,6 +66,7 @@ class HomeController extends Controller
             'gestiones_para_el_grafico_dona'     => collect($gestiones_para_el_grafico_dona)->toJson(),
             'gestiones_para_el_grafico_columnas' => collect($gestiones_para_el_grafico_columnas)->toJson(),
             'monto_depositado_total'             => collect($this->format_to_pesos($monto_depositado_total))->toJson(),
+            'monto_depositado_total_en_numero'   => $monto_depositado_total,
             'empresa'                            => $empresa,
         ]);
         return view('home');

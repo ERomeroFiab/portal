@@ -60,9 +60,13 @@
             <div class="card">
 
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col">
-                            <h5>Estadísticas</h5>
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div class="counter">
+                                <h3>Beneficios Obtenidos Desde Inicio del Proyecto:</h3>
+                                <h1 data-target="{{ $monto_depositado_total_en_numero }}" class="count text-success">0</h1>
+                            </div>
                         </div>
                     </div>
 
@@ -121,7 +125,7 @@
         const MONTO_DEPOSITADO_TOTAL = JSON.parse({!! json_encode($monto_depositado_total) !!});
 
         document.addEventListener('DOMContentLoaded', function () {
-            console.log( GESTIONES_GRAFICO_COLUMNAS )
+
             Highcharts.chart('dona', {
                 chart: {
                     type: 'pie',
@@ -200,6 +204,27 @@
                 credits: {
                     enabled: false
                 },
+            });
+
+
+            const counters = document.querySelectorAll(".count");
+            const speed = 300;
+
+            counters.forEach((counter) => {
+                const updateCount = () => {
+                    const target = parseInt(+counter.getAttribute("data-target"));
+                    const count = parseInt(+counter.innerText);
+                    const increment = Math.trunc(target / speed);
+
+                    if (count < target) {
+                        counter.innerText = count + increment;
+                        setTimeout(updateCount, 1);
+                    } else {
+                        count.innerText = count;
+                        counter.innerText = MONTO_DEPOSITADO_TOTAL[0];
+                    }
+                };
+                updateCount();
             });
             
         });
