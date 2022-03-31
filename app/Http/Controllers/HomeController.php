@@ -19,7 +19,8 @@ class HomeController extends Controller
     public function index()
     {
         $gestiones = [];
-        $gestiones_para_el_grafico = [];
+        $gestiones_para_el_grafico_dona = [];
+        $gestiones_para_el_grafico_columnas = [];
         $monto_depositado_total = null;
         $empresa = null;
 
@@ -32,7 +33,9 @@ class HomeController extends Controller
                 $q->where('empresa_id', $empresa->id);
             })->sum('monto_depositado');
 
-            $gestiones_para_el_grafico = $this->get_gestiones_para_el_grafico( $gestiones_para_el_grafico, $empresa, $monto_depositado_total );
+            $gestiones_para_el_grafico_dona = $this->get_gestiones_para_el_grafico_dona( $gestiones_para_el_grafico_dona, $empresa, $monto_depositado_total );
+            $gestiones_para_el_grafico_columnas = $this->get_gestiones_para_el_grafico_columnas( $gestiones_para_el_grafico_columnas, $empresa );
+
             // Gestiones en Silvertool
             $gestiones_names_todas = Gestion::distinct('gestion')
                                                 ->whereHas('razon_social', function($q) use ($empresa){
@@ -59,10 +62,11 @@ class HomeController extends Controller
         }
 
         return view('home', [
-            'gestiones'                 => collect($gestiones),
-            'gestiones_para_el_grafico' => collect($gestiones_para_el_grafico)->toJson(),
-            'monto_depositado_total'    => collect($this->format_to_pesos($monto_depositado_total))->toJson(),
-            'empresa'                   => $empresa,
+            'gestiones'                          => collect($gestiones),
+            'gestiones_para_el_grafico_dona'     => collect($gestiones_para_el_grafico_dona)->toJson(),
+            'gestiones_para_el_grafico_columnas' => collect($gestiones_para_el_grafico_columnas)->toJson(),
+            'monto_depositado_total'             => collect($this->format_to_pesos($monto_depositado_total))->toJson(),
+            'empresa'                            => $empresa,
         ]);
         return view('home');
     }
@@ -75,7 +79,7 @@ class HomeController extends Controller
         return null;
     }
 
-    public function get_gestiones_para_el_grafico( $gestiones, $empresa, $monto_depositado_total )
+    public function get_gestiones_para_el_grafico_dona( $gestiones, $empresa, $monto_depositado_total )
     {
         $nombres_de_gestiones = Gestion::whereHas('razon_social', function($q) use ($empresa){
             $q->where('empresa_id', $empresa->id);
@@ -96,6 +100,24 @@ class HomeController extends Controller
         }
         return $gestiones;
         
+    }
+
+    public function get_gestiones_para_el_grafico_columnas( $gestiones, $empresa )
+    {
+        $anio_actual = now()->year;
+        $response['categorias'] = [$anio_actual-5, $anio_actual-4, $anio_actual-3, $anio_actual-2, $anio_actual-1, $anio_actual];
+        $response['data'] = [];
+
+        foreach ($response['categorias'] as $categoria) {
+            $monto = Gestion::whereHas('razon_social', function($q) use ($empresa){
+                $q->where('empresa_id', $empresa->id);
+            })->whereYear('periodo_gestion', $categoria)->sum('monto_depositado');
+
+            array_push( $response['data'], $monto );
+        }
+        
+        return $response;
+
     }
 
     public function prueba()

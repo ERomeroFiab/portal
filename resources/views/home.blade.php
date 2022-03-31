@@ -70,22 +70,19 @@
                     @if ( count($gestiones) > 0 )
 
                         <div class="row my-5">
-                            <div class="col-12">
+
+                            <div class="col-6">
                                 <figure class="highcharts-figure">
                                     <div id="dona"></div>
-                                    {{-- <p class="highcharts-description">
-                                    A variation of a 3D pie chart with an inner radius added.
-                                    These charts are often referred to as donut charts.
-                                    </p> --}}
                                 </figure>
                             </div>
-                            {{-- <div class="col-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <p>otro grafico</p>
-                                    </div>
-                                </div>
-                            </div> --}}
+
+                            <div class="col-6">
+                                <figure class="highcharts-figure">
+                                    <div id="columnas_chart"></div>
+                                </figure>
+                            </div>
+
                         </div>
                         
                         <div class="row mb-3">
@@ -104,7 +101,6 @@
                         </div>
                     @endif
 
-                    {{-- @dd( $gestiones_para_el_grafico ) --}}
 
                 </div>
             </div> <!-- End card -->
@@ -120,11 +116,12 @@
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
     <script>
-        const GESTIONES_GRAFICO = JSON.parse({!! json_encode($gestiones_para_el_grafico) !!});
+        const GESTIONES_GRAFICO_DONA = JSON.parse({!! json_encode($gestiones_para_el_grafico_dona) !!});
+        const GESTIONES_GRAFICO_COLUMNAS = JSON.parse({!! json_encode($gestiones_para_el_grafico_columnas) !!});
         const MONTO_DEPOSITADO_TOTAL = JSON.parse({!! json_encode($monto_depositado_total) !!});
 
         document.addEventListener('DOMContentLoaded', function () {
-            
+            console.log( GESTIONES_GRAFICO_COLUMNAS )
             Highcharts.chart('dona', {
                 chart: {
                     type: 'pie',
@@ -134,10 +131,10 @@
                     }
                 },
                 title: {
-                    text: 'Gestiones'
+                    text: 'Beneficios por Gestión'
                 },
                 subtitle: {
-                    text: `Total de montos depositados: ${MONTO_DEPOSITADO_TOTAL}`,
+                    text: `Total: ${MONTO_DEPOSITADO_TOTAL}`,
                 },
                 plotOptions: {
                     pie: {
@@ -147,7 +144,55 @@
                 },
                 series: [{
                     name: 'Delivered amount',
-                    data: GESTIONES_GRAFICO
+                    data: GESTIONES_GRAFICO_DONA
+                }],
+                exporting: {
+                    enabled: false
+                },
+                credits: {
+                    enabled: false
+                },
+            });
+
+
+            Highcharts.chart('columnas_chart', {
+                chart: {
+                    type: 'column',
+                    options3d: {
+                        enabled: true,
+                        alpha: 10,
+                        beta: 25,
+                        depth: 70
+                    }
+                },
+                title: {
+                    text: 'Beneficios por Año'
+                },
+                subtitle: {
+                    text: ''
+                },
+                plotOptions: {
+                    column: {
+                        depth: 25
+                    }
+                },
+                xAxis: {
+                    categories: GESTIONES_GRAFICO_COLUMNAS['categorias'],
+                        labels: {
+                        skew3d: true,
+                        style: {
+                            fontSize: '16px'
+                        }
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: null
+                    }
+                },
+                series: [{
+                    name: 'Beneficios recibidos',
+                    data: GESTIONES_GRAFICO_COLUMNAS['data']
                 }],
                 exporting: {
                     enabled: false
