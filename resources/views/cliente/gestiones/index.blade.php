@@ -75,8 +75,13 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Fecha Depostito:</label>
-                            <input id="input__fecha_deposito" type="date" class="form-control" autocomplete="off" min="1999-01-01">
+                            <label>Fecha Deposito Desde:</label>
+                            <input id="input__periodo_depositado_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
+                        </div>
+
+                        <div class="col-3 form-group">
+                            <label>Fecha Deposito Hasta:</label>
+                            <input id="input__periodo_depositado_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 
                         <div class="col-3 form-group">
@@ -175,20 +180,21 @@
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function(d) {
-                        d.search_by_empresa                = "{{ auth()->user()->empresa->id }}";
-                        d.search_by_razon_social           = document.querySelector('#input__razon_social').value;
-                        d.search_by_rut                    = document.querySelector('#input__rut').value;
-                        d.search_by_gestion                = document.querySelector('#input__gestion').value;
-                        d.search_by_motivo                 = document.querySelector('#input__motivo').value;
-                        d.search_by_periodo_gestion_desde  = document.querySelector('#input__periodo_gestion_desde').value;
-                        d.search_by_periodo_gestion_hasta  = document.querySelector('#input__periodo_gestion_hasta').value;
-                        d.search_by_fecha_deposito         = document.querySelector('#input__fecha_deposito').value;
-                        d.search_by_banco                  = document.querySelector('#input__banco').value;
-                        d.search_by_monto_depositado       = document.querySelector('#input__monto_depositado').value;
-                        d.search_by_honorarios_fiabilis    = document.querySelector('#input__honorarios_fiabilis').value;
-                        d.search_by_montos_facturados      = document.querySelector('#input__montos_facturados').value;
-                        d.search_by_monto_a_facturar       = document.querySelector('#input__monto_a_facturar').value;
-                        d.search_by_status                 = document.querySelector('#input__status').value;
+                        d.search_by_empresa                          = "{{ auth()->user()->empresa->id }}";
+                        d.search_by_razon_social                     = document.querySelector('#input__razon_social').value;
+                        d.search_by_rut                              = document.querySelector('#input__rut').value;
+                        d.search_by_gestion                          = document.querySelector('#input__gestion').value;
+                        d.search_by_motivo                           = document.querySelector('#input__motivo').value;
+                        d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
+                        d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
+                        d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
+                        d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
+                        d.search_by_banco                            = document.querySelector('#input__banco').value;
+                        d.search_by_monto_depositado                 = document.querySelector('#input__monto_depositado').value;
+                        d.search_by_honorarios_fiabilis              = document.querySelector('#input__honorarios_fiabilis').value;
+                        d.search_by_montos_facturados                = document.querySelector('#input__montos_facturados').value;
+                        d.search_by_monto_a_facturar                 = document.querySelector('#input__monto_a_facturar').value;
+                        d.search_by_status                           = document.querySelector('#input__status').value;
 
                     }
                 },

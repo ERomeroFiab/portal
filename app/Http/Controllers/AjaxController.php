@@ -379,9 +379,14 @@ class AjaxController extends Controller
     public function get_tabla_gestiones_by_empresa( Request $request )
     {
         $empresa_id = $request->get('search_by_empresa');
-        $starts = $request->get('search_by_periodo_gestion_desde') ? Carbon::parse( $request->get('search_by_periodo_gestion_desde') ) : Carbon::now('America/Santiago')
+        $starts_gestion = $request->get('search_by_periodo_gestion_desde') ? Carbon::parse( $request->get('search_by_periodo_gestion_desde') ) : Carbon::now('America/Santiago')
         ->setTimeZone('America/Santiago')->subYears(100);
-        $ends = $request->get('search_by_periodo_gestion_hasta') ? Carbon::parse( $request->get('search_by_periodo_gestion_hasta') ) : Carbon::now('America/Santiago')
+        $ends_gestion = $request->get('search_by_periodo_gestion_hasta') ? Carbon::parse( $request->get('search_by_periodo_gestion_hasta') ) : Carbon::now('America/Santiago')
+        ->setTimeZone('America/Santiago')->addYears(100);
+
+        $starts_depositado = $request->get('search_by_periodo_depositado_desde ') ? Carbon::parse( $request->get('search_by_periodo_depositado_desde ') ) : Carbon::now('America/Santiago')
+        ->setTimeZone('America/Santiago')->subYears(100);
+        $ends_depositado = $request->get('search_by_periodo_depositado_hasta') ? Carbon::parse( $request->get('search_by_periodo_depositado_hasta') ) : Carbon::now('America/Santiago')
         ->setTimeZone('America/Santiago')->addYears(100);
         return DataTables::eloquent( 
             Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
@@ -391,7 +396,7 @@ class AjaxController extends Controller
             })
             ->where('origin', "ST")
 
-        )->filter(function ($query) use ($request, $starts,$ends) {
+        )->filter(function ($query) use ($request, $starts_gestion,$ends_gestion,$starts_depositado,$ends_depositado) {
                             
             if ( $request->get('search_by_razon_social') !== null ) {
                 $query->where('razon_social_id', $request->get('search_by_razon_social'));
@@ -412,14 +417,15 @@ class AjaxController extends Controller
                 });
             }
 
-            if ($request->get("search_by_fecha_deposito") !== null){
-                $query->where("fecha_deposito","like","%" . $request->get('search_by_fecha_deposito') . "%");
-            }
+            $query->whereBetween('periodo_gestion', [$starts_gestion, $ends_gestion]);
 
-            //$request->whereBetween('periodo_gestion', [$starts, $ends]);
+            $query->whereBetween('periodo_gestion', [$starts_depositado, $ends_depositado]);
 
             if ($request->get("search_by_banco") !== null){
-                $query->where("banco","like","%" . $request->get('search_by_banco') . "%");
+                $palabra = "%".$request->get('search_by_banco')."%";
+                $query->whereHas('razon_social',function($q) use ($palabra){
+                    $q->where('banco','like',$palabra);
+                });
             }
 
             if ($request->get("search_by_monto_depositado") !== null){
