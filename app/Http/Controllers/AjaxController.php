@@ -388,6 +388,7 @@ class AjaxController extends Controller
         ->setTimeZone('America/Santiago')->subYears(100);
         $ends_depositado = $request->get('search_by_periodo_depositado_hasta') ? Carbon::parse( $request->get('search_by_periodo_depositado_hasta') ) : Carbon::now('America/Santiago')
         ->setTimeZone('America/Santiago')->addYears(100);
+        
         return DataTables::eloquent( 
             Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
                 $q3->wherehas('empresa', function($q4) use ($empresa_id) {
@@ -419,7 +420,7 @@ class AjaxController extends Controller
 
             $query->whereBetween('periodo_gestion', [$starts_gestion, $ends_gestion]);
 
-            $query->whereBetween('periodo_gestion', [$starts_depositado, $ends_depositado]);
+            $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
 
             if ($request->get("search_by_banco") !== null){
                 $palabra = "%".$request->get('search_by_banco')."%";
