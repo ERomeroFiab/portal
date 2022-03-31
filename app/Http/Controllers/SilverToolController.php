@@ -20,13 +20,14 @@ use Carbon\Carbon;
 class SilverToolController extends Controller
 {
     public function update_database_first_time()
-    {
+    {   
+        set_time_limit(12000);
         $empresas = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_empresas_name" );
         foreach ($empresas as $empresa) {
             $new_empresa = $this->create_new_empresa( $empresa['name'] );
             $this->register_razones_sociales( $new_empresa, $empresa['razones_sociales'] );
         }
-
+        
         return back()->with('success', "Base de datos actualizada correctamente.");
             
     }
