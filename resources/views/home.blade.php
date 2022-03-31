@@ -85,7 +85,7 @@
 
                         </div>
                         
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <div class="col-12">
                                 <h6>Gestiones</h6>
                             </div>
@@ -98,7 +98,7 @@
                                     <hr>
                                 @endforeach
                             </div>
-                        </div>
+                        </div> --}}
                     @endif
 
 
