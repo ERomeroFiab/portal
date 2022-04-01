@@ -144,7 +144,7 @@
 
             <footer class="footer">
                 <div class="container-fluid">
-                    <div class="copyright">
+                    <div class="copyright text-white">
                         © {{ date('Y') }}, Desarrollado por Fiabilis - portalclientes@fiabiliscg.com
                     </div>
                 </div>

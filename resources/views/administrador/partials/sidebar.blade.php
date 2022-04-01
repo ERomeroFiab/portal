@@ -2,7 +2,7 @@
     <!-- Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow" -->
     <div class="logo">
         <a href="{{ route('home') }}" class="simple-text logo-mini" title="Fiabilis">
-            <img src="{{asset('assets/img/logo-md.png')}}">
+            <img src="{{asset('assets/img/logo-md.svg')}}">
         </a>
         <!--Nombre de la empresa-->
         <a href="{{ route('home') }}" class="simple-text logo-normal" title="Fiabilis">Fiabilis</a>

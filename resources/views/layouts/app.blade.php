@@ -60,7 +60,11 @@
                                     <span class="navbar-toggler-bar bar3"></span>
                                 </button>
                             </div>
-                            <a class="navbar-brand"> {{ auth()->user()->rol === "Cliente" ? "Empresa ".auth()->user()->empresa->nombre : "Portal Cliente" }} </a>
+                            <a class="navbar-brand">  
+                                <h3>
+                                    {{ auth()->user()->rol === "Cliente" ? auth()->user()->empresa->nombre : "Portal Cliente" }}
+                                </h3>
+                            </a>
                             {{-- <a class="navbar-brand">Portal Cliente</a> --}}
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
@@ -115,7 +119,7 @@
 
                 <footer class="footer">
                     <div class="container-fluid">
-                        <div class="copyright">
+                        <div class="copyright text-white">
                             © {{ date('Y') }}, Desarrollado por Fiabilis - portalclientes@fiabiliscg.com
                         </div>
                     </div>
@@ -124,7 +128,7 @@
 
         @else
             {{-- SIDEBAR --}}
-            @include('partials.sidebar')
+            {{-- @include('partials.sidebar') --}}
 
             {{-- MAINPANEL --}}
             <div class="main-panel custom-gradient-fiabilis">
@@ -175,7 +179,7 @@
 
                 <footer class="footer">
                     <div class="container-fluid">
-                        <div class="copyright">
+                        <div class="copyright text-white">
                             © {{ date('Y') }}, Desarrollado por Fiabilis - portalclientes@fiabiliscg.com
                         </div>
                     </div>

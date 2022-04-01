@@ -2,7 +2,8 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    font-size: 14px;
+    font-size: 18px;
+    background-color: #002f63;
 }
 
 
@@ -72,15 +73,15 @@ body {
 }
 
 .off-canvas-sidebar{
-    background: -webkit-linear-gradient(left, #002f63, #0051ad) !important;
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
 }
 
 .off-canvas-sidebar:after{
-    background: -webkit-linear-gradient(left, #002f63, #0051ad) !important;
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
 }
 
 .off-canvas-sidebar[data-color=blue] .nav li.active>a:not([data-toggle=collapse]), .sidebar[data-color=blue] .nav li.active>a:not([data-toggle=collapse]) {
-    background: -webkit-linear-gradient(left, #002f63, #0051ad) !important;
+    background: -webkit-linear-gradient(left, #002f63, #e7317c) !important;
 }
 
 
@@ -130,7 +131,7 @@ button{
 }
 
 .custom-gradient-fiabilis {
-    background: -webkit-linear-gradient(left, #002f63, #4590e6) !important;
+    background: -webkit-linear-gradient(left, #002f63, #002f63) !important;
 }
 
 .table-header-fiabilis {
