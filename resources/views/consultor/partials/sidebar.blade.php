@@ -24,7 +24,7 @@
                     <p class="sidebar-normal">Empresas</p>
                 </a>
             </li>
-            <li class="{{ request()->is('consultor/gestiones/index') ? 'active' : '' }}">
+            {{-- <li class="{{ request()->is('consultor/gestiones/index') ? 'active' : '' }}">
                 <a href="{{ route('consultor.gestiones.index') }}">
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-briefcase"></i></span>
                     <p class="sidebar-normal">Gestiones</p>
@@ -35,7 +35,7 @@
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
                     <p class="sidebar-normal">Facturas</p>
                 </a>
-            </li>
+            </li> --}}
 
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">

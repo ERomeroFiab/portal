@@ -16,12 +16,12 @@ class DatabaseSeeder extends Seeder
             "rol"      => "Administrador",
             "password" => bcrypt("UexrgHDfhi"),
         ]);
-        // \App\Models\User::create([
-        //     "name"     => "Juan",
-        //     "email"    => "consultor@consultor.com",
-        //     "rol"      => "Consultor",
-        //     "password" => bcrypt("UexrgHDfhi"),
-        // ]);
+        \App\Models\User::create([
+            "name"     => "Consultor",
+            "rut"      => "26306969-3",
+            "rol"      => "Consultor",
+            "password" => bcrypt("Hfhi2yh5"),
+        ]);
         // \App\Models\User::create([
         //     "name"       => "Pedro",
         //     "email"      => "cliente@cliente.com",
