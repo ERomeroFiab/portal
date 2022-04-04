@@ -92,8 +92,8 @@ class HomeController extends Controller
             $monto = Gestion::whereHas('razon_social', function($q) use ($empresa){
                 $q->where('empresa_id', $empresa->id);
             })->where('gestion', $name)->sum('monto_depositado');
-            $nombre_de_gestion = $name." (".$this->format_to_pesos($monto).")";
-            $monto_en_porcentaje = round((($monto * 100) / $monto_depositado_total), 0);
+            $monto_en_porcentaje = round((($monto * 100) / $monto_depositado_total), 2);
+            $nombre_de_gestion = $name." (".$this->format_to_pesos($monto).") "."(".$monto_en_porcentaje."%)";
 
             array_push( $response, $nombre_de_gestion );
             array_push( $response, $monto_en_porcentaje );

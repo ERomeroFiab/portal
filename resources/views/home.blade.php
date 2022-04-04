@@ -74,13 +74,13 @@
 
                         <div class="row my-5">
 
-                            <div class="col-6">
+                            <div class="col-lg-7 col-md-12">
                                 <figure class="highcharts-figure">
                                     <div id="dona"></div>
                                 </figure>
                             </div>
 
-                            <div class="col-6">
+                            <div class="col-lg-5 col-md-12">
                                 <figure class="highcharts-figure">
                                     <div id="columnas_chart"></div>
                                 </figure>
@@ -137,13 +137,22 @@
                     options3d: {
                         enabled: true,
                         alpha: 45
+                    },
+                    style: {
+                        fontFamily: '"Poppins", Verdana, sans-serif',
                     }
                 },
                 title: {
-                    text: 'Beneficios por Gestión'
+                    text: 'Beneficios por Gestión',
+                    style: {
+                        font: 'bold 18px "Poppins", Verdana, sans-serif'
+                    }
                 },
                 subtitle: {
-                    text: `Total: ${MONTO_DEPOSITADO_TOTAL}`,
+                    text: `Total: ${MONTO_DEPOSITADO_TOTAL} (100%)`,
+                    style: {
+                        font: '16px "Poppins", Verdana, sans-serif'
+                    }
                 },
                 plotOptions: {
                     pie: {
@@ -151,10 +160,12 @@
                         depth: 45
                     }
                 },
-                series: [{
-                    name: 'Delivered amount',
-                    data: GESTIONES_GRAFICO_DONA
-                }],
+                series: [
+                    {
+                        name: 'Porcentaje',
+                        data: GESTIONES_GRAFICO_DONA
+                    }
+                ],
                 exporting: {
                     enabled: false
                 },
@@ -172,10 +183,16 @@
                         alpha: 10,
                         beta: 25,
                         depth: 70
+                    },
+                    style: {
+                        fontFamily: '"Poppins", Verdana, sans-serif',
                     }
                 },
                 title: {
-                    text: 'Beneficios por Año'
+                    text: 'Beneficios por Año',
+                    style: {
+                        font: 'bold 18px "Poppins", Verdana, sans-serif'
+                    }
                 },
                 subtitle: {
                     text: ''
@@ -187,10 +204,10 @@
                 },
                 xAxis: {
                     categories: GESTIONES_GRAFICO_COLUMNAS['categorias'],
-                        labels: {
+                    labels: {
                         skew3d: true,
                         style: {
-                            fontSize: '16px'
+                            fontSize: '18px',
                         }
                     }
                 },
@@ -199,10 +216,12 @@
                         text: null
                     }
                 },
-                series: [{
-                    name: 'Beneficios recibidos',
-                    data: GESTIONES_GRAFICO_COLUMNAS['data']
-                }],
+                series: [
+                    {
+                        name: 'Beneficios recibidos',
+                        data: GESTIONES_GRAFICO_COLUMNAS['data']
+                    }
+                ],
                 exporting: {
                     enabled: false
                 },

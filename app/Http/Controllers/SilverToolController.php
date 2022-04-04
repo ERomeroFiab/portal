@@ -44,12 +44,11 @@ class SilverToolController extends Controller
             'CUSTOM' => config('services.TOKEN_FOR_REQUESTS_TO_SILVER'),
         ])->get($url);
         
-        if ( !$response->ok() ) {
-            return null;
+        if ( $response->ok() ) {
+            return $response->json();
         } 
-
-        return $response->json();
-
+        
+        return null;
     }
 
     public function send_data_to_api_in_silver( $url, $request, $method )
@@ -407,20 +406,27 @@ class SilverToolController extends Controller
 
     public function update_gestiones_from_silvertool()
     {
+        $ecos = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos" );
+        if ( !$ecos  ) {return;}
+
         $this->delete_gestiones();
         
-        $ecos = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos" );
         foreach ($ecos as $eco) {
-            $razon_social = $this->check_if_razon_social_exists( $eco );
+            $rut = $this->get_rut( $eco );
+            if ( !$rut ) {continue;}
+
+            $razon_social = $this->check_if_razon_social_exists( $rut );
             if ( $razon_social ) {
                 $this->register_new_gestion( $eco, $razon_social );
+            } else {
+                // register new razon social
             }
         }
         
         return back()->with('success', "Gestiones actualizadas correctamente.");
     }
 
-    public function check_if_razon_social_exists( $eco )
+    public function get_rut( $eco )
     {
         $rut = null;
         if ( $eco ) { 
@@ -434,8 +440,13 @@ class SilverToolController extends Controller
                 }
             }
         }
-        if ( $rut ) {
-            $razon_social = RazonSocial::where('rut', $rut)->first();
+        return $rut;
+    }
+
+    public function check_if_razon_social_exists( $rut )
+    {
+        $razon_social = RazonSocial::where('rut', $rut)->first();
+        if ( $razon_social ) {
             return $razon_social;
         }
         return false;
