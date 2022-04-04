@@ -27,7 +27,7 @@ class SilverToolController extends Controller
         if ( !$empresas ) {
             return back()->with('error', "Hubo un error al momento de consultar la api: ".config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_empresas_name");
         }
-        
+
         foreach ($empresas as $empresa) {
             $new_empresa = $this->create_new_empresa( $empresa['name'] );
             $this->register_razones_sociales( $new_empresa, $empresa['razones_sociales'] );
@@ -416,11 +416,14 @@ class SilverToolController extends Controller
         return null;
     }
 
-    public function update_gestiones_from_silvertool()
+    public function update_gestiones_from_silvertool( $scheduled_task = false )
     {
         $ecos = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos" );
         
         if ( !$ecos  ) {
+            if ( $scheduled_task ) {
+                return false;
+            }
             return back()->with('error', "Hubo un error al momento de consultar la API: ".config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos");
         }
 
@@ -442,7 +445,9 @@ class SilverToolController extends Controller
                 $this->register_new_gestion( $eco, $new_razon_social );
             }
         }
-        
+        if ( $scheduled_task ) {
+            return true;
+        }
         return back()->with('success', "Gestiones actualizadas correctamente.");
     }
 
