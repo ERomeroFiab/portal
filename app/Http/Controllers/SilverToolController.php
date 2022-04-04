@@ -44,11 +44,11 @@ class SilverToolController extends Controller
             'CUSTOM' => config('services.TOKEN_FOR_REQUESTS_TO_SILVER'),
         ])->get($url);
         
-        if ( $response->ok() ) {
-            return $response->json();
+        if ( !$response->ok() ) {
+            return null;
         } 
         
-        return null;
+        return $response->json();
     }
 
     public function send_data_to_api_in_silver( $url, $request, $method )
