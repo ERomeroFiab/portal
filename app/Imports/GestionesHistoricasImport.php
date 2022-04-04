@@ -43,7 +43,7 @@ class GestionesHistoricasImport implements ToModel, WithChunkReading, WithEvents
             $monto_depositado    = preg_replace("/[^0-9]/", "", round($row[19]));
             $honorarios_fiabilis = preg_replace("/[^0-9]/", "", round($row[20]));
             $montos_facturados   = preg_replace("/[^0-9]/", "", round($row[20]));
-            $monto_a_facturar    = preg_replace("/[^0-9]/", "", round($row[78]));
+            $monto_a_facturar    = null;
             $origin              = "CN";
 
             $validator1 = Validator::make(['periodo_gestion' => $periodo_gestion], ['periodo_gestion'  => 'nullable|date_format:d-m-Y',]);
