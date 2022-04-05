@@ -32,7 +32,9 @@ class GestionesHistoricasImport implements ToModel, WithChunkReading, WithEvents
         $rut = $row[2];
         // Validaciones:
         if ( !str_contains($rut, "-") ) {return;}
-
+        if ( $rut == "76714250-1" ) {
+            $rut = "123456789-1";
+        }
         $razon_social_existente = RazonSocial::where( 'rut', $rut  )->first();
 
         if ( $razon_social_existente ) {

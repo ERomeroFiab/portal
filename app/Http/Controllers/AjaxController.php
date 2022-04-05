@@ -332,6 +332,10 @@ class AjaxController extends Controller
                 $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
             }
 
+            if ($request->get("SEARCH_BY_RUT") !== null){
+                $query->where("rut", "like", "%" . $request->get('SEARCH_BY_RUT') . "%");
+            }
+
         })
         ->addColumn('empresa', function ($dato) {
             return $dato->empresa->nombre;
