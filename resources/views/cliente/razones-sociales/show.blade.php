@@ -73,7 +73,7 @@
                                                 <thead class="table-header-fiabilis">
                                                     <tr>
                                                         <th>Motivo</th>
-                                                        <th>Gestion</th>
+                                                        <th>Gestión</th>
                                                         <th>Periodo Gestión</th>
                                                         <th>Fecha Depósito</th>
                                                         <th>Monto Depositado</th>

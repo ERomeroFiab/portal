@@ -506,14 +506,14 @@ class AjaxController extends Controller
         ->setTimeZone('America/Santiago')->addYears(100);
         
         return DataTables::eloquent( 
-            Gestion::query()->wherehas('razon_social', function($q3) use ($empresa_id) {
-                $q3->wherehas('empresa', function($q4) use ($empresa_id) {
+            Gestion::query()->whereHas('razon_social', function($q3) use ($empresa_id) {
+                $q3->whereHas('empresa', function($q4) use ($empresa_id) {
                     $q4->where('id', $empresa_id);
                 });
             })
             ->where('origin', "CN")
 
-            )->filter(function ($query) use ($request, $starts_gestion,$ends_gestion,$starts_depositado,$ends_depositado) {
+            )->filter(function ($query) use ($request, $starts_gestion, $ends_gestion, $starts_depositado, $ends_depositado) {
                             
                 if ( $request->get('search_by_razon_social') !== null ) {
                     $query->where('razon_social_id', $request->get('search_by_razon_social'));
@@ -535,8 +535,8 @@ class AjaxController extends Controller
                 }
     
                 $query->whereBetween('periodo_gestion', [$starts_gestion, $ends_gestion]);
-    
-                $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
+                
+                // $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
     
                 if ($request->get("search_by_banco") !== null){
                     $palabra = "%".$request->get('search_by_banco')."%";
