@@ -33,4 +33,9 @@ class Empresa extends Model
         }
         return $texto;
     }
+
+    function gestiones()
+    {
+        return $this->hasManyThrough('App\Models\Gestion', 'App\Models\RazonSocial');
+    }
 }

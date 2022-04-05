@@ -52,11 +52,7 @@ class FacturaController extends Controller
     // CONSULTOR
     public function consultor_index()
     {
-        $empresa = Empresa::find( auth()->user()->empresa->id );
-
-        return view('consultor.facturas.index', [
-            'razones_sociales' => $empresa->razones_sociales,
-        ]);
+        return view('consultor.facturas.index');
     }
 
 }

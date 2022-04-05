@@ -39,6 +39,10 @@
                             <label>Razones Sociales:</label>
                             <input id="input__razones_sociales_count" type="text" class="form-control">
                         </div>
+                        <div class="col-3 form-group">
+                            <label>Gestiones:</label>
+                            <input id="input__gestiones_count" type="text" class="form-control">
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
@@ -52,6 +56,7 @@
                                         <th>Nombre</th>
                                         <th>Usuario</th>
                                         <th>Razones Sociales</th>
+                                        <th>Gestiones</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -81,14 +86,15 @@
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_empresas') }}",
+                    url: "{{ route('ajax.get_tabla_empresas_as_consultor') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
                     data: function ( d ) {
                         d.SEARCH_BY_NOMBRE                      = $('#input__Nombre').val();
-                        d.SEARCH_BY_REPRESENTANTE               = $('#input__representante').val();
+                        d.SEARCH_BY_REPRESENTANTE               = $('#input__cliente').val();
                         d.SEARCH_BY_RAZONES_SOCIALES_COUNT      = $('#input__razones_sociales_count').val();
+                        d.SEARCH_BY_GESTIONES_COUNT             = $('#input__gestiones_count').val();
                     }
                 },
                 columns: [
@@ -100,15 +106,13 @@
                     },
                     { data: "representante"},
                     { data: "razones_sociales_count"},
+                    { data: "gestiones_count"},
                     { 
                         data: 'action', 
                         render: function (data, type, row){
                             let html = "";
                             if ( data.path_to_show ) {
                                 html += `<a href="${data.path_to_show}" class="bt_info btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                            }
-                            if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="bt_edit btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
                             }
                             return html;
                         },
@@ -125,7 +129,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: "tabla empresas - " + new Date().toLocaleString(),
+                    title: "Empresas del portal de clientes",
                     className: "bt_excel",
                     exportOptions: {
                         columns: ':not(.no_exportar)'
@@ -202,6 +206,7 @@
         $( "#input__Nombre" ).change(function() { agregar_quitar_bg_success('input__Nombre'); });
         $( "#input__cliente" ).change(function() { agregar_quitar_bg_success('input__cliente'); });
         $( "#input__razones_sociales_count" ).change(function() { agregar_quitar_bg_success('input__razones_sociales_count'); });
+        $( "#input__gestiones_count" ).change(function() { agregar_quitar_bg_success('input__gestiones_count'); });
 
         function agregar_quitar_bg_success(id){
             if ( $(`#${id}`).val() !== "" ) {

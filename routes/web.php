@@ -169,6 +169,7 @@ Route::group(['middleware' => ['auth']], function() {
     
     // Ajax
     Route::get('/ajax/empresas', [App\Http\Controllers\AjaxController::class, 'get_tabla_empresas'])->name('ajax.get_tabla_empresas');
+    Route::get('/ajax/empresas_as_consultor', [App\Http\Controllers\AjaxController::class, 'get_tabla_empresas_as_consultor'])->name('ajax.get_tabla_empresas_as_consultor');
     Route::get('/ajax/usuarios', [App\Http\Controllers\AjaxController::class, 'get_tabla_usuarios'])->name('ajax.get_tabla_usuarios');
     Route::get('/ajax/mission_motive_ecos', [App\Http\Controllers\AjaxController::class, 'get_tabla_mission_motive_eco_by_empresa'])->name('ajax.get_tabla_mission_motive_eco_by_empresa');
     Route::get('/ajax/get_tabla_missions', [App\Http\Controllers\AjaxController::class, 'get_tabla_missions'])->name('ajax.get_tabla_missions');
@@ -180,6 +181,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/ajax/get_tabla_gestiones_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_empresa'])->name('ajax.get_tabla_gestiones_by_empresa');
     Route::get('/ajax/get_tabla_servicios_por_cobrar_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_servicios_por_cobrar_by_empresa'])->name('ajax.get_tabla_servicios_por_cobrar_by_empresa');
     Route::get('/ajax/get_tabla_gestiones_by_razon_social', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_razon_social'])->name('ajax.get_tabla_gestiones_by_razon_social');
+    Route::get('/ajax/get_tabla_gestiones_by_razon_social_as_consultor', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_by_razon_social_as_consultor'])->name('ajax.get_tabla_gestiones_by_razon_social_as_consultor');
     Route::get('/ajax/get_tabla_gestiones_historicas_by_empresa', [App\Http\Controllers\AjaxController::class, 'get_tabla_gestiones_historicas_by_empresa'])->name('ajax.get_tabla_gestiones_historicas_by_empresa');
 
     // Api's hacia silvertool database

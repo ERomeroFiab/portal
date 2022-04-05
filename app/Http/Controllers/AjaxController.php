@@ -24,6 +24,7 @@ class AjaxController extends Controller
         $relations = [
             'razones_sociales',
             'representante',
+            'gestiones',
         ];
         
         return DataTables::eloquent( Empresa::query()->withCount($relations) )
@@ -44,6 +45,9 @@ class AjaxController extends Controller
                                 }
                                 if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
                                     $query->has("razones_sociales", $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT'));
+                                }
+                                if ($request->get("SEARCH_BY_GESTIONES_COUNT") !== null){
+                                    $query->has("gestiones", $request->get('SEARCH_BY_GESTIONES_COUNT'));
                                 }
                             })
                             
@@ -69,6 +73,64 @@ class AjaxController extends Controller
                                 $data['path_to_show']    = route('admin.empresas.show', ['id' => $dato->id]);
                                 $data['path_to_edit']    = route('admin.empresas.edit', ['id' => $dato->id]);
                                 $data['path_to_destroy'] = route('admin.empresas.destroy', ['id' => $dato->id]);
+
+                                return $data;
+                            })
+                            ->toJson();
+    }
+
+    public function get_tabla_empresas_as_consultor( Request $request )
+    {
+        $relations = [
+            'razones_sociales',
+            'representante',
+            'gestiones',
+        ];
+        
+        return DataTables::eloquent( Empresa::query()->withCount($relations) )
+                            ->filter(function ($query) use ($request ) {
+                                
+                                if ( $request->get('search_by_empresas') !== null ) {
+                                    $query->where('id', $request->get('search_by_empresas'));
+                                }
+                                //filtros Tabla
+                                if ($request->get("SEARCH_BY_NOMBRE") !== null){
+                                    $query->where("nombre","like","%" . $request->get('SEARCH_BY_NOMBRE') . "%");
+                                }
+                                if ($request->get("SEARCH_BY_REPRESENTANTE") !== null){
+                                    $palabra = "%".$request->get("SEARCH_BY_REPRESENTANTE")."%";
+                                    $query->whereHas("representante", function($q) use ($palabra){
+                                        $q->where('name', 'like', $palabra);
+                                    });
+                                }
+                                if ($request->get("SEARCH_BY_RAZONES_SOCIALES_COUNT") !== null){
+                                    $query->has("razones_sociales", $request->get('SEARCH_BY_RAZONES_SOCIALES_COUNT'));
+                                }
+                                if ($request->get("SEARCH_BY_GESTIONES_COUNT") !== null){
+                                    $query->has("gestiones", $request->get('SEARCH_BY_GESTIONES_COUNT'));
+                                }
+                            })
+                            
+                            ->addColumn('representante', function ($dato) {
+                                if ( $dato->representante ) {
+                                    return $dato->representante->name;
+                                }
+                                return " ";
+                            })
+                            ->orderColumn('representante', function ($query, $order) {
+                                $query->orderBy(
+                                    User::select('name')->whereColumn('empresas.id', 'empresa_id'),
+                                    $order
+                                );
+                            })
+                            ->editColumn('nombre', function ($dato) {
+                                $data['nombre'] = $dato->nombre;
+                                $data['id']     = $dato->id;
+                                return $data;
+                            })
+                            ->addColumn('action', function ($dato) {
+                                $data['id'] = $dato->id;
+                                $data['path_to_show']    = route('consultor.empresas.show', ['id' => $dato->id]);
 
                                 return $data;
                             })
@@ -618,6 +680,58 @@ class AjaxController extends Controller
                 $q->where('id', $razon_social_id);
             })
             ->where('origin', "ST")
+
+        )->filter(function ($query) use ($request) {
+                            
+            if ( $request->get('search_by_rut') !== null ) {
+                $rut = "%".$request->get('search_by_rut')."%";
+                $query->whereHas('razon_social', function($q) use ($rut) {
+                    $q->where('rut', 'like', $rut);
+                });
+            }
+
+        })
+        ->orderColumn('razon_social', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('nombre')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('rut', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('rut')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->orderColumn('banco', function($query, $order){
+            $query->orderBy(
+                RazonSocial::select('banco')->whereColumn('razon_socials.id', 'razon_social_id'),
+                $order
+            );
+        })
+        ->editColumn('monto_depositado', function($dato){
+            return $dato->monto_depositado ? "$ ".number_format( $dato->monto_depositado, 0, ",", ".") : null;
+        })
+        ->editColumn('honorarios_fiabilis', function($dato){
+            return $dato->honorarios_fiabilis ? "$ ".number_format( $dato->honorarios_fiabilis, 0, ",", ".") : null;
+        })
+        ->editColumn('montos_facturados', function($dato){
+            return $dato->montos_facturados ? "$ ".number_format( $dato->montos_facturados, 0, ",", ".") : null;
+        })
+        ->editColumn('monto_a_facturar', function($dato){
+            return $dato->monto_a_facturar ? "$ ".number_format( $dato->monto_a_facturar, 0, ",", ".") : null;
+        })
+        ->toJson();
+    }
+
+    public function get_tabla_gestiones_by_razon_social_as_consultor( Request $request )
+    {
+        $razon_social_id = $request->get('search_by_razon_social_id');
+        
+        return DataTables::eloquent( 
+            Gestion::query()->wherehas('razon_social', function($q) use ($razon_social_id) {
+                $q->where('id', $razon_social_id);
+            })
 
         )->filter(function ($query) use ($request) {
                             

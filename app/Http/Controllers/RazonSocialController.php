@@ -122,10 +122,15 @@ class RazonSocialController extends Controller
     // CONSULTOR
     public function consultor_show($id)
     {
-        $razon_social = RazonSocial::where('id', $id);
+        $razon_social = RazonSocial::where('id', $id)->first();
         
         return view('consultor.razones-sociales.show', [
             "razon_social" => $razon_social,
         ]);
+    }
+
+    public function consultor_index()
+    {
+        return view('consultor.razones-sociales.index');
     }
 }

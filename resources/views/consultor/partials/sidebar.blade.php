@@ -24,7 +24,13 @@
                     <p class="sidebar-normal">Empresas</p>
                 </a>
             </li>
-            {{-- <li class="{{ request()->is('consultor/gestiones/index') ? 'active' : '' }}">
+            <li class="{{ request()->is('consultor/razones-sociales/index') ? 'active' : '' }}">
+                <a href="{{ route('consultor.razones-sociales.index') }}">
+                    <span class="sidebar-mini-icon"><i class="fa-solid fa-briefcase"></i></span>
+                    <p class="sidebar-normal">Razones Sociales</p>
+                </a>
+            </li>
+            <li class="{{ request()->is('consultor/gestiones/index') ? 'active' : '' }}">
                 <a href="{{ route('consultor.gestiones.index') }}">
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-briefcase"></i></span>
                     <p class="sidebar-normal">Gestiones</p>
@@ -33,9 +39,9 @@
             <li class="{{ request()->is('consultor/facturas/index') ? 'active' : '' }}">
                 <a href="{{ route('consultor.facturas.index') }}">
                     <span class="sidebar-mini-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span>
-                    <p class="sidebar-normal">Facturas</p>
+                    <p class="sidebar-normal">Servicios por Cobrar</p>
                 </a>
-            </li> --}}
+            </li>
 
         </ul>
         <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">

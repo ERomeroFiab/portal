@@ -1,72 +1,93 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <div class="card-header">
-                <h2>Empresa <b>{{ $empresa->nombre }}</b></h2>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-12">
-                        <form>
 
+    @include('includes.messages_in_session')
+    
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Empresa <b>{{ $empresa->nombre }}</b></h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="name">Nombre</label>
                                 <input disabled type="text" class="form-control" id="name" value="{{ $empresa->nombre }}">
                             </div>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="tipo">Tipo</label>
-                                <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->tipo }}">
+                        @if ( $empresa->representante )
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tipo">Representante</label>
+                                    <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->name }}">
+                                </div>
                             </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="tipo">Email</label>
+                                    <input disabled type="text" class="form-control" id="tipo" value="{{ $empresa->representante->email }}">
+                                </div>
+                            </div>
+                        @endif
 
 
-                        </form>
-                    </div>
-                    <div class="col-12 mt-3">
-                        <h3> {{ count($empresa->razones_sociales) < 2 ? count($empresa->razones_sociales)." Razón Social" : count($empresa->razones_sociales)." Razones Sociales" }}</h3>
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
+                        <div class="col-12 mt-3">
+                            <h6> {{ $empresa->get_razones_sociales_quantity_in_text() }}</h6>
+                            <div class="row mt-5">
+                                <div class="col-12">
+                                    <div class="row">
+                                        @foreach ($empresa->razones_sociales as $razon_social)
+                                            <div class="col-3">
+                                                <div class="card text-center">
+                                                    <div class="card-header">
+                                                        <b>{{ $razon_social->nombre }}</b>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        @if ( $razon_social->principal )
+                                                            <p>Principal</p>
+                                                        @endif
+                                                        @if ( $razon_social->rut )
+                                                            <p>Rut: <b>{{ $razon_social->rut }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->ciudad )
+                                                            <p>Ciudad: <b>{{ $razon_social->ciudad }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->codigo_postal )
+                                                            <p>Código postal: <b>{{ $razon_social->codigo_postal }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->direccion )
+                                                            <p>Dirección: <b>{{ $razon_social->direccion }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->numero_de_cuenta_bancaria )
+                                                            <p>N° Cuenta Bancaria: <b>{{ $razon_social->numero_de_cuenta_bancaria }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->banco )
+                                                            <p>Banco: <b>{{ $razon_social->banco }}</b></p>
+                                                        @endif
+                                                        @if ( $razon_social->tipo_de_cuenta )
+                                                            <p>Cuenta: <b>{{ $razon_social->tipo_de_cuenta }}</b></p>
+                                                        @endif
 
-                                        <table class="table-hover" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>N°</th>
-                                                    <th>Nombre</th>
-                                                    <th>Rut</th>
-                                                    <th>Gestiones Finalizadas</th>
-                                                    <th>Gestiones Pendientes</th>
-                                                    <th class="no_exportar">&nbsp;</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach ($empresa->razones_sociales as $razon_social)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }} </td>
-                                                    <td>{{ $razon_social->nombre }} </td>
-                                                    <td>{{ $razon_social->rut }} </td>
-                                                    <td>{{ count($razon_social->gestiones_finalizadas) }} </td>
-                                                    <td>{{ count($razon_social->gestiones_pendientes) }} </td>
-                                                    <td>
-                                                        <a href="{{ route('consultor.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">Ver</a>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
+                                                            <p>Gestiones: <b>{{ $razon_social->gestiones->count() ?? "-" }}</b></p>
 
+                                                        <a href="{{ route('consultor.razones-sociales.show', ['id' => $razon_social->id]) }}" class="btn btn-sm btn-info">
+                                                            Ver
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> <!-- End card -->
+            </div> <!-- End card -->
+        </div>
     </div>
-</div>
 @endsection
