@@ -54,7 +54,7 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Gestion</label>
+                            <label>Gestión</label>
                             <select id="input__gestion" class="js-example-basic-single form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
                                 <option value="">TODOS</option>

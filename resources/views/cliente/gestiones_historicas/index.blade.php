@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Gestion</label>
+                            <label>Gestión</label>
                             <select id="input__gestion" class="js-example-basic-single form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
                                 <option value="">TODOS</option>
@@ -64,12 +64,12 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Periodo Gestion Desde:</label>
+                            <label>Periodo Gestión Desde:</label>
                             <input id="input__periodo_gestion_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Periodo Gestion Hasta:</label>
+                            <label>Periodo Gestión Hasta:</label>
                             <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 {{-- 
