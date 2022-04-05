@@ -23,6 +23,11 @@ class SilverToolController extends Controller
     {   
         set_time_limit(12000);
         $empresas = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_empresas_name" );
+
+        if ( !$empresas ) {
+            return back()->with('error', "Hubo un error al momento de consultar la api: ".config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_empresas_name");
+        }
+
         foreach ($empresas as $empresa) {
             $new_empresa = $this->create_new_empresa( $empresa['name'] );
             $this->register_razones_sociales( $new_empresa, $empresa['razones_sociales'] );
@@ -34,21 +39,28 @@ class SilverToolController extends Controller
 
     public function get_datos_de_api( $url )
     {
-
-        $response = Http::withHeaders([
-            'Accept' => 'application/json',
-            'Access-Control-Allow-Origin' => '*',
-            'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept, Authorization, X-Request-With',
-            'Access-Control-Allow-Credentials' => 'true',
-            'CUSTOM' => config('services.TOKEN_FOR_REQUESTS_TO_SILVER'),
-        ])->get($url);
-        
-        if ( !$response->ok() ) {
+        try {
+            
+            $response = Http::withHeaders([
+                'Accept' => 'application/json',
+                'Access-Control-Allow-Origin' => '*',
+                'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
+                'Access-Control-Allow-Headers' => 'Origin, Content-Type, Accept, Authorization, X-Request-With',
+                'Access-Control-Allow-Credentials' => 'true',
+                'CUSTOM' => config('services.TOKEN_FOR_REQUESTS_TO_SILVER'),
+            ])->get($url);
+            
+            if ( !$response->ok() ) {
+                return null;
+            } 
+            
+            return $response->json();
+            
+        } catch (\Throwable $th) {
+            info('HUBO UN ERROR AL MOMENTO DE CONSULTAR LA API '.$url);
             return null;
-        } 
-        
-        return $response->json();
+        }
+
     }
 
     public function send_data_to_api_in_silver( $url, $request, $method )
@@ -404,12 +416,18 @@ class SilverToolController extends Controller
         return null;
     }
 
-    public function update_gestiones_from_silvertool()
+    public function update_gestiones_from_silvertool( $scheduled_task = false )
     {
         $ecos = $this->get_datos_de_api( config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos" );
-        if ( !$ecos  ) {return;}
+        
+        if ( !$ecos  ) {
+            if ( $scheduled_task ) {
+                return false;
+            }
+            return back()->with('error', "Hubo un error al momento de consultar la API: ".config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos");
+        }
 
-        $this->delete_gestiones();
+        $this->delete_gestiones_de_st();
         
         foreach ($ecos as $eco) {
             $rut = $this->get_rut( $eco );
@@ -420,10 +438,44 @@ class SilverToolController extends Controller
                 $this->register_new_gestion( $eco, $razon_social );
             } else {
                 // register new razon social
+                $empresa_name = $this->get_empresa_name( $eco );
+                if ( !$empresa_name ) {continue;} 
+                $empresa = $this->get_empresa( $empresa_name );
+                $new_razon_social = $this->register_new_razon_social( $empresa, $razon_social );
+                $this->register_new_gestion( $eco, $new_razon_social );
             }
         }
-        
+        if ( $scheduled_task ) {
+            return true;
+        }
         return back()->with('success', "Gestiones actualizadas correctamente.");
+    }
+
+    public function get_empresa( $name )
+    {
+        $empresa = Empresa::where('nombre', $name)->first();
+        if ( !$empresa ) {
+            $empresa = $this->create_new_empresa( $name );
+        }
+        return $empresa;
+    }
+
+    public function get_empresa_name( $eco )
+    {
+        $name = null;
+        if ( $eco ) { 
+            if ( array_key_exists( 'mission_motive', $eco )) {
+                if ( array_key_exists( 'mission', $eco['mission_motive'] ) ) {   
+                    if ( array_key_exists( 'identification', $eco['mission_motive']['mission']) ) {
+                        if ( array_key_exists( 'GROUP', $eco['mission_motive']['mission']['identification']) ) {           
+                            $name = $eco['mission_motive']['mission']['identification']['GROUP'];
+                        } 
+                    }
+                }
+            }
+        }
+        dd( $name );
+        return $name;
     }
 
     public function get_rut( $eco )
@@ -471,7 +523,7 @@ class SilverToolController extends Controller
         $gestion->save();
     }
 
-    public function delete_gestiones()
+    public function delete_gestiones_de_st()
     {
         $ecos = Gestion::where('origin', 'ST')->get();
 

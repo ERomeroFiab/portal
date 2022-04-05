@@ -23,55 +23,47 @@
                     <div class="row">
                         <div class="col-3 form-group">
                             <label>ID:</label>
-                            <input id="input__Nombre" type="text" class="form-control">
+                            <input id="input__id" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Empresa:</label>
-                            <input id="input__cliente" type="text" class="form-control">
+                            <input id="input__empresa" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Nombre:</label>
-                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                            <input id="input__nombre" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Rut:</label>
-                            <input id="input__Nombre" type="text" class="form-control">
+                            <input id="input__rut" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Ciudad:</label>
-                            <input id="input__cliente" type="text" class="form-control">
+                            <input id="input__ciudad" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Codigo Postal:</label>
-                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                            <input id="input__codigo_postal" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Direccion:</label>
-                            <input id="input__Nombre" type="text" class="form-control">
+                            <input id="input__direccion" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Numero de Cuenta Bancaria:</label>
-                            <input id="input__cliente" type="text" class="form-control">
+                            <input id="input__numero_cuenta_bancaria" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Banco:</label>
-                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                            <input id="input__banco" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
                             <label>Tipo de Cuenta:</label>
-                            <input id="input__Nombre" type="text" class="form-control">
+                            <input id="input__tipo_de_cuenta_bancaria" type="text" class="form-control">
                         </div>
                         <div class="col-3 form-group">
-                            <label>Principal:</label>
-                            <input id="input__cliente" type="text" class="form-control">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label>Misiones:</label>
-                            <input id="input__razones_sociales_count" type="text" class="form-control">
-                        </div>
-                        <div class="col-3 form-group">
-                            <label>Invoices:</label>
-                            <input id="input__razones_sociales_count" type="text" class="form-control">
+                            <label>Gestiones:</label>
+                            <input id="input__gestiones" type="text" class="form-control">
                         </div>
                     </div>
                     <div class="row">
@@ -131,6 +123,7 @@
                     // },
                     data: function ( d ) {
                         // d.search_by_xxxx = $('#input__xxxx').val();
+                        d.SEARCH_BY_RUT = $('#input__rut').val();
                     }
                 },
                 columns: [

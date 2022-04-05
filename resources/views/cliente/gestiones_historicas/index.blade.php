@@ -53,7 +53,7 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Gestion</label>
+                            <label>Gestión</label>
                             <select id="input__gestion" class="js-example-basic-single form-control">
                                 <option value="" selected disabled>-- Seleccione --</option>
                                 <option value="">TODOS</option>
@@ -64,29 +64,29 @@
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Periodo Gestion Desde:</label>
+                            <label>Periodo Gestión Desde:</label>
                             <input id="input__periodo_gestion_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Periodo Gestion Hasta:</label>
+                            <label>Periodo Gestión Hasta:</label>
                             <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
-
+{{-- 
                         <div class="col-3 form-group">
-                            <label>Fecha Deposito Desde:</label>
+                            <label>Fecha Depósito Desde:</label>
                             <input id="input__periodo_depositado_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 
                         <div class="col-3 form-group">
-                            <label>Fecha Deposito Hasta:</label>
+                            <label>Fecha Depósito Hasta:</label>
                             <input id="input__periodo_depositado_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div>
+                        </div> --}}
 
-                        <div class="col-3 form-group">
+                        {{-- <div class="col-3 form-group">
                             <label>Banco:</label>
                             <input id="input__banco" type="text" class="form-control" autocomplete="off">
-                        </div>
+                        </div> --}}
 
                         <div class="col-3 form-group">
                             <label>Monto Depositado:</label>
@@ -127,16 +127,16 @@
                                 <thead class="table-header-fiabilis">
                                     <tr>
                                         <th>Razón Social</th>
-                                        <th>Rut</th>
+                                        <th class="min_width_120_class">Rut</th>
                                         <th>Motivo</th>
-                                        <th>Gestion</th>
-                                        <th>Periodo Gestión</th>
-                                        <th>Fecha Depósito</th>
-                                        <th>Banco</th>
+                                        <th>Gestión</th>
+                                        <th class="min_width_120_class">Periodo Gestión</th>
+                                        <th class="min_width_120_class">Fecha Depósito</th>
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
                                         <th>Estado</th>
+                                        <th class="d-none">Banco</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
@@ -183,9 +183,9 @@
                         d.search_by_motivo                           = document.querySelector('#input__motivo').value;
                         d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
                         d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
-                        d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
-                        d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
-                        d.search_by_banco                            = document.querySelector('#input__banco').value;
+                        // d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
+                        // d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
+                        // d.search_by_banco                            = document.querySelector('#input__banco').value;
                         d.search_by_monto_depositado                 = document.querySelector('#input__monto_depositado').value;
                         d.search_by_honorarios_fiabilis              = document.querySelector('#input__honorarios_fiabilis').value;
                         d.search_by_montos_facturados                = document.querySelector('#input__montos_facturados').value;
@@ -199,11 +199,11 @@
                     {data: "gestion"},
                     {data: "periodo_gestion"},
                     {data: "fecha_deposito"},
-                    {data: "banco"},
                     {data: "monto_depositado"},
                     {data: "honorarios_fiabilis"},
                     {data: "montos_facturados"},
                     {data: "status"},
+                    {data: "banco", class: "d-none"},
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,

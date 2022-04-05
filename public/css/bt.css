@@ -138,3 +138,7 @@ button{
     background-color: #1d3d61;
     color: white;
 }
+
+.min_width_120_class{
+    min-width: 120px;
+}

@@ -5,6 +5,8 @@ namespace App\Console;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+use  App\Http\Controllers\SilverToolController;
+
 class Kernel extends ConsoleKernel
 {
     /**
@@ -17,8 +19,13 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->call(function () {
-            info('hello world');
-        })->everyMinute();
+            $update_successfully = (new SilverToolController)->update_gestiones_from_silvertool( true );
+            if ( $update_successfully ) {
+                info("GESTIONES ACTUALIZADAS CORRECTAMENTE");
+            } else {
+                info("LAS GESTIONES NO SE HAN ACTUALIZADO");
+            }
+        })->hourly();
     }
 
     /**
