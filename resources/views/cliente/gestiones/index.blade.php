@@ -131,11 +131,11 @@
                                 <thead class="table-header-fiabilis">
                                     <tr>
                                         <th>Razón Social</th>
-                                        <th>Rut</th>
+                                        <th class="min_width_120_class">Rut</th>
                                         <th>Motivo</th>
                                         <th>Gestión</th>
-                                        <th>Periodo Gestión</th>
-                                        <th>Fecha Depósito</th>
+                                        <th class="min_width_120_class">Periodo Gestión</th>
+                                        <th class="min_width_120_class">Fecha Depósito</th>
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
