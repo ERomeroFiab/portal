@@ -424,7 +424,7 @@ class AjaxController extends Controller
 
             $query->whereBetween('periodo_gestion', [$starts_gestion, $ends_gestion]);
 
-            $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
+            // $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
 
             if ($request->get("search_by_banco") !== null){
                 $palabra = "%".$request->get('search_by_banco')."%";
@@ -708,7 +708,7 @@ class AjaxController extends Controller
     
                 $query->whereBetween('periodo_gestion', [$starts_gestion, $ends_gestion]);
     
-                $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
+                // $query->whereBetween('fecha_deposito', [$starts_depositado, $ends_depositado]);
     
                 if ($request->get("search_by_banco") !== null){
                     $palabra = "%".$request->get('search_by_banco')."%";

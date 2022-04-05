@@ -73,7 +73,7 @@
                             <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
 
-                        <div class="col-3 form-group">
+                        {{-- <div class="col-3 form-group">
                             <label>Fecha Depósito Desde:</label>
                             <input id="input__periodo_depositado_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
@@ -81,7 +81,7 @@
                         <div class="col-3 form-group">
                             <label>Fecha Depósito Hasta:</label>
                             <input id="input__periodo_depositado_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="col-3 form-group">
                             <label>Banco:</label>
@@ -186,8 +186,8 @@
                         d.search_by_motivo                           = document.querySelector('#input__motivo').value;
                         d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
                         d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
-                        d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
-                        d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
+                        // d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
+                        // d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
                         // d.search_by_banco                            = document.querySelector('#input__banco').value;
                         d.search_by_monto_depositado                 = document.querySelector('#input__monto_depositado').value;
                         d.search_by_honorarios_fiabilis              = document.querySelector('#input__honorarios_fiabilis').value;
