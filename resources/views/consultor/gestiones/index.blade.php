@@ -1,15 +1,17 @@
 @extends('layouts.app')
 
 @section('customcss')
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
-        #tabla_razones_sociales_filter {
+        #tabla_gestiones_filter {
             display: none;
         }
     </style>
 @endsection
 
 @section('content')
-<link rel="stylesheet" href="{{ URL::asset('css/bt_excel.css') }}" />
 
     @include('includes.messages_in_session')
 
@@ -34,15 +36,27 @@
 
                         <div class="col-3 form-group">
                             <label>Motivo</label>
-                            <input id="input__motivo" type="text" class="form-control" autocomplete="off">
+                            <select id="input__motivo" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($motivos as $motivo)
+                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-3 form-group">
                             <label>Gestión</label>
-                            <input id="input__gestion" type="text" class="form-control" autocomplete="off">
+                            <select id="input__gestion" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($gestiones as $gestion)
+                                    <option value="{{$gestion}}">{{$gestion}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="col-3 form-group">
+                        {{-- <div class="col-3 form-group">
                             <label>Periodo Gestión Desde:</label>
                             <input id="input__periodo_gestion_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
@@ -50,21 +64,6 @@
                         <div class="col-3 form-group">
                             <label>Periodo Gestión Hasta:</label>
                             <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div>
-
-                        {{-- <div class="col-3 form-group">
-                            <label>Fecha Depósito Desde:</label>
-                            <input id="input__periodo_depositado_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div>
-
-                        <div class="col-3 form-group">
-                            <label>Fecha Depósito Hasta:</label>
-                            <input id="input__periodo_depositado_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div> --}}
-
-                        {{-- <div class="col-3 form-group">
-                            <label>Banco:</label>
-                            <input id="input__banco" type="text" class="form-control" autocomplete="off">
                         </div> --}}
 
                         <div class="col-3 form-group">
@@ -98,30 +97,34 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="btn btn-sm btn-success float-right" type="button" onclick="buscar()">Buscar</button>
-                            </div>
-                        </div>
+
 
                     </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <button class="btn btn-sm btn-success float-right" type="button" onclick="filtrar_tabla()">Buscar</button>
+                        </div>
+                    </div>
+
                     <div class="row mt-5">
                         <div class="col" style="overflow-x: auto;">
                             <table id="tabla_gestiones" class="table-hover table-striped table-bordered table-sm table-responsive" style="width:100%">
                                 <thead class="table-header-fiabilis">
                                     <tr>
                                         <th>Razón Social</th>
-                                        <th >Rut</th>
+                                        <th class="min_width_120_class">Rut</th>
                                         <th>Motivo</th>
                                         <th>Gestión</th>
-                                        <th >Periodo Gestión</th>
-                                        <th >Fecha Depósito</th>
+                                        <th class="min_width_120_class">Periodo Gestión</th>
+                                        <th class="min_width_120_class">Fecha Depósito</th>
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
                                         <th>Monto a Facturar</th>
                                         <th>Estado</th>
-                                        <th >Banco</th>
+                                        <th>Origen</th>
+                                        <th class="d-none">Banco</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
@@ -141,6 +144,8 @@
 @endsection
 
 @section('customjs')
+
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
     <script>
         let TABLA_GESTIONES;
@@ -148,11 +153,13 @@
 
         $(document).ready(function() {
 
+            $('.js-example-basic-single').select2();
+
             TABLA_GESTIONES = $('#tabla_gestiones').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_gestiones_by_empresa') }}",
+                    url: "{{ route('ajax.get_tabla_gestiones_by_empresa_as_consultor') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
@@ -163,8 +170,8 @@
                         d.search_by_rut                              = document.querySelector('#input__rut').value;
                         d.search_by_gestion                          = document.querySelector('#input__gestion').value;
                         d.search_by_motivo                           = document.querySelector('#input__motivo').value;
-                        d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
-                        d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
+                        // d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
+                        // d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
                         // d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
                         // d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
                         // d.search_by_banco                            = document.querySelector('#input__banco').value;
@@ -187,22 +194,8 @@
                     {data: "montos_facturados"},
                     {data: "monto_a_facturar"},
                     {data: "status"},
+                    {data: "origin"},
                     {data: "banco", class: "d-none"},
-                
-                        data: 'action', 
-                        render: function (data, type, row){
-                            let html = "";
-                            if ( data.path_to_show ) {
-                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                            }
-                            /*if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
-                            }*/
-                            return html;
-                        },
-                        orderable: false, 
-                        searchable: false
-                    }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -268,7 +261,7 @@
 
         });
 
-        function buscar(){
+        function filtrar_tabla(){
             TABLA_GESTIONES.draw();
         }
 

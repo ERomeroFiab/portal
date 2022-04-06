@@ -41,14 +41,14 @@
                             <label>Ciudad:</label>
                             <input id="input__ciudad" type="text" class="form-control">
                         </div>
-                        <div class="col-3 form-group">
+                        {{-- <div class="col-3 form-group">
                             <label>Codigo Postal:</label>
                             <input id="input__codigo_postal" type="text" class="form-control">
-                        </div>
-                        <div class="col-3 form-group">
+                        </div> --}}
+                        {{-- <div class="col-3 form-group">
                             <label>Direccion:</label>
                             <input id="input__direccion" type="text" class="form-control">
-                        </div>
+                        </div> --}}
                         <div class="col-3 form-group">
                             <label>Numero de Cuenta Bancaria:</label>
                             <input id="input__numero_de_cuenta_bancaria" type="text" class="form-control">
@@ -80,11 +80,9 @@
                                         <th>nombre</th>
                                         <th>rut</th>
                                         <th>ciudad</th>
-                                        <th>codigo_postal</th>
-                                        <th>direccion</th>
-                                        <th>numero_de_cuenta_bancaria</th>
+                                        <th>Cuenta N°</th>
                                         <th>banco</th>
-                                        <th>tipo_de_cuenta</th>
+                                        <th>Tipo de cuenta</th>
                                         <th>principal</th>
                                         <th>Gestiones</th>
                                         <th class="no_exportar">&nbsp;</th>
@@ -117,7 +115,7 @@
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_razones_sociales') }}",
+                    url: "{{ route('ajax.get_tabla_razones_sociales_as_consultor') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
@@ -128,8 +126,8 @@
                         d.SEARCH_BY_NOMBRE                  = $('#input__nombre').val();
                         d.SEARCH_BY_RUT                     = $('#input__rut').val();
                         d.SEARCH_BY_CIUDAD                  = $('#input__ciudad').val();
-                        d.SEARCH_BY_CODIGO_POSTAL           = $('#input__codigo_postal').val();
-                        d.SEARCH_BY_DIRECCION               = $('#input__direccion').val();
+                        // d.SEARCH_BY_CODIGO_POSTAL           = $('#input__codigo_postal').val();
+                        // d.SEARCH_BY_DIRECCION               = $('#input__direccion').val();
                         d.SEARCH_BY_NUMERO_DE_CUENTA_BANCARIA  = $('#input__numero_de_cuenta_bancaria').val();
                         d.SEARCH_BY_BANCO                   = $('#input__banco').val();
                         d.SEARCH_BY_TIPO_DE_CUENTA          = $('#input__tipo_de_cuenta').val();
@@ -142,8 +140,6 @@
                     { data: "nombre"},
                     { data: "rut"},
                     { data: "ciudad"},
-                    { data: "codigo_postal"},
-                    { data: "direccion"},
                     { data: "numero_de_cuenta_bancaria"},
                     { data: "banco"},
                     { data: "tipo_de_cuenta"},
@@ -174,7 +170,7 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: "Razones sociales - " + new Date().toLocaleString(),
+                    title: "Razones sociales",
                     className: "bt_excel",
                     exportOptions: {
                         columns: ':not(.no_exportar)'

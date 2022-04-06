@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
 @section('customcss')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <style>
-        #tabla_razones_sociales_filter {
+        #tabla_gestiones_filter {
             display: none;
         }
+
     </style>
 @endsection
 
 @section('content')
-<link rel="stylesheet" href="{{ URL::asset('css/bt_excel.css') }}" />
-
     @include('includes.messages_in_session')
 
     <div class="row">
@@ -21,10 +21,14 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
+
+                        <div class="col-12">
+                            <h6>Filtros:</h6>
+                        </div>
+
                         <div class="col-3 form-group">
-                            <label>Razones Sociales:</label>
+                            <label>Razón Social:</label>
                             <input id="input__razon_social" type="text" class="form-control" autocomplete="off">
-                                
                         </div>
 
                         <div class="col-3 form-group">
@@ -34,15 +38,27 @@
 
                         <div class="col-3 form-group">
                             <label>Motivo</label>
-                            <input id="input__motivo" type="text" class="form-control" autocomplete="off">
+                            <select id="input__motivo" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($motivos as $motivo)
+                                    <option value="{{$motivo}}">{{$motivo}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <div class="col-3 form-group">
                             <label>Gestión</label>
-                            <input id="input__gestion" type="text" class="form-control" autocomplete="off">
+                            <select id="input__gestion" class="js-example-basic-single form-control">
+                                <option value="" selected disabled>-- Seleccione --</option>
+                                <option value="">TODOS</option>
+                                @foreach ($gestiones as $gestion)
+                                    <option value="{{$gestion}}">{{$gestion}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
-                        <div class="col-3 form-group">
+                        {{-- <div class="col-3 form-group">
                             <label>Periodo Gestión Desde:</label>
                             <input id="input__periodo_gestion_desde" type="date" class="form-control" autocomplete="off" min="1999-01-01">
                         </div>
@@ -50,7 +66,7 @@
                         <div class="col-3 form-group">
                             <label>Periodo Gestión Hasta:</label>
                             <input id="input__periodo_gestion_hasta" type="date" class="form-control" autocomplete="off" min="1999-01-01">
-                        </div>
+                        </div> --}}
 
                         {{-- <div class="col-3 form-group">
                             <label>Fecha Depósito Desde:</label>
@@ -98,10 +114,8 @@
                         </div>
 
 
-                        <div class="row">
-                            <div class="col-12">
-                                <button class="btn btn-sm btn-success float-right" type="button" onclick="buscar()">Buscar</button>
-                            </div>
+                        <div class="col-12 form-group">
+                            <button onclick="filtrar_tabla()" class="btn btn-sm btn-success float-right" type="button">Filtrar Datos</button>
                         </div>
 
                     </div>
@@ -121,6 +135,7 @@
                                         <th>Montos Facturados</th>
                                         <th>Monto a Facturar</th>
                                         <th>Estado</th>
+                                        <th>Origen</th>
                                         <th class="d-none">Banco</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
@@ -131,40 +146,40 @@
                             </table>
                         </div>
                     </div>
+
+
                 </div>
             </div> <!-- End card -->
         </div>
     </div>
-
-    
-
 @endsection
 
 @section('customjs')
-    
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
     <script>
         let TABLA_GESTIONES;
         const CSRF = "{{ csrf_token() }}";
 
         $(document).ready(function() {
 
+            $('.js-example-basic-single').select2();
+
             TABLA_GESTIONES = $('#tabla_gestiones').DataTable({
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ route('ajax.get_tabla_servicios_por_cobrar_by_empresa') }}",
+                    url: "{{ route('ajax.get_tabla_servicios_por_cobrar_as_consultor') }}",
                     // error: function(jqXHR, ajaxOptions, thrownError) {
                     //     console.log("error: " + thrownError + "\n\n" + "status: " + jqXHR.statusText + "\n\n" + "response: "+jqXHR.responseText + "\n\n" + "options: "+ajaxOptions.responseText);
                     // },
-                    data: function ( d ) {
-                        // d.search_by_xxxx = $('#input__xxxx').val();
-                        
+                    data: function(d) {
                         d.search_by_razon_social                     = document.querySelector('#input__razon_social').value;
                         d.search_by_rut                              = document.querySelector('#input__rut').value;
                         d.search_by_gestion                          = document.querySelector('#input__gestion').value;
                         d.search_by_motivo                           = document.querySelector('#input__motivo').value;
-                        d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
-                        d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
+                        // d.search_by_periodo_gestion_desde            = document.querySelector('#input__periodo_gestion_desde').value;
+                        // d.search_by_periodo_gestion_hasta            = document.querySelector('#input__periodo_gestion_hasta').value;
                         // d.search_by_periodo_depositado_desde         = document.querySelector('#input__periodo_depositado_desde').value;
                         // d.search_by_periodo_depositado_hasta         = document.querySelector('#input__periodo_depositado_hasta').value;
                         // d.search_by_banco                            = document.querySelector('#input__banco').value;
@@ -187,22 +202,8 @@
                     {data: "montos_facturados"},
                     {data: "monto_a_facturar"},
                     {data: "status"},
+                    {data: "origin"},
                     {data: "banco", class: "d-none"},
-                
-                        data: 'action', 
-                        render: function (data, type, row){
-                            let html = "";
-                            if ( data.path_to_show ) {
-                                html += `<a href="${data.path_to_show}" class="btn btn-sm btn-info"><i class="fa-solid fa-eye"></i></a>`;
-                            }
-                            /*if ( data.path_to_edit ) {
-                                html += `<a href="${data.path_to_edit}" class="btn btn-sm btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>`;
-                            }*/
-                            return html;
-                        },
-                        orderable: false, 
-                        searchable: false
-                    }
                 ],
                 // order: [[ 1, 'desc' ]],
                 pageLength: 20,
@@ -213,8 +214,8 @@
                 buttons: [{
                     extend: 'excelHtml5',
                     text: "Exportar a Excel",
-                    title: "Razones sociales - " + new Date().toLocaleString(),
-                    className: "bt_excel",
+                    title: `Servicios por cobrar`,
+                    className: "bg-info",
                     exportOptions: {
                         columns: ':not(.no_exportar)'
                     },
@@ -226,30 +227,37 @@
             function newExportAction(e, dt, button, config) {
                 var self = this;
                 var oldStart = dt.settings()[0]._iDisplayStart;
-                dt.one('preXhr', function (e, s, data) {
+                dt.one('preXhr', function(e, s, data) {
                     // Just this once, load all data from the server...
                     data.start = 0;
                     data.length = 2147483647;
-                    dt.one('preDraw', function (e, settings) {
+                    dt.one('preDraw', function(e, settings) {
                         // Call the original action function
                         if (button[0].className.indexOf('buttons-copy') >= 0) {
-                            $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button, config);
+                            $.fn.dataTable.ext.buttons.copyHtml5.action.call(self, e, dt, button,
+                                config);
                         } else if (button[0].className.indexOf('buttons-excel') >= 0) {
                             $.fn.dataTable.ext.buttons.excelHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt, button, config);
+                                $.fn.dataTable.ext.buttons.excelHtml5.action.call(self, e, dt,
+                                    button, config) :
+                                $.fn.dataTable.ext.buttons.excelFlash.action.call(self, e, dt,
+                                    button, config);
                         } else if (button[0].className.indexOf('buttons-csv') >= 0) {
                             $.fn.dataTable.ext.buttons.csvHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button, config);
+                                $.fn.dataTable.ext.buttons.csvHtml5.action.call(self, e, dt, button,
+                                    config) :
+                                $.fn.dataTable.ext.buttons.csvFlash.action.call(self, e, dt, button,
+                                    config);
                         } else if (button[0].className.indexOf('buttons-pdf') >= 0) {
                             $.fn.dataTable.ext.buttons.pdfHtml5.available(dt, config) ?
-                                $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button, config) :
-                                $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button, config);
+                                $.fn.dataTable.ext.buttons.pdfHtml5.action.call(self, e, dt, button,
+                                    config) :
+                                $.fn.dataTable.ext.buttons.pdfFlash.action.call(self, e, dt, button,
+                                    config);
                         } else if (button[0].className.indexOf('buttons-print') >= 0) {
                             $.fn.dataTable.ext.buttons.print.action(e, dt, button, config);
                         }
-                        dt.one('preXhr', function (e, s, data) {
+                        dt.one('preXhr', function(e, s, data) {
                             // DataTables thinks the first item displayed is index 0, but we're not drawing that.
                             // Set the property to what it was before exporting.
                             settings._iDisplayStart = oldStart;
@@ -268,7 +276,21 @@
 
         });
 
-        function buscar(){
+        // function sweetAlert_to_remove_user(boton_submit) {
+        //     Swal.fire({
+        //         icon: "warning",
+        //         title: '¿Desea ELIMINAR este usuario, con la empresa asociada y sus razones sociales?',
+        //         confirmButtonText: `Eliminar`,
+        //         confirmButtonColor: '#d9534f',
+        //     }).then((result) => {
+        //         /* Read more about isConfirmed, isDenied below */
+        //         if (result.isConfirmed) {
+        //             document.getElementById(boton_submit).click();
+        //         }
+        //     })
+        // }
+
+        function filtrar_tabla() {
             TABLA_GESTIONES.draw();
         }
 
@@ -335,6 +357,5 @@
                 $(`#${id}`).next().children().children().children().removeClass('bg-success')
             }
         }
-
     </script>
 @endsection

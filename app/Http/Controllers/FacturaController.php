@@ -52,7 +52,21 @@ class FacturaController extends Controller
     // CONSULTOR
     public function consultor_index()
     {
-        return view('consultor.facturas.index');
+        $gestiones = Gestion::distinct('gestion')
+                                ->whereNotNull('monto_a_facturar')
+                                ->whereNull('montos_facturados')
+                                ->pluck('gestion');
+
+        $motivos = Gestion::distinct('motivo')
+                                ->whereNotNull('monto_a_facturar')
+                                ->whereNull('montos_facturados')
+                                ->pluck('motivo');
+
+        return view('consultor.facturas.index', [
+            'gestiones'        => $gestiones,
+            'motivos'          => $motivos,
+        ]);
+
     }
 
 }

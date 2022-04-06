@@ -64,10 +64,16 @@ class GestionController extends Controller
     // CONSULTOR
     public function consultor_index()
     {
-        $gestiones = Gestion::all();
+        $razones_sociales = RazonSocial::all();
+
+        $gestiones = Gestion::distinct('gestion')->pluck('gestion');
+
+        $motivos = Gestion::distinct('motivo')->pluck('motivo');
         
         return view('consultor.gestiones.index', [
-            "gestiones" => $gestiones,
+            'razones_sociales' => $razones_sociales,
+            'gestiones'        => $gestiones,
+            'motivos'          => $motivos,
         ]);
     }
     public function consultor_show($id)
