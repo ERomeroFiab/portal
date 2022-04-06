@@ -382,6 +382,7 @@ class AjaxController extends Controller
         $relations = [
             'gestiones',
             'invoices',
+            
 
         ];
 
@@ -390,13 +391,53 @@ class AjaxController extends Controller
         )->filter(function ($query) use ($request) {
                             
             //filtros Tabla
-            if ($request->get("SEARCH_BY_NAME") !== null){
-                $query->where("NAME","like","%" . $request->get('SEARCH_BY_NAME') . "%");
+            if ($request->get("SEARCH_BY_ID") !== null){
+                $query->where("ID","like","%" . $request->get('SEARCH_BY_ID') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_EMPRESA") !== null){
+                $palabra = "%".$request->get('SEARCH_BY_EMPRESA')."%";
+                $query->whereHas("empresa", function ($q) use ($palabra){
+                    $q->where('nombre', 'like', $palabra);
+                });
+            }
+
+            if ($request->get("SEARCH_BY_NOMBRE") !== null){
+                $query->where("NOMBRE", "like", "%" . $request->get('SEARCH_BY_NOMBRE') . "%");
             }
 
             if ($request->get("SEARCH_BY_RUT") !== null){
-                $query->where("rut", "like", "%" . $request->get('SEARCH_BY_RUT') . "%");
+                $query->where("RUT", "like", "%" . $request->get('SEARCH_BY_RUT') . "%");
             }
+
+            if ($request->get("SEARCH_BY_CIUDAD") !== null){
+                $query->where("CIUDAD", "like", "%" . $request->get('SEARCH_BY_CIUDAD') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_CODIGO_POSTAL") !== null){
+                $query->where("CODIGO_POSTAL", "like", "%" . $request->get('SEARCH_BY_CODIGO_POSTAL') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_DIRECCION") !== null){
+                $query->where("DIRECCION", "like", "%" . $request->get('SEARCH_BY_DIRECCION') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_NUMERO_DE_CUENTA_BANCARIA") !== null){
+                $query->where("NUMERO_DE_CUENTA_BANCARIA", "like", "%" . $request->get('SEARCH_BY_NUMERO_DE_CUENTA_BANCARIA') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_BANCO") !== null){
+                $query->where("BANCO", "like", "%" . $request->get('SEARCH_BY_BANCO') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_TIPO_DE_CUENTA") !== null){
+                $query->where("TIPO_DE_CUENTA", "like", "%" . $request->get('SEARCH_BY_TIPO_DE_CUENTA') . "%");
+            }
+
+            if ($request->get("SEARCH_BY_GESTIONES") !== null){
+                $query->has("GESTIONES", "like", "%" . $request->get('SEARCH_BY_GESTIONES') . "%");
+            }
+
 
         })
         ->addColumn('empresa', function ($dato) {
