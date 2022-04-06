@@ -26,8 +26,8 @@ class Kernel extends ConsoleKernel
                 info("LAS GESTIONES NO SE HAN ACTUALIZADO");
             }
         })
-        // ->hourly();
-        ->everyMinute();
+        ->hourly();
+        // ->everyMinute();
     }
 
     /**
