@@ -111,17 +111,17 @@
                                 <thead class="table-header-fiabilis">
                                     <tr>
                                         <th>Razón Social</th>
-                                        <th class="min_width_120_class">Rut</th>
+                                        <th >Rut</th>
                                         <th>Motivo</th>
                                         <th>Gestión</th>
-                                        <th class="min_width_120_class">Periodo Gestión</th>
-                                        <th class="min_width_120_class">Fecha Depósito</th>
+                                        <th >Periodo Gestión</th>
+                                        <th >Fecha Depósito</th>
                                         <th>Monto Depositado</th>
                                         <th>Honorarios Fiabilis</th>
                                         <th>Montos Facturados</th>
                                         <th>Monto a Facturar</th>
                                         <th>Estado</th>
-                                        <th class="d-none">Banco</th>
+                                        <th >Banco</th>
                                         {{-- <th class="no_exportar">&nbsp;</th> --}}
                                     </tr>
                                 </thead>
