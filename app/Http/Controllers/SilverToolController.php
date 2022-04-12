@@ -431,7 +431,7 @@ class SilverToolController extends Controller
         foreach ($ecos as $eco) {
             $rut = $this->get_rut( $eco );
             if ( !$rut ) {continue;}
-
+            
             $razon_social = $this->check_if_razon_social_exists( $rut );
             if ( $razon_social ) {
                 $this->register_new_gestion( $eco, $razon_social );
@@ -440,7 +440,7 @@ class SilverToolController extends Controller
                 $empresa_name = $this->get_empresa_name( $eco );
                 if ( !$empresa_name ) {continue;} 
                 $empresa = $this->get_empresa( $empresa_name );
-                $new_razon_social = $this->register_new_razon_social( $empresa, $razon_social );
+                $new_razon_social = $this->register_new_razon_social( $empresa, $eco['mission_motive']['mission']['identification'] );
                 $this->register_new_gestion( $eco, $new_razon_social );
             }
         }
