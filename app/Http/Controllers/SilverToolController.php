@@ -153,7 +153,6 @@ class SilverToolController extends Controller
             "get",
         );
 
-        dd( $response );
     }
 
     public function create_new_user( $razon_social )
@@ -474,7 +473,6 @@ class SilverToolController extends Controller
                 }
             }
         }
-        dd( $name );
         return $name;
     }
 
