@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,600;0,700;1,100&display=swap');
+
+
+body{
+    height: 100vh;
+    font-size:'poppins', sans-serif;
+    background-color: #002f63;
+}
+
+
+
+.login-container{
+    height: 43.75rem;
+    max-width: 70em;
+    margin: 3em ;
+    display: flex;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.login-info-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 5rem;
+    margin-top: 2rem;
+    background-color: white;
+    margin-bottom: 10rem;
+    border-radius: 10% 0% 0% 10%;
+
+}
+
+.image{
+    width: 50%;
+    margin-top: 2rem;
+    margin-bottom: 10rem;
+    border-radius: 0% 10% 10% 0%;
+
+}
+
+.tittle{
+    text-transform: capitalize;
+    font-size: 2.25rem;
+    font-weight: 600;
+    padding-bottom: 100px;
+        font-family: "poppins", Sans-serif;
+}
+
+.inputs-container{
+    height: 80%;
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    text-align: center;
+    align-items: center;
+}
+
+.line{
+    color: #e7317c;
+}
+
+.title{
+    color: black;
+    font-family: "poppins", Sans-serif;
+}
+
+span{
+    text-align: center;
+    padding-top: 3px;
+    color: rgb(139, 139, 139);
+}
+
+.input{
+    width:50%;
+    border:2px solid #e7317c;
+    border-radius:25px;
+    outline:none;
+    padding:10px;
+    box-sizing:border-box;
+    transition:0.3s;
+
+}
+.input:hover{
+    border: 2px solid #e7317c;
+}
+
+input:focus{
+    border-color:#e7317c;
+    box-shadow:0 0 8px 0 #e7317c;
+}
+
+#rut{
+    margin-bottom: -40px;
+}
+
+.btn{
+    width: 25%;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color:white;
+    border-radius:25px;
+    background-color: #e7317c;
+    font-family: "poppins", Sans-serif;
+    cursor: pointer;
+    padding:10px;
+    border: none;
+}
+
+.btn:hover{
+    border-color:#e7317c;
+    box-shadow:0 0 8px 0 #e7317c;
+}
+
+
+footer{
+    background-color:#041c3c ;
+
+}
+
+.container{
+    margin-bottom: 3%;
+}
+
+.logo{
+
+    max-width: 80%;
+    border: none;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    margin-left: 30px;
+    padding-left: 5%;
+}
+
+.h1{
+    color: white;
+    font-size: small;
+    font-size: 0.9rem;
+    font-family: "poppins", Sans-serif;
+    font-weight: normal;
+    text-transform: capitalize;
+    line-height: 1.5em;
+    padding-left: 10%;
+    text-align: center;
+}
+
+
+
+.elementor-icon-list-text{
+    color:white;
+    font-size: 0.9rem;
+    font-family: "poppins", Sans-serif;
+    font-weight: normal;
+    text-transform: capitalize;
+    line-height: 1.5em;
+    
+}
+
+.elementor-heading-title {
+    color:white;
+    font-family: "poppins", Sans-serif;
+    font-size: 0.9rem;
+    font-weight: normal;
+    text-transform: capitalize;
+    line-height: 1.5em;
+}
+
+i{
+    color:rgb(255, 255, 255);
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    position: relative;
+    display: block;
+    font-style: normal;
+    font-size: 28px;
+    line-height: 60px;
+    width: calc(var(--icon-size, 25px) + (2 * var(--icon-padding, .5em)));
+    height: calc(var(--icon-size, 25px) + (2 * var(--icon-padding, .5em)));
+    background-color: #e7317c;
+    border-radius: 50%;
+}
+
+.boton_red_social i{
+    text-decoration: none;
+    font-size: 23px;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    transition: all .4s ease-in-out;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+i:hover{
+    background-color: #ffffff;
+    color: #041c3c ;
+}
+
+
+
+.elementor-icon-list-text:hover{
+    color:#e7317c;
+}
+
+
+a{
+    text-decoration:none;
+    cursor: pointer;
+    
+}
+
+
+
+.footer_row{
+    background-color:#041c3c ;
+    padding-top: 5%;
+
+}
+
+p{
+    margin-top: 20px;
+}
+
+
+.footerrow{
+    padding-top: 35px;
+}
+
+.col-3{
+    text-align: start;
+
+}
+
+
+.flag{
+    width: 50px;
+    border-radius: 50%;
+    margin-left: 10px;
+    margin-top: 10px;
+}
+
+.col-4{
+    text-align: center;
+    margin: auto;
+}
