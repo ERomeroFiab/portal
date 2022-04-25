@@ -43,7 +43,7 @@
             </form>
 
         </div>
-        <img class="image" src="{{ asset('assets/img/fondo3.png') }}" alt="">
+        <img class="image" src="{{ asset('assets/img/fondo_login.jpeg') }}" alt="">
     </div>
     <footer>
         <div class="container">
@@ -52,7 +52,7 @@
                 <div class="col-3">
                     <div>
                         <img class="logo"
-                            src="{{ asset('assets/img/brand/FCG_LOGO_WHITE_BACKGROUND-1024x512.svg') }}" alt="Logo Fiabilis">
+                            src="{{ asset('assets/img/brand/FCG_LOGO_WHITE_BACKGROUND-1024x512.png') }}" alt="Logo Fiabilis">
                     </div>
 
                     <h1 class="h1">Expertos en Optimización de Costos Laborales</h1>
