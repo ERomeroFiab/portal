@@ -106,11 +106,11 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="elementor-widget-wrap">
+                    <div class="elementor-widget-wrap info-contacto">
                         <div class="elementor-element elementor-element-47f7c923 elementor-widget elementor-widget-heading"
                             data-id="47f7c923" data-element_type="widget" data-widget_type="heading.default">
                             <div class="elementor-widget-container">
-                                <h6 class="elementor-heading-title elementor-size-default eael-heading-content"
+                                <h6 class=" elementor-heading-title elementor-size-default eael-heading-content"
                                     id="4-eael-table-of-content">Contacto</h6>
                             </div>
                         </div>
