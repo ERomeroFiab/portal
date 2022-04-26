@@ -109,11 +109,12 @@ class SilverToolController extends Controller
                 continue;
             }
             $nueva_razon_social = new RazonSocial();
-            $nueva_razon_social->empresa_id          = $empresa->id;
-            $nueva_razon_social->nombre              = $razon_social['RAISON_SOC'];
-            $nueva_razon_social->rut                 = $razon_social['SIRET'];
-            $nueva_razon_social->ciudad              = $razon_social['VILLE'];
-            $nueva_razon_social->codigo_postal       = $razon_social['CODE_POSTAL'];
+            $nueva_razon_social->empresa_id    = $empresa->id;
+            $nueva_razon_social->nombre        = $razon_social['RAISON_SOC'];
+            $nueva_razon_social->rut           = $razon_social['SIRET'];
+            $nueva_razon_social->ciudad        = $razon_social['VILLE'];
+            $nueva_razon_social->codigo_postal = $razon_social['CODE_POSTAL'];
+            $nueva_razon_social->direccion     = array_key_exists( 'ADRESSE1', $razon_social ) ? $razon_social['ADRESSE1'] : null;
             
             foreach (config('razones_sociales') as $rut => $value) {
                 if ( $nueva_razon_social->rut === $rut ) {
@@ -185,11 +186,12 @@ class SilverToolController extends Controller
     public function register_new_razon_social( $empresa, $razon_social )
     {
         $new_razon_social = new RazonSocial();
-        $new_razon_social->empresa_id          = $empresa->id;
-        $new_razon_social->nombre              = $razon_social['RAISON_SOC'];
-        $new_razon_social->rut                 = $razon_social['SIRET'];
-        $new_razon_social->ciudad              = $razon_social['VILLE'];
-        $new_razon_social->codigo_postal       = $razon_social['CODE_POSTAL'];
+        $new_razon_social->empresa_id    = $empresa->id;
+        $new_razon_social->nombre        = $razon_social['RAISON_SOC'];
+        $new_razon_social->rut           = $razon_social['SIRET'];
+        $new_razon_social->ciudad        = $razon_social['VILLE'];
+        $new_razon_social->codigo_postal = $razon_social['CODE_POSTAL'];
+        $new_razon_social->direccion     = array_key_exists( 'ADRESSE1', $razon_social ) ? $razon_social['ADRESSE1'] : null;
         
         foreach (config('razones_sociales') as $rut => $value) {
             if ( $new_razon_social->rut === $rut ) {
@@ -546,7 +548,6 @@ class SilverToolController extends Controller
         // Update Gestion
         $monto_a_facturar = !$eco['invoice_ligne'] ? round(($eco['ECO_PRESENTEE'] * 0.3)) : null;
 
-        $gestion->ID_MISSION_MOTIVE_ECO = $eco['ID_MISSION_MOTIVE_ECO'];
         $gestion->motivo                = $eco['mission_motive']['mission']['PRODUIT'];
         $gestion->gestion               = $eco['SOUS_MOTIF_2'];
         $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco['SOUS_MOTIF_1']); // convertir en fecha
@@ -563,6 +564,48 @@ class SilverToolController extends Controller
 
     public function update_data_in_razon_social( $eco, $razon_social )
     {
+        $eco = $this->arrange_all_data_at_same_level( $eco );
+        $razon_social->direccion = array_key_exists( 'IDENTIFICATION__ADRESSE1', $eco ) ? $eco['IDENTIFICATION__ADRESSE1'] : null;
+        $razon_social->update();
         return;
+    }
+
+    public function arrange_all_data_at_same_level( $eco )
+    {
+        $gestion = [];
+        foreach ($eco as $key => $value) {
+            if ( $key === "mission_motive" ) {continue;}
+            $gestion[$key] = $value;
+        }
+        // Motives
+        if ( array_key_exists( 'mission_motive', $eco ) ) {
+            foreach ($eco['mission_motive'] as $key => $value) {
+                if ( $key === "mission" ) {continue;}
+                $gestion['MOTIVE__'.$key] = $value;
+            }
+            // Missions
+            if ( array_key_exists( 'mission', $eco['mission_motive'] ) ) {
+                foreach ($eco['mission_motive']['mission'] as $key => $value) {
+                    if ( $key === "identification" ) {continue;}
+                    if ( $key === "contrat" ) {continue;}
+                    if ( $key === "contrat_detail_produit" ) {continue;}
+                    $gestion['MISSION__'.$key] = $value;
+                }
+
+                // Identification
+                if ( array_key_exists( 'identification', $eco['mission_motive']['mission'] ) ) {
+                    foreach ($eco['mission_motive']['mission']['identification'] as $key => $value) {
+                        $gestion['IDENTIFICATION__'.$key] = $value;
+                    }
+                }
+                // Contrat
+                if ( array_key_exists( 'contrat', $eco['mission_motive']['mission'] ) ) {
+                    foreach ($eco['mission_motive']['mission']['contrat'] as $key => $value) {
+                        $gestion['CONTRAT__'.$key] = $value;
+                    }
+                }
+            }
+        }
+        return $gestion;
     }
 }

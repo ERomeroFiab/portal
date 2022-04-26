@@ -52,6 +52,7 @@
                                         <th>Nombre</th>
                                         <th>Usuario</th>
                                         <th>Razones Sociales</th>
+                                        <th>Gestiones</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
                                 </thead>
@@ -100,6 +101,7 @@
                     },
                     { data: "representante"},
                     { data: "razones_sociales_count"},
+                    { data: "gestiones_count"},
                     { 
                         data: 'action', 
                         render: function (data, type, row){

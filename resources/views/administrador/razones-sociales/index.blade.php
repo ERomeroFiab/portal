@@ -76,16 +76,16 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>empresa</th>
-                                        <th>nombre</th>
-                                        <th>rut</th>
-                                        <th>ciudad</th>
-                                        <th>codigo_postal</th>
-                                        <th>direccion</th>
-                                        <th>numero_de_cuenta_bancaria</th>
-                                        <th>banco</th>
-                                        <th>tipo_de_cuenta</th>
-                                        <th>principal</th>
+                                        <th>Empresa</th>
+                                        <th>Razón</th>
+                                        <th>Rut</th>
+                                        <th>Ciudad</th>
+                                        <th>Código Postal</th>
+                                        <th>Dirección</th>
+                                        <th>Cuenta</th>
+                                        <th>Banco</th>
+                                        <th>tipo de cuenta</th>
+                                        <th>Principal</th>
                                         <th>Gestiones</th>
                                         <th class="no_exportar">&nbsp;</th>
                                     </tr>
