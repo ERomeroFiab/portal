@@ -252,11 +252,47 @@ p{
 
 
 
-@media (min-width: 1689px) {
+@media (min-width: 800px) {
     .login-container{
         margin-left: 40em;
     }
 }
+
+@media (min-width: 900px) {
+    .login-container{
+        height: 43.75rem;
+        max-width: 70em;
+        margin: 3em ;
+        display: flex;
+        justify-content: space-between;
+        overflow: hidden;
+    }
+}
+
+@media (min-width: 1282px) {
+    .login-container{
+        margin-left: 10em;
+    }
+}
+
+@media (min-width: 1600px) {
+    .login-container{
+        margin-left: 15em;
+    }
+}
+
+@media (min-width: 1800px) {
+    .login-container{
+        margin-left: 20em;
+    }
+}
+
+@media (min-width: 2040px) {
+    .login-container{
+        margin-left: 40em;
+    }
+}
+
 
 
 @media ( max-width:700px ) {
