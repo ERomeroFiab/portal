@@ -69,7 +69,7 @@ body{
 
 span{
     text-align: center;
-    padding-top: 3px;
+    padding-top: 5px;
     color: rgb(139, 139, 139);
 }
 
@@ -250,6 +250,9 @@ p{
     margin: auto;
 }
 
+.mensaje{
+    color: red;
+}
 
 
 @media (min-width: 800px) {
