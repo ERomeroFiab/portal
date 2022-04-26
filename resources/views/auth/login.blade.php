@@ -28,14 +28,14 @@
                 <span>Ejemplo:12345678-9</span>
                 @error('rut')
                     <span>
-                        <strong>{{ $message }}</strong>
+                        <strong class="mensaje">{{ $message }}</strong>
                     </span>
                 @enderror
 
                 <input class="input" type="password" placeholder="Contraseña" name="password" required>
                 @error('password')
                     <span>
-                        <strong>{{ $message }}</strong>
+                        <strong class="mensaje">{{ $message }}</strong>
                     </span>
                 @enderror
 
