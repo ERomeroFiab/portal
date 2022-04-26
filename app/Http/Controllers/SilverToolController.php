@@ -426,7 +426,7 @@ class SilverToolController extends Controller
             return back()->with('error', "Hubo un error al momento de consultar la API: ".config('services.PATH_TO_SILVERTOOL_DATABASE_MANAGER')."empresas/get_ecos");
         }
 
-        $this->delete_gestiones_de_st();
+        // $this->delete_gestiones_de_st();
         
         foreach ($ecos as $eco) {
             $rut = $this->get_rut( $eco );
@@ -434,7 +434,8 @@ class SilverToolController extends Controller
             
             $razon_social = $this->check_if_razon_social_exists( $rut );
             if ( $razon_social ) {
-                $this->register_new_gestion( $eco, $razon_social );
+                $this->update_data_in_razon_social( $eco, $razon_social );
+                $this->handle_gestion( $eco, $razon_social );
             } else {
                 // register new razon social
                 $empresa_name = $this->get_empresa_name( $eco );
@@ -508,6 +509,7 @@ class SilverToolController extends Controller
 
         $gestion = new Gestion();
         $gestion->razon_social_id       = $razon_social->id;
+        $gestion->ID_MISSION_MOTIVE_ECO = $eco['ID_MISSION_MOTIVE_ECO'];
         $gestion->motivo                = $eco['mission_motive']['mission']['PRODUIT'];
         $gestion->gestion               = $eco['SOUS_MOTIF_2'];
         $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco['SOUS_MOTIF_1']); // convertir en fecha
@@ -530,5 +532,37 @@ class SilverToolController extends Controller
                 $eco->delete();
             }
         }
+    }
+
+    public function handle_gestion( $eco, $razon_social )
+    {
+        $gestion = Gestion::where('ID_MISSION_MOTIVE_ECO', $eco['ID_MISSION_MOTIVE_ECO'])->first();
+        
+        if ( !$gestion ) {
+            $this->register_new_gestion( $eco, $razon_social );
+            return;
+        }
+
+        // Update Gestion
+        $monto_a_facturar = !$eco['invoice_ligne'] ? round(($eco['ECO_PRESENTEE'] * 0.3)) : null;
+
+        $gestion->ID_MISSION_MOTIVE_ECO = $eco['ID_MISSION_MOTIVE_ECO'];
+        $gestion->motivo                = $eco['mission_motive']['mission']['PRODUIT'];
+        $gestion->gestion               = $eco['SOUS_MOTIF_2'];
+        $gestion->periodo_gestion       = self::convert_custom_string_to_date($eco['SOUS_MOTIF_1']); // convertir en fecha
+        $gestion->fecha_deposito        = $eco['DATE_PREVISIONNELLE'];
+        $gestion->monto_depositado      = $eco['ECO_PRESENTEE'];
+        $gestion->honorarios_fiabilis   = $eco['invoice_ligne'] ? round($eco['invoice_ligne']['AMOUNT']) : null;
+        $gestion->montos_facturados     = $eco['invoice_ligne'] ? round($eco['invoice_ligne']['AMOUNT']) : null;
+        $gestion->monto_a_facturar      = $monto_a_facturar;
+        $gestion->status                = $monto_a_facturar ? "Pendiente" : "Facturado";
+        $gestion->update();
+        
+        return;
+    }
+
+    public function update_data_in_razon_social( $eco, $razon_social )
+    {
+        return;
     }
 }
