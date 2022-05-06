@@ -15,7 +15,7 @@
                 <div class="card-header">
                     <h5>
                         Nuevo Usuario
-                        <a href="{{ route('silver.update_database_first_time') }}">
+                        <a href="{{ route('silver.update_gestiones_from_silvertool') }}">
                             <button onclick="$(this).prop('disabled', true).text('Actualizando...');" type="button" class="btn btn-sm btn-info float-right">
                                 Actualizar la base de datos desde SilverTool
                             </button>
